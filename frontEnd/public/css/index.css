@@ -1,0 +1,227 @@
+body {
+  width: 100%;
+  background: #FFF8F0;
+}
+
+.header {
+  width: 100%;
+  height: 20px;
+}
+.header .header_wrap{
+  width: 95%;
+  margin: 30px auto;
+  display: flex;
+  justify-content: space-between;
+}
+.header .header_wrap .header_title{
+  font-size: 20px;
+}
+.header .header_wrap .header_nav{
+  display: flex;
+}
+.header .header_wrap .header_nav .nav_wrap{
+  display: flex;
+  gap: 30px;
+  font-size: 18px;
+  margin-right: 40px;
+}
+.header .header_wrap .header_nav .nav_link{
+  display: flex;
+  gap: 25px;
+}
+.header .header_wrap .header_nav .nav_link img{
+  width: 17px;
+}
+
+.container {
+  width: 95%;
+  margin: 0 auto;
+}
+.container .container_wrap{
+  width: 100%;
+}
+.container .container_wrap .info_contents{}
+.container .container_wrap .info_contents .info_contents_wrap{
+  display: flex;
+  margin: 200px 0;
+  padding: 50px;
+}
+.container .container_wrap .info_contents .info_contents_wrap .info_title{
+  width: 50%;
+  font-size: 40px;
+  font-weight: bold;
+}
+.container .container_wrap .info_contents .info_contents_wrap .info_detail{
+  width: 50%;
+  font-size: 17px;
+}
+
+.container .container_wrap .image_contents{
+  width: 100%;
+}
+.container .container_wrap .image_contents .image_contents_wrap{}
+.container .container_wrap .image_contents .image_contents_wrap img{
+  object-fit: cover;
+}
+.container .container_wrap .image_contents .image_contents_wrap .top{
+  width: 100%;
+  height: 550px;
+  overflow: hidden;
+  margin-bottom: 3%;
+}
+.container .container_wrap .image_contents .image_contents_wrap .top .img01{
+  width: 66%;
+  height: 100%;
+  float: left;
+  margin-right: 3%;
+}
+.container .container_wrap .image_contents .image_contents_wrap .top .img02{
+  width: 31%;
+  height: 50%;
+  margin-bottom: 3%;
+}
+.container .container_wrap .image_contents .image_contents_wrap .top .img03{
+  width: 31%;
+  height: 50%;
+}
+
+.container .container_wrap .image_contents .image_contents_wrap .middle{
+  width: 100%;
+  height: 550px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.container .container_wrap .image_contents .image_contents_wrap .middle .img04{
+  width: 31%;
+  height: 50%;
+  margin-bottom: 3%;
+  float: left;
+}
+.container .container_wrap .image_contents .image_contents_wrap .middle .img05{
+  width: 66%;
+  height: 100%;
+  float: right;
+}
+.container .container_wrap .image_contents .image_contents_wrap .middle .img06{
+  width: 31%;
+  height: 50%;
+  float: left;
+}
+
+.container .container_wrap .image_contents .image_contents_wrap .bottom{
+  width: 100%;
+  height: 550px;
+  overflow: hidden;
+  margin-bottom: 3%;
+}
+.container .container_wrap .image_contents .image_contents_wrap .bottom .img07{
+  width: 66%;
+  height: 100%;
+  float: left;
+  margin-right: 3%;
+}
+.container .container_wrap .image_contents .image_contents_wrap .bottom .img08{
+  width: 31%;
+  height: 50%;
+  margin-bottom: 3%;
+}
+.container .container_wrap .image_contents .image_contents_wrap .bottom .img09{
+  width: 31%;
+  height: 50%;
+}
+
+
+.footer {
+  width: 100%;
+  height: 750px;
+  background: #766161;
+  color: #ffffff;
+}
+.footer .footer_wrap{
+  width: 95%;
+  height: 100%;
+  padding: 100px 50px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer .footer_wrap .contact{
+}
+.footer .footer_wrap .contact .contact_wrap{
+  display: flex;
+  gap: 50px;
+}
+
+.footer .footer_wrap .contact .contact_wrap .contact_info{
+  width: 50%;
+}
+
+.footer .footer_wrap .contact .contact_wrap .contact_info .contact_title{
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+.footer .footer_wrap .contact .contact_wrap .contact_info .contact_detail{
+  padding-right: 30px;
+}
+.footer .footer_wrap .contact .contact_wrap .contact_form{
+  width: 50%;
+  font-size: 16px;
+}
+
+.footer .footer_wrap .contact .contact_wrap .contact_form .form_name {
+  width: 100%;
+  margin-bottom: 50px;
+}
+.footer .footer_wrap .contact .contact_wrap .contact_form .form_name .name_text {
+  margin-bottom: 10px;
+}
+.footer .footer_wrap .contact .contact_wrap .contact_form .form_name .name_input{
+  display: flex;
+  gap: 4%;
+}
+.footer .footer_wrap .contact .contact_wrap .contact_form .form_name .name_input input{
+  width: 48%;
+  height: 40px;
+  margin-bottom: 5px;
+}
+
+.footer .footer_wrap .contact .contact_wrap .contact_form .form_name .name_sub {
+  display: flex;
+}
+
+.footer .footer_wrap .contact .contact_wrap .contact_form .form_name .name_sub >div{
+  width: 50%;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.footer .footer_wrap .contact .contact_wrap .contact_form .form_email {
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.footer .footer_wrap .contact .contact_wrap .contact_form .form_email input{
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+}
+
+
+.footer .footer_wrap .contact .contact_wrap .contact_form .form_message {
+  width: 100%;
+  margin-bottom: 50px;
+}
+.footer .footer_wrap .contact .contact_wrap .contact_form .form_message input {
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+}
+
+.footer .footer_wrap .contact .contact_wrap .contact_form .form_button {
+  width: 20%;
+  padding: 20px;
+  text-align: center;
+  background: #ffffff;
+}
