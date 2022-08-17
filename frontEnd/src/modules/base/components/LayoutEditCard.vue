@@ -48,9 +48,9 @@ export default {
       isItemState: false,
       selectedThemaLayouts:[],
       newLayouts: [
-        { name: "TestHeader", id: 1, price: 10000, subject:'Headers'},
       ],
       HeaderLayouts: [
+        { name: "TestHeader", id: 1, price: 10000, subject:'Headers'},
         { name: "TestHeader1", id: 2, price: 22000, subject:'Headers' },
         { name: "TestHeader2", id: 3, price: 22000, subject:'Headers' },
         { name: "TestHeader3", id: 4, price: 22000, subject:'Headers' },

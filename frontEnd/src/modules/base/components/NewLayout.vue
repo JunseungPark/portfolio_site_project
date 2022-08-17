@@ -71,7 +71,7 @@ export default {
   /// ------------------------- LIFE -------------------------///
   methods: {
     findCompoent(subject, name){
-      return defineAsyncComponent(() =>import(`@/modules/base/components/${subject}/${name}.vue`));
+      return defineAsyncComponent(() =>import(`@/modules/base/components/LayoutItems/${subject}/${name}.vue`));
     },
 
     caluPrice() {
