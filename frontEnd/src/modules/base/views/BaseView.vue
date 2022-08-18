@@ -1,5 +1,4 @@
 <template>
-  <div>
     <!-- <b-row class="g-0">
       <b-col>
         <b-button class="mx-1 mb-2" variant="outline-primary" @click="publishPage">Preview PAGE</b-button>
@@ -7,7 +6,6 @@
       </b-col>
     </b-row> -->
     <LayoutEditCard/>
-  </div>
 </template>
 
 <script>

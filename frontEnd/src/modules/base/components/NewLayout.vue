@@ -1,36 +1,36 @@
 <template>
-<b-card>
-  <b-row class="g-0">
-    Price : {{caluPrice()}} 원
-  </b-row>
-  <b-card no-body class="overflow-hidden">
-    <b-row class="g-0">
-      <b-col>
-        <b-list-group>
-            <draggable 
-              :list="newLayouts" 
-              group="people"
-              item-key="id"
-              :component-data="{
-                tag: 'ul',
-                type: 'transition-group',
-                name: !drag ? 'flip-list' : null
-              }"
-              @change="onChange"
-              style="min-height: 100vh"
-              v-bind="dragOptions">
-              <template #item="{element}">
-                <b-list-group-item class="border-0 position-relative" :key="element.id">
-                  <b-button class="mx-1 position-absolute top-0 end-0" variant="outline-danger" @click="deleteLayout(element)">delete</b-button>
-                  <component :key="element.id" :is="findCompoent(element.subject, element.name)"/>
-                </b-list-group-item>
-              </template>
-            </draggable>
-        </b-list-group>
-      </b-col>
-    </b-row>
+  <b-card>
+    <!-- <b-row class="g-0">
+      Price : {{caluPrice()}} 원
+    </b-row> -->
+    <b-card no-body class="overflow-hidden">
+      <b-row class="g-0">
+        <b-col>
+          <b-list-group>
+              <draggable 
+                :list="newLayouts" 
+                group="people"
+                item-key="id"
+                :component-data="{
+                  tag: 'ul',
+                  type: 'transition-group',
+                  name: !drag ? 'flip-list' : null
+                }"
+                @change="onChange"
+                style="min-height: 100vh"
+                v-bind="dragOptions">
+                <template #item="{element}">
+                  <b-list-group-item class="border-0 position-relative" :key="element.id">
+                    <b-button class="mx-1 position-absolute top-0 end-0" variant="outline-danger" @click="deleteLayout(element)">delete</b-button>
+                    <component :key="element.id" :is="findCompoent(element.subject, element.name)"/>
+                  </b-list-group-item>
+                </template>
+              </draggable>
+          </b-list-group>
+        </b-col>
+      </b-row>
+    </b-card>
   </b-card>
-</b-card>
 </template>
 
 <script>
