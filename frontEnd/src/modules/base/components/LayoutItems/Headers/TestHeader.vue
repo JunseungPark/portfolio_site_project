@@ -3,14 +3,14 @@
     <header class="p-3 text-white" style="background-color:#333333">
       <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
-            <div @click="showTextEditModal(contentData.textList.text1)" class="col">{{contentData.textList.text1.value}}</div>
+            <div @click="showTextEditModal(contentData.textList.text1)" class="col clickable effect-shine">{{contentData.textList.text1.value}}</div>
 
             <ul class="nav col-8 col-lg-8 me-lg-auto mb-2 justify-content-end mb-md-0">
-              <li @click="showTextEditModal(contentData.textList.text2)"><a href="#" class="nav-link px-2 text-secondary">{{contentData.textList.text2.value}}</a></li>
-              <li @click="showTextEditModal(contentData.textList.text3)"><a href="#" class="nav-link px-2 text-white">{{contentData.textList.text3.value}}</a></li>
-              <li @click="showTextEditModal(contentData.textList.text4)"><a href="#" class="nav-link px-2 text-white">{{contentData.textList.text4.value}}</a></li>
-              <li @click="showTextEditModal(contentData.textList.text5)"><a href="#" class="nav-link px-2 text-white">{{contentData.textList.text5.value}}</a></li>
-              <li @click="showTextEditModal(contentData.textList.text6)"><a href="#" class="nav-link px-2 text-white">{{contentData.textList.text6.value}}</a></li>
+              <li @click="showTextEditModal(contentData.textList.text2)"><a href="#" class="nav-link px-2 text-secondary clickable effect-shine">{{contentData.textList.text2.value}}</a></li>
+              <li @click="showTextEditModal(contentData.textList.text3)"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList.text3.value}}</a></li>
+              <li @click="showTextEditModal(contentData.textList.text4)"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList.text4.value}}</a></li>
+              <li @click="showTextEditModal(contentData.textList.text5)"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList.text5.value}}</a></li>
+              <li @click="showTextEditModal(contentData.textList.text6)"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList.text6.value}}</a></li>
             </ul>
 
             <ul class="nav col-1 col-lg-1 mb-4 justify-content-end mb-md-0">
@@ -51,27 +51,27 @@ export default {
       contentData: {
         textList: {
           text1: {
-            key:"1",
+            key: 1,
             value: "HomePage"
           },
           text2: {
-            key:"2",
+            key: 2,
             value: "Home"
           },
           text3: {
-            key:"3",
+            key: 3,
             value: "About"
           },
           text4: {
-            key:"4",
+            key: 4,
             value: "Work"
           },
           text5: {
-            key:"5",
+            key: 5,
             value: "Team"
           },
           text6: {
-            key:"6",
+            key: 6,
             value: "Contact"
           },
         }
@@ -79,39 +79,44 @@ export default {
     }
   },
   methods: {
+    // 텍스트 에딧 -------------------------------
     showTextEditModal(text) {
       this.selectedText = text
       this.isShowTextEditMoadal = true;
+      this.emitter.emit('isOpenedAnyModal');
     },
     hideTextEditModal() {
       this.isShowTextEditMoadal = false;
+      // 수정필요
+      setTimeout(() => {
+        this.emitter.emit('isClosedModal');
+      },100)
     },
     // editTextData(text){
     //   console.log(text)
     //   this.isShowTextEditMoadal = false;
     // }
+    // 텍스트 에딧 -------------------------------
   }
 }
 </script>
 
 <style>
-
-/* linkone */
-
-/* effect-shine */
-a.effect-shine:hover {
-  -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%);
-  -webkit-mask-size: 200%;
-  animation: shine 2s infinite;
-}
-
-@-webkit-keyframes shine {
-  from {
-    -webkit-mask-position: 150%;
+  /* effect-shine */
+  .clickable.effect-shine:hover {
+    cursor: pointer;
+    -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%);
+    -webkit-mask-size: 200%;
+    animation: shine 2s infinite;
   }
-  
-  to {
-    -webkit-mask-position: -50%;
+
+  @-webkit-keyframes shine {
+    from {
+      -webkit-mask-position: 150%;
+    }
+    
+    to {
+      -webkit-mask-position: -50%;
+    }
   }
-}
 </style>

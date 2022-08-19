@@ -1,11 +1,11 @@
 <template>
   <!-- Modal -->
   <div class="modal fade" ref="modal" id="TextEditModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="TextEditModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">
           <div>
-            <input type="type" class="form-control" placeholder="Selected Text" aria-label="text" v-model="text.value" >
+            <input type="type" class="form-control" style="height:300px" placeholder="Selected Text" aria-label="text" v-model="text.value" >
           </div>
         </div>
         <div class="modal-footer">
@@ -36,9 +36,8 @@ export default {
   },
 
   /// ------------------------- LIFE -------------------------///
-created() {
-  console.log("모달 완성됨", this.selectedText)
-}, 
+  created() {
+  }, 
 
   mounted() {
     this.modal = new Modal(this.$refs.modal);
@@ -71,7 +70,7 @@ created() {
       this.$emit('hideModal');
     },
     editTextData() {
-      this.$emit('hideModal');
+      this.$emit('editTextData', this.text);
     }
   }
 }

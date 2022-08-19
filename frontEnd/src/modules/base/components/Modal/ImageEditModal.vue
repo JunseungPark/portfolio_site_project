@@ -1,17 +1,17 @@
 <template>
   <!-- Modal -->
   <div class="modal fade" ref="modal" id="TextEditModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="TextEditModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">
-          <img :src="image" alt="">
+          <img :src="image.imgName" class="previewImg" width="400" height="400" alt="">
           <div class="file-upload-wrapper" data-text="Select your file!">
             <input name="file-upload-field" type="file" class="file-upload-field" value="" @change="onFileChange">
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" @click="hideModal">닫기</button>
-          <button type="button" class="btn btn-primary" @click="editTextData">데이터 변경</button>
+          <button type="button" class="btn btn-primary" @click="editImageData">데이터 변경</button>
         </div>
       </div>
     </div>
@@ -19,17 +19,13 @@
 </template>
 
 <script>
-// import EditInput from '../Input/EditInput.vue'
 import { Modal } from 'bootstrap';
 
 export default {
   name: "ImageEditModal",
-  components: {
-    // EditInput,
-  },
   props: {
-    selectedText: {
-      type: Object,
+    selectedImage: {
+      type: Number,
     },
     isShowMoadal: {
       type: Boolean,
@@ -37,10 +33,9 @@ export default {
   },
 
   /// ------------------------- LIFE -------------------------///
-created() {
-  console.log("모달 완성됨", this.selectedText)
-}, 
-
+  created() {
+    this.image.imgName = require(`../../assets/img/logo.svg`);
+  }, 
   mounted() {
     this.modal = new Modal(this.$refs.modal);
   },
@@ -48,11 +43,10 @@ created() {
   data() {
     return {
       modal: null,
-      image:"",
-      text:{
-        key:"",
-        value:""
-      },
+      image: {
+        key: this.selectedImage,
+        imgName: "",
+      }
     }
   },
   watch: {
@@ -64,17 +58,23 @@ created() {
         this.modal.hide()
       }
     },
-    selectedText(newVal) {
-      this.text = newVal;
+    selectedImage(newVal) {
+      if(newVal == 0) {
+        this.image.imgName = require(`../../assets/img/logo.svg`);
+      }
+
+      this.image.key = newVal;
     }
   },
   methods: {
     hideModal() {
       this.$emit('hideModal');
     },
-    editTextData() {
-      this.$emit('hideModal');
+    editImageData() {
+      this.$emit('editImageData', this.image);
     },
+
+    // 이미지 주입
     onFileChange(e) {
       var files = e.target.files;
       if (!files.length)
@@ -82,15 +82,16 @@ created() {
       this.createImage(files[0]);
     },
     createImage(file) {
-      var image = new Image();
+      // var image = new Image();
       var reader = new FileReader();
-      console.log(image)
 
       reader.onload = (e) => {
-        this.image = e.target.result;
+        this.image.imgName = e.target.result;
       };
       reader.readAsDataURL(file);
     },
+
+    // 이미지 삭제
     removeImage: function (item) {
       item.image = false; 
     }
@@ -98,6 +99,10 @@ created() {
 }
 </script>
 <style>
+.previewImg {
+  object-fit: cover;
+}
+
 .file-upload-wrapper {
   position: relative;
   width: 100%;

@@ -18,9 +18,10 @@
                 }"
                 @change="onChange"
                 style="min-height: 100vh"
-                v-bind="dragOptions">
+                v-bind="dragOptions"
+                :disable=isDraggable>
                 <template #item="{element}">
-                  <b-list-group-item class="border-0 position-relative p-0" :key="element.id">
+                  <b-list-group-item class="border-0 position-relative p-0">
                     <b-button class="mx-1 position-absolute top-0 end-0" variant="outline-danger" @click="deleteLayout(element)">delete</b-button>
                     <component :key="element.id" :is="findCompoent(element.subject, element.name)"/>
                   </b-list-group-item>
@@ -75,7 +76,6 @@ export default {
         },
         scrollSensitivity: 200,
         forceFallback: true,
-        disabled: false,
         animation: 200,
         ghostClass: "ghost"
       };
@@ -84,9 +84,19 @@ export default {
   data() {
     return {
       drag: false,
+      isDraggable: false,
     }
   },
   /// ------------------------- LIFE -------------------------///
+  created() {
+    this.emitter.on('isOpenedAnyModal', this.isOpenedAnyModal);
+    this.emitter.on('isClosedModal', this.isClosedModal);
+  },
+  unmounted() {
+    console.log("부셔짐")
+    this.emitter.off('isOpenedAnyModal');
+    this.emitter.off('isClosedModal');
+  },
   /// ------------------------- LIFE -------------------------///
   methods: {
     findCompoent(subject, name){
@@ -104,7 +114,13 @@ export default {
 
     deleteLayout(element) {
       this.$emit('deleteLayout', element)
-    }
+    },
+    // isOpenedAnyModal() {
+    //   this.isDraggable = true;
+    // },
+    // isClosedModal() {
+    //   this.isDraggable = false;
+    // }
   }
 }
 </script>
