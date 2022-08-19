@@ -1,9 +1,9 @@
 <template>
-  <b-card>
+  <b-card no-body>
     <!-- <b-row class="g-0">
       Price : {{caluPrice()}} 원
     </b-row> -->
-    <b-card no-body class="overflow-hidden">
+    <b-card v-if="newLayouts.length" no-body class="overflow-hidden">
       <b-row class="g-0">
         <b-col>
           <b-list-group>
@@ -20,7 +20,7 @@
                 style="min-height: 100vh"
                 v-bind="dragOptions">
                 <template #item="{element}">
-                  <b-list-group-item class="border-0 position-relative" :key="element.id">
+                  <b-list-group-item class="border-0 position-relative p-0" :key="element.id">
                     <b-button class="mx-1 position-absolute top-0 end-0" variant="outline-danger" @click="deleteLayout(element)">delete</b-button>
                     <component :key="element.id" :is="findCompoent(element.subject, element.name)"/>
                   </b-list-group-item>
@@ -29,6 +29,25 @@
           </b-list-group>
         </b-col>
       </b-row>
+    </b-card>
+
+    <b-card v-if="!newLayouts.length" text-variant="white" class="text-center m-4" style="background-color:#8A8989; height: 90vh;">
+      <div class="d-flex flex-column justify-content-center align-items-center h-100">
+        <div class="mb-5">
+          <img src="../assets/img/logo.svg" alt="">
+        </div>
+        <div class="mb-5">
+          <h1>오른쪽에서 원하는 디자인을 선택해주세요!</h1>
+        </div>
+        <div class="mt-3">
+          <p class="display-6">
+            Select From The Right...
+          </p>
+        </div>
+        <div>
+          <img src="../assets/img/progress.svg" alt="">
+        </div>
+      </div>
     </b-card>
   </b-card>
 </template>
@@ -41,7 +60,7 @@ import { filterComma } from '../../../util/util';
 export default {
   name: "NewLayout",
   components: {
-        draggable,
+    draggable,
   },
   props: {
     newLayouts: {

@@ -1,37 +1,46 @@
 <template>
-  <div class="container">
-    <div class="container_wrap">
-      <div class="image_contents">
-        <div class="image_contents_wrap">
-          <div class="top">
-            <img class="img01" src="../../../assets/img/ar1.avif" alt="">
-            <img class="img02" src="../../../assets/img/ar2.avif" alt="">
-            <img class="img03" src="../../../assets/img/ar3.avif" alt="">
-          </div>
-          <!-- <div class="middle">
-            <img class="img04" src="../../../assets/img/ar4.avif" alt="">
-            <img class="img05" src="../../../assets/img/ar5.avif" alt="">
-            <img class="img06" src="../../../assets/img/ar6.avif" alt="">
-          </div> -->
-          <!-- <div class="bottom">
-            <img class="img07" src="../../../assets/img/ar7.avif" alt="">
-            <img class="img08" src="../../../assets/img/ar8.avif" alt="">
-            <img class="img09" src="../../../assets/img/ar9.avif" alt="">
-          </div> -->
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="bg">
+		<div class="row g-0 hover06">
+			<div @click="showImageEditModal" class="col hover06_1">
+				<img src="../../../assets/img/nasa1.jpg" class="img-fluid d-block" alt="...">
+			</div>
+			<div class="col hover06_1">
+				<img src="../../../assets/img/nasa2.jpg" class="img-fluid d-block" alt="...">
+			</div>
+			<div class="col hover06_1">
+				<img src="../../../assets/img/nasa3.jpg" class="img-fluid d-block" alt="...">
+			</div>
+			<div class="col hover06_1">
+				<img src="../../../assets/img/nasa4.jpg" class="img-fluid d-block" alt="...">
+			</div>
+		</div>
+
+    <ImageEditModal
+      :isShowMoadal="isShowImageEditMoadal"
+      @hideModal='hideImageEditModal'
+    />
+	</div>
 </template>
 <script>
+import ImageEditModal from "../../Modal/ImageEditModal.vue";
 
 export default {
   name: "TestContent",
   components: {
+    ImageEditModal,
   },
   data() {
     return {
+      isShowImageEditMoadal: false,
     }
   },
+  methods: {
+    showImageEditModal() {
+      this.isShowImageEditMoadal = true;
+    },
+    hideImageEditModal() {
+      this.isShowImageEditMoadal = false;
+    },
+  }
 }
 </script>
