@@ -38,10 +38,24 @@
       <b-accordion-item title="Picture Text Main"  class="mb-3 border-top">
         <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
+      <b-accordion-item title="Picture Main"  class="mb-3 border-top">
+        <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />
+      </b-accordion-item>
+      <b-accordion-item title="Text Main"  class="mb-3 border-top">
+        <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />
+      </b-accordion-item>
+      <b-accordion-item title="Send Mail"  class="mb-3 border-top">
+        <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />
+      </b-accordion-item>
       <b-accordion-item title="Footer"  class="mb-3 border-top">
         <ItemSlider :layoutList='allLayouts.FooterLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
     </b-accordion>
+
+    <div class="position-absolute bottom-0 end-0">
+      <div>이미지로 저장</div>
+      <div>카톡 내보내기</div>
+    </div>
   </b-card>
 </template>
 

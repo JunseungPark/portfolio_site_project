@@ -5,7 +5,8 @@
       <div class="modal-content">
         <div class="modal-body">
           <div>
-            <input type="type" class="form-control" style="height:300px" placeholder="Selected Text" aria-label="text" v-model="text.value" >
+            <!-- <input type="type" class="form-control" style="height:300px" placeholder="Selected Text" aria-label="text" v-model="text.value" > -->
+            <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="10" v-model="text.value"></textarea>
           </div>
         </div>
         <div class="modal-footer">
