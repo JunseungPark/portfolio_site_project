@@ -15,6 +15,7 @@
         </div>
       </div>
     </div>
+       <font-picker :api-key="googleKey" :options="options" :active-font="fontFamily" @change="myFunc"></font-picker>
   </div>
 </template>
 
@@ -47,6 +48,7 @@ export default {
   data() {
     return {
       modal: null,
+      googleKey: process.env.VUE_APP_GOOGLE_API_KEY,
       text:{
         key:"",
         value:""
@@ -72,6 +74,9 @@ export default {
     },
     editTextData() {
       this.$emit('editTextData', this.text);
+    },
+    myFunc() {
+
     }
   }
 }
