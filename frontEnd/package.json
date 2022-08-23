@@ -16,13 +16,13 @@
     "dotenv": "^16.0.1",
     "mitt": "^3.0.0",
     "node-sass": "^7.0.1",
+    "pinia": "^2.0.20",
     "sass-loader": "^13.0.2",
     "sortablejs": "^1.15.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.16",
     "vue3-simple-html2pdf": "0.0.6",
-    "vuedraggable": "^4.1.0",
-    "vuex": "^4.0.2"
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

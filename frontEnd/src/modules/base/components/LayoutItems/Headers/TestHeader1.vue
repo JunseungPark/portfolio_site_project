@@ -57,13 +57,54 @@
   </header>
 </template>
 <script>
+import { ref } from "vue";
+// import {mapState} from 'pinia' 
+import { useHeaderStore } from '../../../store/modules/Header';
 
 export default {
-  name: "TestHeader",
-  components: {
-  },
-  data() {
+  name: "TestHeader1",
+  setup() {
+    const header = useHeaderStore();
+    header.addList(2);
+    console.log(header.getDataAll);
+    // ----------------------------- 텍스트 에딧 ------------------------------- //
+    const isShowTextEditMoadal = ref(false);
+    const selectedText = ref({});
+    const showTextEditModal = (text) => {
+      this.selectedText = text
+      this.isShowTextEditMoadal = true;
+      this.emitter.emit('isOpenedAnyModal');
+    };
+    const hideTextEditModal = () => {
+      this.isShowTextEditMoadal = false;
+      // 수정필요
+      setTimeout(() => {
+        this.emitter.emit('isClosedModal');
+      },100)
+    };
+    const editTextData = (editedText) =>{
+      console.log(editedText)
+      this.contentData.textList.filter(text => { 
+        if (text.key === editedText.key) { 
+          text.key = editedText.key
+          text.value = editedText.value;
+        } 
+      });
+      this.isShowTextEditMoadal = false;
+      // 수정필요
+      setTimeout(() => {
+        this.emitter.emit('isClosedModal');
+      },100)
+    };
+    // ----------------------------- 텍스트 에딧 ------------------------------- //
     return {
+      // ----------------------------- 텍스트 에딧 ------------------------------- //
+      isShowTextEditMoadal,
+      selectedText,
+      showTextEditModal,
+      hideTextEditModal,
+      editTextData,
+      // ----------------------------- 텍스트 에딧 ------------------------------- //
     }
   },
 }

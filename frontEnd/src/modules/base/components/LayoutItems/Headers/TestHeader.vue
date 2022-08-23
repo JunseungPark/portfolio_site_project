@@ -3,14 +3,14 @@
     <header class="p-3 text-white" style="background-color:#333333">
       <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
-            <div @click="showTextEditModal(contentData.textList.text1)" class="col clickable effect-shine">{{contentData.textList.text1.value}}</div>
+            <div @click="showTextEditModal(contentData.textList[0])" class="col clickable effect-shine">{{contentData.textList[0].value}}</div>
 
             <ul class="nav col-8 col-lg-8 me-lg-auto mb-2 justify-content-end mb-md-0">
-              <li @click="showTextEditModal(contentData.textList.text2)"><a href="#" class="nav-link px-2 text-secondary clickable effect-shine">{{contentData.textList.text2.value}}</a></li>
-              <li @click="showTextEditModal(contentData.textList.text3)"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList.text3.value}}</a></li>
-              <li @click="showTextEditModal(contentData.textList.text4)"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList.text4.value}}</a></li>
-              <li @click="showTextEditModal(contentData.textList.text5)"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList.text5.value}}</a></li>
-              <li @click="showTextEditModal(contentData.textList.text6)"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList.text6.value}}</a></li>
+              <li @click="showTextEditModal(contentData.textList[1])"><a href="#" class="nav-link px-2 text-secondary clickable effect-shine">{{contentData.textList[1].value}}</a></li>
+              <li @click="showTextEditModal(contentData.textList[2])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[2].value}}</a></li>
+              <li @click="showTextEditModal(contentData.textList[3])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[3].value}}</a></li>
+              <li @click="showTextEditModal(contentData.textList[4])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[4].value}}</a></li>
+              <li @click="showTextEditModal(contentData.textList[5])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[5].value}}</a></li>
             </ul>
 
             <ul class="nav col-1 col-lg-1 mb-4 justify-content-end mb-md-0">
@@ -33,71 +33,61 @@
       :isShowMoadal="isShowTextEditMoadal"
       :selectedText="selectedText"
       @hideModal='hideTextEditModal'
+      @editTextData="editTextData"
     />
   </div>
 </template>
 <script>
+import { ref } from "vue";
+// import {mapState} from 'pinia' 
+import { useHeaderStore } from '../../../store/modules/Header';
 import TextEditModal from '../../Modal/TextEditModal.vue';
 
 export default {
   name: "TestHeader",
-  components: {
-    TextEditModal,
-  },
-  data() {
-    return {
-      isShowTextEditMoadal: false,
-      selectedText:"",
-      contentData: {
-        textList: {
-          text1: {
-            key: 1,
-            value: "HomePage"
-          },
-          text2: {
-            key: 2,
-            value: "Home"
-          },
-          text3: {
-            key: 3,
-            value: "About"
-          },
-          text4: {
-            key: 4,
-            value: "Work"
-          },
-          text5: {
-            key: 5,
-            value: "Team"
-          },
-          text6: {
-            key: 6,
-            value: "Contact"
-          },
-        }
-      }
-    }
-  },
-  methods: {
-    // 텍스트 에딧 -------------------------------
-    showTextEditModal(text) {
-      this.selectedText = text
-      this.isShowTextEditMoadal = true;
+
+  setup() {
+    const header = useHeaderStore();
+    const contentData = header.getHeadr1;
+    // ----------------------------- 텍스트 에딧 ------------------------------- //
+    const isShowTextEditMoadal = ref(false);
+    const selectedText = ref({});
+    const showTextEditModal = (text) => {
+      selectedText.value = text
+      isShowTextEditMoadal.value = true;
       this.emitter.emit('isOpenedAnyModal');
-    },
-    hideTextEditModal() {
-      this.isShowTextEditMoadal = false;
+    };
+    const hideTextEditModal = () => {
+      isShowTextEditMoadal.value = false;
       // 수정필요
       setTimeout(() => {
         this.emitter.emit('isClosedModal');
       },100)
-    },
-    // editTextData(text){
-    //   console.log(text)
-    //   this.isShowTextEditMoadal = false;
-    // }
-    // 텍스트 에딧 -------------------------------
-  }
+    };
+    const editTextData = (editedText) =>{
+      console.log(editedText)
+      // header.editHeaderList(editedText)
+      isShowTextEditMoadal.value = false;
+      // 수정필요
+      setTimeout(() => {
+        this.emitter.emit('isClosedModal');
+      },100)
+    };
+    // ----------------------------- 텍스트 에딧 ------------------------------- //
+    return {
+      // ----------------------------- 텍스트 에딧 ------------------------------- //
+      isShowTextEditMoadal,
+      selectedText,
+      showTextEditModal,
+      hideTextEditModal,
+      editTextData,
+      // ----------------------------- 텍스트 에딧 ------------------------------- //
+      contentData
+    }
+  },
+  components: {
+    TextEditModal,
+  },
 }
 </script>
 
