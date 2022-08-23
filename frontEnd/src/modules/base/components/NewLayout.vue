@@ -115,9 +115,10 @@ export default {
     deleteLayout(element) {
       this.$emit('deleteLayout', element)
     },
-    // isOpenedAnyModal() {
-    //   this.isDraggable = true;
-    // },
+    isOpenedAnyModal() {
+      console.log("오픈")
+      this.isDraggable = true;
+    },
     // isClosedModal() {
     //   this.isDraggable = false;
     // }

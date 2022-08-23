@@ -3,27 +3,27 @@ export default {
     textList: [
       {
         key: 1,
-        value: "HomePage"
+        textValue: "HomePage"
       },
       {
         key: 2,
-        value: "Home"
+        textValue: "Home"
       },
       {
         key: 3,
-        value: "About"
+        textValue: "About"
       },
       {
         key: 4,
-        value: "Work"
+        textValue: "Work"
       },
       {
         key: 5,
-        value: "Team"
+        textValue: "Team"
       },
       {
         key: 6,
-        value: "Contact"
+        textValue: "Contact"
       },
     ]
   },
@@ -31,7 +31,7 @@ export default {
     textList: [
       {
         key: 1,
-        value: "HomePag23131e"
+        textValue: "HomePag23131e"
       },
     ]
   }

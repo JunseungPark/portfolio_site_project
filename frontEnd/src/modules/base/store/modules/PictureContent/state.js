@@ -1,5 +1,5 @@
 export default {
-  Picture1: {
+  PICTURE1: {
     imageList: [
       {
         key: 1,
@@ -19,7 +19,7 @@ export default {
       },
     ]
   },
-  Picture2: {
+  PICTURE2: {
     imageList: [
       {
         key: 1,

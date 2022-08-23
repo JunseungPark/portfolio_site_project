@@ -43,11 +43,14 @@ export default {
       isItemState: false,
       allLayouts:{
         HeaderLayouts: [
-          { name: "TestHeader", id: 1, price: 10000, subject:'Headers'},
-          { name: "TestHeader1", id: 2, price: 22000, subject:'Headers'},
-          { name: "TestHeader2", id: 3, price: 22000, subject:'Headers'},
-          { name: "TestHeader3", id: 4, price: 22000, subject:'Headers'},
-          { name: "TestHeader4", id: 5, price: 22000, subject:'Headers'},
+          { name: "HeaderLayout1", id: 1, price: 10000, subject:'HeaderLayouts'},
+          { name: "TestHeader1", id: 2, price: 22000, subject:'HeaderLayouts'},
+          { name: "TestHeader2", id: 3, price: 22000, subject:'HeaderLayouts'},
+          { name: "TestHeader3", id: 4, price: 22000, subject:'HeaderLayouts'},
+          { name: "TestHeader4", id: 5, price: 22000, subject:'HeaderLayouts'},
+        ],
+        PictureLayouts: [
+          { name: "PictureLayout1", id: 17, price: 10000, subject:'PictureLayouts'},
         ],
         ContentLayouts: [
           { name: "TestContent", id: 7, price: 45000, subject:'Contents'},
@@ -72,27 +75,11 @@ export default {
   },
   methods: {
     addLayoutTo(layout) {
+      console.log(layout)
       this.newLayouts.push(layout);
     },
     deleteLayout(element) {
       this.newLayouts.splice(this.newLayouts.indexOf(element), 1);
-      switch(element.subject) {
-        case 'Headers':
-          this.HeaderLayouts.push(element);
-          this.itemSort(this.HeaderLayouts)
-          break;
-        case 'Contents':
-          this.ContentLayouts.push(element);
-          this.itemSort(this.ContentLayouts)
-          break;
-        case 'Features':
-          this.FeatureLayouts.push(element);
-          this.itemSort(this.FeatureLayouts)
-          break;
-        case 'Footers':
-          this.FooterLayouts.push(element);
-          this.itemSort(this.FooterLayouts)
-      }
     },
     itemSort(array){
       array.sort(function(a,b){

@@ -16,15 +16,15 @@ export const useHeaderStore = defineStore('header', () => {
   }
 
   const getDataAll = computed(() =>  headerList.value);
-  const getHeadr1 = computed(() =>  headerList.value.HEADER1);
-  const getHeadr2 = computed(() =>  headerList.value.HEADER2);
+  const getHeader1 = computed(() =>  headerList.value.HEADER1);
+  const getHeader2 = computed(() =>  headerList.value.HEADER2);
 
   return { 
     headerList, 
     editHeaderList, 
     getDataAll,
-    getHeadr1,
-    getHeadr2
+    getHeader1,
+    getHeader2
   };
 
 });

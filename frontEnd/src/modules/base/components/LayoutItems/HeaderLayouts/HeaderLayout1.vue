@@ -3,14 +3,14 @@
     <header class="p-3 text-white" style="background-color:#333333">
       <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
-            <div @click="showTextEditModal(contentData.textList[0])" class="col clickable effect-shine">{{contentData.textList[0].value}}</div>
+            <div @click="showTextEditModal(contentData.textList[0])" class="col clickable effect-shine">{{contentData.textList[0].textValue}}</div>
 
             <ul class="nav col-8 col-lg-8 me-lg-auto mb-2 justify-content-end mb-md-0">
-              <li @click="showTextEditModal(contentData.textList[1])"><a href="#" class="nav-link px-2 text-secondary clickable effect-shine">{{contentData.textList[1].value}}</a></li>
-              <li @click="showTextEditModal(contentData.textList[2])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[2].value}}</a></li>
-              <li @click="showTextEditModal(contentData.textList[3])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[3].value}}</a></li>
-              <li @click="showTextEditModal(contentData.textList[4])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[4].value}}</a></li>
-              <li @click="showTextEditModal(contentData.textList[5])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[5].value}}</a></li>
+              <li @click="showTextEditModal(contentData.textList[1])"><a href="#" class="nav-link px-2 text-secondary clickable effect-shine">{{contentData.textList[1].textValue}}</a></li>
+              <li @click="showTextEditModal(contentData.textList[2])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[2].textValue}}</a></li>
+              <li @click="showTextEditModal(contentData.textList[3])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[3].textValue}}</a></li>
+              <li @click="showTextEditModal(contentData.textList[4])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[4].textValue}}</a></li>
+              <li @click="showTextEditModal(contentData.textList[5])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[5].textValue}}</a></li>
             </ul>
 
             <ul class="nav col-1 col-lg-1 mb-4 justify-content-end mb-md-0">
@@ -41,37 +41,48 @@
 import { ref } from "vue";
 // import {mapState} from 'pinia' 
 import { useHeaderStore } from '../../../store/modules/Header';
+import { getCurrentInstance } from 'vue'
 import TextEditModal from '../../Modal/TextEditModal.vue';
 
 export default {
-  name: "TestHeader",
-
+  name: "HeaderLayout1",
+  emits: ["isOpendAnyModal", "isClosedModal"],
   setup() {
+    // 이벤트 버스 임시 사용중 pinia로 이전 필요해보임
+    // vue3에서는 기본적으로 이벤트버스를 허용하지 않아 mitt라이브러리 이용중
+    const internalInstance = getCurrentInstance(); 
+    const emitter = internalInstance.appContext.config.globalProperties.emitter;
+
     const header = useHeaderStore();
-    const contentData = header.getHeadr1;
+    const contentData = header.getHeader1;
+    console.log(contentData)
+    
     // ----------------------------- 텍스트 에딧 ------------------------------- //
     const isShowTextEditMoadal = ref(false);
     const selectedText = ref({});
+
     const showTextEditModal = (text) => {
       selectedText.value = text
       isShowTextEditMoadal.value = true;
-      this.emitter.emit('isOpenedAnyModal');
+      emitter.emit('isOpenedAnyModal');
     };
+
     const hideTextEditModal = () => {
       isShowTextEditMoadal.value = false;
       // 수정필요
-      setTimeout(() => {
-        this.emitter.emit('isClosedModal');
-      },100)
+      // setTimeout(() => {
+      //   this.emitter.emit('isClosedModal');
+      // },100)
     };
+    
     const editTextData = (editedText) =>{
       console.log(editedText)
-      // header.editHeaderList(editedText)
+      header.editHeaderList(editedText)
       isShowTextEditMoadal.value = false;
       // 수정필요
-      setTimeout(() => {
-        this.emitter.emit('isClosedModal');
-      },100)
+      // setTimeout(() => {
+      //   this.emitter.emit('isClosedModal');
+      // },100)
     };
     // ----------------------------- 텍스트 에딧 ------------------------------- //
     return {

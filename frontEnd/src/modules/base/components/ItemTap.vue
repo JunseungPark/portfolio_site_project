@@ -39,7 +39,7 @@
         <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Picture Main"  class="mb-3 border-top">
-        <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />
+        <ItemSlider :layoutList='allLayouts.PictureLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Text Main"  class="mb-3 border-top">
         <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />

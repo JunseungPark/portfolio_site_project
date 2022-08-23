@@ -21,6 +21,7 @@
 
 <script>
 // import EditInput from '../Input/EditInput.vue'
+import { ref, watch, onMounted } from 'vue';
 import { Modal } from 'bootstrap';
 
 export default {
@@ -37,47 +38,58 @@ export default {
     },
   },
 
-  /// ------------------------- LIFE -------------------------///
-  created() {
-  }, 
+  emits: ["hideModal", "editTextData"],
 
-  mounted() {
-    this.modal = new Modal(this.$refs.modal);
-  },
-  /// ------------------------- LIFE -------------------------///
-  data() {
-    return {
-      modal: null,
-      googleKey: process.env.VUE_APP_GOOGLE_API_KEY,
-      text:{
+  setup(props, context) {
+    // 구글 apikey
+    const googleKey = process.env.VUE_APP_GOOGLE_API_KEY ;
+    // 모달창 컨트롤러
+    const modal = ref(null);
+    let modalController = null
+
+    //텍스트 복사
+    const text = ref({
         key:"",
-        value:""
-      },
-    }
-  },
-  watch: {
-    isShowMoadal(val) {
-      if (!this.modal) return
-      if (val) {
-        this.modal.show()
-      } else {
-        this.modal.hide()
-      }
-    },
-    selectedText(newVal) {
-      this.text = newVal;
-    }
-  },
-  methods: {
-    hideModal() {
-      this.$emit('hideModal');
-    },
-    editTextData() {
-      this.$emit('editTextData', this.text);
-    },
-    myFunc() {
+        textValue:""
+    });
+    let originalText = null;
 
+    const hideModal = () => {
+      text.value.value = originalText.textValue
+      context.emit('hideModal');
     }
-  }
+    const editTextData = () => {
+      if (text.value.value === '') text.value.textValue = originalText.textValue
+      context.emit('editTextData', text.value);
+    }
+
+    watch(() => props.isShowMoadal, (newVal) => {
+      if (!modalController) return
+      if (newVal) {
+        modalController.show()
+      } else {
+        modalController.hide()
+      }
+    })
+
+    watch(() => props.selectedText, (newVal) => {
+      if (!originalText) originalText = JSON.parse(JSON.stringify(newVal));
+      console.log(originalText)
+      text.value = newVal;
+    })
+
+    /// ------------------------- LIFE -------------------------///
+    onMounted(()=> {
+      modalController = new Modal(modal.value);
+    });
+    /// ------------------------- LIFE -------------------------///
+    return {
+      googleKey,
+      hideModal,
+      editTextData,
+      modal,
+      text
+    }
+  },
 }
 </script>
