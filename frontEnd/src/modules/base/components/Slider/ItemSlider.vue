@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 
 export default {
   name: "ItemSlieder",
@@ -35,19 +36,25 @@ export default {
       type: Array,
     }
   },
-  data() {
+
+  emits: ["addLayoutTo"],
+
+  setup(props, context) {
+    const subject = ref(props.layoutList[0].subject)
+
+    const getImage = (index) => {
+      return require("../../assets/img/nasa"+ (index+1) +".jpg");
+    }
+
+    const addLayoutTo = (layout) => {
+      context.emit('addLayoutTo', layout)
+    }
     return {
-      subject: this.layoutList[0].subject
+      subject,
+      getImage,
+      addLayoutTo,
     }
   },
-  methods: {
-    getImage(index) {
-      return require("../../assets/img/nasa"+ (index+1) +".jpg");
-    },
-    addLayoutTo(layout) {
-      this.$emit('addLayoutTo', layout)
-    }
-  }
 }
 </script>
 

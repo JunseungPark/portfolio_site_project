@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import { ref }  from 'vue'
 import ItemSlider from '@/modules/base/components/Slider/ItemSlider.vue'
 
 export default {
@@ -72,21 +73,28 @@ export default {
       type: Object,
     }
   },
-  data() {
+
+  emits:["addLayoutTo"],
+
+  setup(context) {
+    const isShow = ref(false)
+
+    const openClose = (thema) => {
+      console.log(thema);
+      isShow.value = !isShow.value;
+    }
+
+    const addLayoutTo = (layout) => {
+      console.log(2)
+      context.emit('addLayoutTo', layout)
+    }
+
     return {
-      isShow : false
+      isShow,
+      openClose,
+      addLayoutTo
     }
   },
-  methods: {
-    openClose(thema){
-      this.isShow = !this.isShow;
-      console.log(thema);
-      // this.$emit('selectThema', thema);
-    },
-    addLayoutTo(layout) {
-      this.$emit('addLayoutTo', layout)
-    }
-  }
 }
 </script>
 

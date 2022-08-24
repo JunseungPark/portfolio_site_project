@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { ref, watch, onMounted } from 'vue';
 import { Modal } from 'bootstrap';
 
 export default {
@@ -32,70 +33,81 @@ export default {
     },
   },
 
-  /// ------------------------- LIFE -------------------------///
-  created() {
-    this.image.imgName = require(`../../assets/img/logo.svg`);
-  }, 
-  mounted() {
-    this.modal = new Modal(this.$refs.modal);
-  },
-  /// ------------------------- LIFE -------------------------///
-  data() {
-    return {
-      modal: null,
-      image: {
-        key: this.selectedImage,
-        imgName: "",
-      }
-    }
-  },
-  watch: {
-    isShowMoadal(val) {
-      if (!this.modal) return
-      if (val) {
-        this.modal.show()
-      } else {
-        this.modal.hide()
-      }
-    },
-    selectedImage(newVal) {
-      if(newVal == 0) {
-        this.image.imgName = require(`../../assets/img/logo.svg`);
-      }
+  emits: ["hideModal", "editTextData"],
 
-      this.image.key = newVal;
-    }
-  },
-  methods: {
-    hideModal() {
-      this.$emit('hideModal');
-    },
-    editImageData() {
-      this.$emit('editImageData', this.image);
-    },
+  setup(props, context) {
+    // 모달창 컨트롤러
+    const modal = ref(null);
+    let modalController = null
 
-    // 이미지 주입
-    onFileChange(e) {
+    //이미지 복사
+    const image = ref({
+        key: props.selectedImage,
+        imgName: require(`../../assets/img/logo.svg`)
+    });
+
+    const hideModal = () => {
+      context.emit('hideModal');
+    }
+    const editImageData = () => {
+      context.emit('editImageData', image.value);
+    }
+
+        // 이미지 주입
+    const onFileChange = (e) => {
       var files = e.target.files;
       if (!files.length)
         return;
       this.createImage(files[0]);
-    },
-    createImage(file) {
+    }
+
+    const createImage = (file) => {
       // var image = new Image();
       var reader = new FileReader();
 
       reader.onload = (e) => {
-        this.image.imgName = e.target.result;
+        image.value.imgName = e.target.result;
       };
       reader.readAsDataURL(file);
-    },
+    }
 
     // 이미지 삭제
-    removeImage: function (item) {
+    const removeImage = (item) => {
       item.image = false; 
     }
-  }
+
+    watch(() => props.isShowMoadal, (newVal) => {
+      if (!modalController) return
+      if (newVal) {
+        modalController.show()
+      } else {
+        modalController.hide()
+      }
+    })
+
+    watch(() => props.selectedImage, (newVal) => {
+      if(newVal == 0) {
+        image.value.imgName = require(`../../assets/img/logo.svg`);
+      }
+      image.value.key = newVal;
+    })
+
+    /// ------------------------- LIFE -------------------------///
+    onMounted(()=> {
+      modalController = new Modal(modal.value);
+    });
+    /// ------------------------- LIFE -------------------------///
+
+    return {
+      hideModal,
+      editImageData,
+      onFileChange,
+      createImage,
+      removeImage,
+      modal,
+      image
+    }
+  },
 }
 </script>
 <style>

@@ -28,6 +28,7 @@
 
 <script>
 import draggable from 'vuedraggable'
+import { ref, computed } from 'vue'
 
 export default {
   name: "ContentsList",
@@ -39,8 +40,12 @@ export default {
       type: Array,
     }
   },
-  computed: {
-    dragOptions() {
+
+  emits: ["backTo"],
+
+  setup(context) {
+    const drag = ref(false);
+    const dragOptions = computed(() => {
       return {
         group: {
           name: 'g1'
@@ -50,20 +55,19 @@ export default {
         disabled: false,
         animation: 200,
         ghostClass: "ghost"
-      };
-    }
-  },
-  data() {
-    return {
-      drag: false,
-    }
-  },
+      }
+    });
 
-  methods: {
-    backTo() {
-      this.$emit('backTo')
+    const backTo = () => {
+      context.emit('backTo');
     }
-  }
+
+    return {
+      drag,
+      backTo,
+      dragOptions
+    }
+  },
 }
 </script>
 

@@ -28,6 +28,10 @@ export default {
       ItemTap,
       PreviewModal
   },
+  
+  setup() {
+
+  },
   /// ------------------------- LIFE -------------------------///
   created() {
     this.emitter.on('publishPage', this.publishPage);

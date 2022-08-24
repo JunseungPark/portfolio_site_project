@@ -55,11 +55,11 @@ export default {
     let originalText = null;
 
     const hideModal = () => {
-      text.value.value = originalText.textValue
+      text.value.textValue = originalText.textValue
       context.emit('hideModal');
     }
     const editTextData = () => {
-      if (text.value.value === '') text.value.textValue = originalText.textValue
+      if (text.value.textValue === '') text.value.textValue = originalText.textValue
       context.emit('editTextData', text.value);
     }
 
