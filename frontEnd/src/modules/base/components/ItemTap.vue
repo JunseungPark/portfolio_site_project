@@ -33,19 +33,19 @@
         <ItemSlider :layoutList='allLayouts.HeaderLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Slider Main" class="mb-3 border-top">
-        <ItemSlider :layoutList='allLayouts.ContentLayouts' @addLayoutTo="addLayoutTo" />
+        <ItemSlider :layoutList='allLayouts.SliderLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Picture Text Main"  class="mb-3 border-top">
-        <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />
+        <ItemSlider :layoutList='allLayouts.PictureTextLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Picture Main"  class="mb-3 border-top">
         <ItemSlider :layoutList='allLayouts.PictureLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Text Main"  class="mb-3 border-top">
-        <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />
+        <ItemSlider :layoutList='allLayouts.TextLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Send Mail"  class="mb-3 border-top">
-        <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />
+        <ItemSlider :layoutList='allLayouts.EmailLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Footer"  class="mb-3 border-top">
         <ItemSlider :layoutList='allLayouts.FooterLayouts' @addLayoutTo="addLayoutTo" />
@@ -74,9 +74,7 @@ export default {
     }
   },
 
-  emits:["addLayoutTo"],
-
-  setup(context) {
+  setup(context, {emit}) {
     const isShow = ref(false)
 
     const openClose = (thema) => {
@@ -85,8 +83,7 @@ export default {
     }
 
     const addLayoutTo = (layout) => {
-      console.log(2)
-      context.emit('addLayoutTo', layout)
+      emit('addLayoutTo', layout)
     }
 
     return {

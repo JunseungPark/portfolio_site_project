@@ -27,7 +27,6 @@
 import { ref } from "vue";
 // import {mapState} from 'pinia' 
 import { usePictureStore } from '../../../store/modules/PictureContent';
-import { getCurrentInstance } from 'vue'
 import ImageEditModal from "../../Modal/ImageEditModal.vue";
 
 export default {
@@ -35,15 +34,9 @@ export default {
   components: {
     ImageEditModal,
   },
-  emits: ["isOpendAnyModal", "isClosedModal"],
   setup() {
-    // 이벤트 버스 임시 사용중 pinia로 이전 필요해보임
-    // vue3에서는 기본적으로 이벤트버스를 허용하지 않아 mitt라이브러리 이용중
-    const internalInstance = getCurrentInstance(); 
-    const emitter = internalInstance.appContext.config.globalProperties.emitter;
-
     const pictureConent = usePictureStore();
-    const contentData = pictureConent.getPicture1;
+    const contentData = pictureConent.getPictureLayout1;
 
     // ----------------------------- 이미지 에딧 ------------------------------- //
     const isShowImageEditMoadal = ref(false);
@@ -52,24 +45,15 @@ export default {
     const showImageEditModal = (key) => {
       selectedImage.value = key
       isShowImageEditMoadal.value = true;
-      emitter.emit('isOpenedAnyModal');
     };
 
     const hideImageEditModal = () => {
       isShowImageEditMoadal.value = false;
-      // 수정필요
-      // setTimeout(() => {
-      //   this.emitter.emit('isClosedModal');
-      // },100)
     };
 
     const editImageData = (uploaedImg) =>{
-      pictureConent.editPictureList(uploaedImg)
+      pictureConent.editPictureList(contentData, uploaedImg)
       isShowImageEditMoadal.value = false;
-      // 수정필요
-      // setTimeout(() => {
-      //   this.emitter.emit('isClosedModal');
-      // },100)
     };
     // ----------------------------- 이미지 에딧 ------------------------------- //
     return {

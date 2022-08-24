@@ -39,13 +39,15 @@
 </template>
 <script>
 import { ref } from "vue";
-// import {mapState} from 'pinia' 
 import { useHeaderStore } from '../../../store/modules/Header';
 import { getCurrentInstance } from 'vue'
 import TextEditModal from '../../Modal/TextEditModal.vue';
 
 export default {
   name: "HeaderLayout1",
+  components: {
+    TextEditModal,
+  },
   emits: ["isOpendAnyModal", "isClosedModal"],
   setup() {
     // 이벤트 버스 임시 사용중 pinia로 이전 필요해보임
@@ -54,7 +56,7 @@ export default {
     const emitter = internalInstance.appContext.config.globalProperties.emitter;
 
     const header = useHeaderStore();
-    const contentData = header.getHeader1;
+    const contentData = header.getHeaderLayout1;
     console.log(contentData)
     
     // ----------------------------- 텍스트 에딧 ------------------------------- //
@@ -76,8 +78,7 @@ export default {
     };
     
     const editTextData = (editedText) =>{
-      console.log(editedText)
-      header.editHeaderList(editedText)
+      header.editTextList(contentData, editedText)
       isShowTextEditMoadal.value = false;
       // 수정필요
       // setTimeout(() => {
@@ -95,9 +96,6 @@ export default {
       // ----------------------------- 텍스트 에딧 ------------------------------- //
       contentData
     }
-  },
-  components: {
-    TextEditModal,
   },
 }
 </script>

@@ -19,10 +19,10 @@
                 @change="onChange"
                 style="min-height: 100vh"
                 v-bind="dragOptions"
-                :disable=isDraggable>
+                :draggable= false>
                 <template #item="{element}">
-                  <b-list-group-item class="border-0 position-relative p-0">
-                    <b-button class="mx-1 position-absolute top-0 end-0" variant="outline-danger" @click="deleteLayout(element)">delete</b-button>
+                  <b-list-group-item class="border-0 position-relative p-0 not-draggable">
+                    <b-button class="mx-3 position-absolute top-0 end-0 mt-3" variant="outline-danger" @click="deleteLayout(element)">제 거</b-button>
                     <component :key="element.id" :is="findCompoent(element.subject, element.name)"/>
                   </b-list-group-item>
                 </template>
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, ref, computed } from 'vue'
 import draggable from 'vuedraggable'
 import { filterComma } from '../../../util/util';
 
@@ -68,25 +68,59 @@ export default {
       type: Array,
     }
   },
-  computed: {
-    dragOptions() {
+
+  setup(context, {emit}) {
+    const drag = ref(false);
+    const isDraggable = ref(false);
+
+    const dragOptions = computed(() => {
       return {
         group: {
           name: 'g1'
         },
         scrollSensitivity: 200,
         forceFallback: true,
+        disabled: false,
         animation: 200,
         ghostClass: "ghost"
-      };
-    },
-  },
-  data() {
+      }
+    });
+
+    const findCompoent = (subject, name) => {
+      return defineAsyncComponent(() =>import(`@/modules/base/components/LayoutItems/${subject}/${name}.vue`));
+    }
+
+    const caluPrice = () =>{
+      var price = 0;
+      this.newLayouts.forEach(element => {
+        price += element.price;
+      });
+
+      return filterComma(price)
+    }
+
+    const deleteLayout = (element) => {
+      emit('deleteLayout', element)
+    }
+    const isOpenedAnyModal = () => {
+      isDraggable.value = true;
+    }
+    // isClosedModal() {
+    //   this.isDraggable = false;
+    // }
+    
     return {
-      drag: false,
-      isDraggable: false,
+      drag,
+      isDraggable,
+      dragOptions,
+      findCompoent,
+      caluPrice,
+      deleteLayout,
+      isOpenedAnyModal
     }
   },
+
+  //eventbus 어쩌려구?
   /// ------------------------- LIFE -------------------------///
   created() {
     this.emitter.on('isOpenedAnyModal', this.isOpenedAnyModal);
@@ -98,31 +132,6 @@ export default {
     this.emitter.off('isClosedModal');
   },
   /// ------------------------- LIFE -------------------------///
-  methods: {
-    findCompoent(subject, name){
-      return defineAsyncComponent(() =>import(`@/modules/base/components/LayoutItems/${subject}/${name}.vue`));
-    },
-
-    caluPrice() {
-      var price = 0;
-      this.newLayouts.forEach(element => {
-        price += element.price;
-      });
-
-      return filterComma(price)
-    },
-
-    deleteLayout(element) {
-      this.$emit('deleteLayout', element)
-    },
-    isOpenedAnyModal() {
-      console.log("오픈")
-      this.isDraggable = true;
-    },
-    // isClosedModal() {
-    //   this.isDraggable = false;
-    // }
-  }
 }
 </script>
 
@@ -141,7 +150,7 @@ export default {
   min-height: 20px;
 }
 .list-group-item {
-  cursor: move;
+  cursor: pointer;
 }
 .list-group-item i {
   cursor: pointer;

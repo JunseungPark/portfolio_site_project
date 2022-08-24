@@ -53,14 +53,15 @@ export default {
       context.emit('editImageData', image.value);
     }
 
-        // 이미지 주입
+    // 이미지 주입
     const onFileChange = (e) => {
       var files = e.target.files;
       if (!files.length)
         return;
-      this.createImage(files[0]);
+      createImage(files[0]);
     }
 
+    // 이미지 적용
     const createImage = (file) => {
       // var image = new Image();
       var reader = new FileReader();
@@ -111,6 +112,10 @@ export default {
 }
 </script>
 <style>
+/* 모달 백그라운드 노터치 */
+.modal {
+  pointer-events: none;
+}
 .previewImg {
   object-fit: cover;
 }

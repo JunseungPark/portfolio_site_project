@@ -54,47 +54,46 @@
         </div>
       </div>
     </div>
+
+    <TextEditModal
+      :isShowMoadal="isShowTextEditMoadal"
+      :selectedText="selectedText"
+      @hideModal='hideTextEditModal'
+      @editTextData="editTextData"
+    />
   </header>
 </template>
 <script>
+
 import { ref } from "vue";
-// import {mapState} from 'pinia' 
 import { useHeaderStore } from '../../../store/modules/Header';
+import TextEditModal from '../../Modal/TextEditModal.vue';
 
 export default {
-  name: "TestHeader1",
+  name: "HeaderLayout",
+  components: {
+    TextEditModal,
+  },
   setup() {
     const header = useHeaderStore();
-    header.addList(2);
-    console.log(header.getDataAll);
+    const contentData = header.getHeaderLayout2;
+    
     // ----------------------------- 텍스트 에딧 ------------------------------- //
     const isShowTextEditMoadal = ref(false);
     const selectedText = ref({});
+
     const showTextEditModal = (text) => {
-      this.selectedText = text
-      this.isShowTextEditMoadal = true;
-      this.emitter.emit('isOpenedAnyModal');
+      selectedText.value = text
+      isShowTextEditMoadal.value = true;
     };
+
     const hideTextEditModal = () => {
-      this.isShowTextEditMoadal = false;
-      // 수정필요
-      setTimeout(() => {
-        this.emitter.emit('isClosedModal');
-      },100)
+      isShowTextEditMoadal.value = false;
     };
+    
     const editTextData = (editedText) =>{
-      console.log(editedText)
-      this.contentData.textList.filter(text => { 
-        if (text.key === editedText.key) { 
-          text.key = editedText.key
-          text.value = editedText.value;
-        } 
-      });
-      this.isShowTextEditMoadal = false;
-      // 수정필요
-      setTimeout(() => {
-        this.emitter.emit('isClosedModal');
-      },100)
+      header.editTextList(contentData, editedText)
+      isShowTextEditMoadal.value = false;
     };
     // ----------------------------- 텍스트 에딧 ------------------------------- //
     return {
@@ -105,6 +104,7 @@ export default {
       hideTextEditModal,
       editTextData,
       // ----------------------------- 텍스트 에딧 ------------------------------- //
+      contentData
     }
   },
 }

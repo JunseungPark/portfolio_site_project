@@ -1,37 +1,25 @@
 export default {
-  HEADER1: {
+  TextLayout1: {
     textList: [
       {
         key: 1,
-        value: "HomePage"
+        textValue: "Calypso Studio Designs 3d product experiences that transcend reality"
       },
       {
         key: 2,
-        value: "Home"
-      },
-      {
-        key: 3,
-        value: "About"
-      },
-      {
-        key: 4,
-        value: "Work"
-      },
-      {
-        key: 5,
-        value: "Team"
-      },
-      {
-        key: 6,
-        value: "Contact"
+        textValue: "Work With us"
       },
     ]
   },
-  HEADER2: {
+  TextLayout2: {
     textList: [
       {
         key: 1,
-        value: "HomePag23131e"
+        textValue: "Who we are"
+      },
+      {
+        key: 2,
+        textValue: "Paragraph text comes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
       },
     ]
   }

@@ -1,10 +1,10 @@
 <template>
-	<div class="bg h-75 py-5" style="background-color:#333333">
-		<div class="container text-white py-5">
-			<div class="row flex-lg-row align-items-center g-5 py-5">
-				<div class="col-lg-6">
-					<h1 @click="showTextEditModal(contentData.textList[0])" class="display-7 fw-bold lh-1 mb-5 clickable effect-shine">{{contentData.textList[0].textValue}}</h1>
-					<span @click="showTextEditModal(contentData.textList[1])" class="mb-5"><u class="clickable effect-shine">{{contentData.textList[1].textValue}}</u></span>
+	<div class="bg" style="background-color: #FFEFEF;">
+		<div class="container h-50 col-xxl-9 px-4 py-5">
+			<div class="row h-100 align-items-center">
+				<div class="row-lg-6">
+					<h1 @click="showTextEditModal(contentData.textList[0])" class="display-5 fw-thin clickable effect-shine">{{contentData.textList[0].textValue}}</h1>
+					<p @click="showTextEditModal(contentData.textList[1])" class="lead mb-4 clickable effect-shine">{{contentData.textList[1].textValue}}</p>
 				</div>
 			</div>
 		</div>
@@ -22,14 +22,13 @@ import { useTextStore } from '../../../store/modules/TextContent';
 import TextEditModal from '../../Modal/TextEditModal.vue';
 
 export default {
-  name: "TextLayout1",
+  name: "TextLayout2",
   components: {
     TextEditModal,
   },
   setup() {
-
     const textContent = useTextStore();
-    const contentData = textContent.getTextLayout1;
+    const contentData = textContent.getTextLayout2;
     
     // ----------------------------- 텍스트 에딧 ------------------------------- //
     const isShowTextEditMoadal = ref(false);

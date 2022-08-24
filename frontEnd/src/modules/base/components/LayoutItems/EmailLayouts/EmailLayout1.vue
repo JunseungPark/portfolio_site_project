@@ -18,7 +18,7 @@
 <script>
 
 export default {
-  name: "TestContent2",
+  name: "EmailLayout1",
   components: {
   },
   data() {

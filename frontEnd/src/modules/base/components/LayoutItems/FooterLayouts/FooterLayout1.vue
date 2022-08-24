@@ -52,7 +52,7 @@
 <script>
 
 export default {
-  name: "TestFooter",
+  name: "FooterLayout1",
   components: {
   },
   data() {

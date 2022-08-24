@@ -18,7 +18,7 @@
 <script>
 
 export default {
-  name: "TestContent2",
+  name: "SliderLayout1",
   components: {
   },
   data() {

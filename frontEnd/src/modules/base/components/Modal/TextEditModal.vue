@@ -6,7 +6,7 @@
         <div class="modal-body">
           <div>
             <!-- <input type="type" class="form-control" style="height:300px" placeholder="Selected Text" aria-label="text" v-model="text.value" > -->
-            <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="10" v-model="text.value"></textarea>
+            <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="10" v-model="text.textValue"></textarea>
           </div>
         </div>
         <div class="modal-footer">
@@ -52,6 +52,7 @@ export default {
         key:"",
         textValue:""
     });
+
     let originalText = null;
 
     const hideModal = () => {
@@ -74,7 +75,6 @@ export default {
 
     watch(() => props.selectedText, (newVal) => {
       if (!originalText) originalText = JSON.parse(JSON.stringify(newVal));
-      console.log(originalText)
       text.value = newVal;
     })
 
@@ -93,3 +93,9 @@ export default {
   },
 }
 </script>
+<style>
+/* 모달 백그라운드 노터치 */
+.modal {
+  pointer-events: none;
+}
+</style>

@@ -1,5 +1,5 @@
 export default {
-  HEADER1: {
+  HeaderLayout1: {
     textList: [
       {
         key: 1,
@@ -27,7 +27,7 @@ export default {
       },
     ]
   },
-  HEADER2: {
+  HeaderLayout2: {
     textList: [
       {
         key: 1,
