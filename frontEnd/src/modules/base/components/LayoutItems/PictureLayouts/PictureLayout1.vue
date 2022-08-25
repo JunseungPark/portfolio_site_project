@@ -25,7 +25,7 @@
 </template>
 <script>
 import { ref } from "vue";
-// import {mapState} from 'pinia' 
+import { useMainStore } from '../../../store/Main';
 import { usePictureStore } from '../../../store/modules/PictureContent';
 import ImageEditModal from "../../Modal/ImageEditModal.vue";
 
@@ -35,6 +35,7 @@ export default {
     ImageEditModal,
   },
   setup() {
+    const mainStore = useMainStore();
     const pictureConent = usePictureStore();
     const contentData = pictureConent.getPictureLayout1;
 
@@ -45,15 +46,18 @@ export default {
     const showImageEditModal = (key) => {
       selectedImage.value = key
       isShowImageEditMoadal.value = true;
+      mainStore.changeState();
     };
 
     const hideImageEditModal = () => {
       isShowImageEditMoadal.value = false;
+      mainStore.changeState();
     };
 
     const editImageData = (uploaedImg) =>{
       pictureConent.editPictureList(contentData, uploaedImg)
       isShowImageEditMoadal.value = false;
+      mainStore.changeState();
     };
     // ----------------------------- 이미지 에딧 ------------------------------- //
     return {

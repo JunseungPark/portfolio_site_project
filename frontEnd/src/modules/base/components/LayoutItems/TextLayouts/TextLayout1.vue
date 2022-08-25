@@ -18,6 +18,7 @@
 </template>
 <script>
 import { ref } from "vue";
+import { useMainStore } from '../../../store/Main';
 import { useTextStore } from '../../../store/modules/TextContent';
 import TextEditModal from '../../Modal/TextEditModal.vue';
 
@@ -27,7 +28,7 @@ export default {
     TextEditModal,
   },
   setup() {
-
+    const mainStore = useMainStore();
     const textContent = useTextStore();
     const contentData = textContent.getTextLayout1;
     
@@ -38,15 +39,18 @@ export default {
     const showTextEditModal = (text) => {
       selectedText.value = text
       isShowTextEditMoadal.value = true;
+      mainStore.changeState();
     };
 
     const hideTextEditModal = () => {
       isShowTextEditMoadal.value = false;
+      mainStore.changeState();
     };
     
     const editTextData = (editedText) =>{
       textContent.editTextList(contentData, editedText)
       isShowTextEditMoadal.value = false;
+      mainStore.changeState();
     };
     // ----------------------------- 텍스트 에딧 ------------------------------- //
     return {

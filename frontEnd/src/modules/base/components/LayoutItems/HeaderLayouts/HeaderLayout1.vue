@@ -39,8 +39,9 @@
 </template>
 <script>
 import { ref } from "vue";
+import { useMainStore } from '../../../store/Main';
 import { useHeaderStore } from '../../../store/modules/Header';
-import { getCurrentInstance } from 'vue'
+import { getCurrentInstance } from 'vue';
 import TextEditModal from '../../Modal/TextEditModal.vue';
 
 export default {
@@ -55,9 +56,9 @@ export default {
     const internalInstance = getCurrentInstance(); 
     const emitter = internalInstance.appContext.config.globalProperties.emitter;
 
+    const mainStore = useMainStore();
     const header = useHeaderStore();
     const contentData = header.getHeaderLayout1;
-    console.log(contentData)
     
     // ----------------------------- 텍스트 에딧 ------------------------------- //
     const isShowTextEditMoadal = ref(false);
@@ -67,10 +68,12 @@ export default {
       selectedText.value = text
       isShowTextEditMoadal.value = true;
       emitter.emit('isOpenedAnyModal');
+      mainStore.changeState()
     };
 
     const hideTextEditModal = () => {
       isShowTextEditMoadal.value = false;
+      mainStore.changeState();
       // 수정필요
       // setTimeout(() => {
       //   this.emitter.emit('isClosedModal');
@@ -80,6 +83,7 @@ export default {
     const editTextData = (editedText) =>{
       header.editTextList(contentData, editedText)
       isShowTextEditMoadal.value = false;
+      mainStore.changeState()
       // 수정필요
       // setTimeout(() => {
       //   this.emitter.emit('isClosedModal');
@@ -94,7 +98,7 @@ export default {
       hideTextEditModal,
       editTextData,
       // ----------------------------- 텍스트 에딧 ------------------------------- //
-      contentData
+      contentData,
     }
   },
 }

@@ -53,7 +53,7 @@
 </template>
 <script>
 import { ref } from "vue";
-// import {mapState} from 'pinia' 
+import { useMainStore } from '../../../store/Main';
 import { usePictureTextStore } from '../../../store/modules/PictureTextContent';
 import TextEditModal from '../../Modal/TextEditModal.vue';
 import ImageEditModal from "../../Modal/ImageEditModal.vue";
@@ -65,6 +65,7 @@ export default {
     ImageEditModal,
   },
   setup() {
+    const mainStore = useMainStore();
     const PictureTextContent = usePictureTextStore();
     const contentData = PictureTextContent.getPictureTextLayout3;
     
@@ -75,15 +76,18 @@ export default {
     const showTextEditModal = (text) => {
       selectedText.value = text
       isShowTextEditMoadal.value = true;
+      mainStore.changeState();
     };
 
     const hideTextEditModal = () => {
       isShowTextEditMoadal.value = false;
+      mainStore.changeState();
     };
     
     const editTextData = (editedText) =>{
       PictureTextContent.editTextList(contentData, editedText)
       isShowTextEditMoadal.value = false;
+      mainStore.changeState();
     };
     // ----------------------------- 텍스트 에딧 ------------------------------- //
 
@@ -94,15 +98,18 @@ export default {
     const showImageEditModal = (key) => {
       selectedImage.value = key
       isShowImageEditMoadal.value = true;
+      mainStore.changeState();
     };
 
     const hideImageEditModal = () => {
       isShowImageEditMoadal.value = false;
+      mainStore.changeState();
     };
 
     const editImageData = (uploaedImg) =>{
       PictureTextContent.editPictureList(contentData, uploaedImg)
       isShowImageEditMoadal.value = false;
+      mainStore.changeState();
     };
     // ----------------------------- 이미지 에딧 ------------------------------- //
     return {

@@ -27,7 +27,7 @@
 </template>
 <script>
 import { ref } from "vue";
-// import {mapState} from 'pinia' 
+import { useMainStore } from '../../../store/Main';
 import { usePictureTextStore } from '../../../store/modules/PictureTextContent';
 import TextEditModal from '../../Modal/TextEditModal.vue';
 import ImageEditModal from "../../Modal/ImageEditModal.vue";
@@ -40,6 +40,7 @@ export default {
   },
 
   setup() {
+    const mainStore = useMainStore();
     const PictureTextContent = usePictureTextStore();
     const contentData = PictureTextContent.getPictureTextLayout1;
     
@@ -50,15 +51,18 @@ export default {
     const showTextEditModal = (text) => {
       selectedText.value = text
       isShowTextEditMoadal.value = true;
+      mainStore.changeState();
     };
 
     const hideTextEditModal = () => {
       isShowTextEditMoadal.value = false;
+      mainStore.changeState();
     };
     
     const editTextData = (editedText) =>{
       PictureTextContent.editTextList(contentData, editedText)
       isShowTextEditMoadal.value = false;
+      mainStore.changeState();
     };
     // ----------------------------- 텍스트 에딧 ------------------------------- //
 

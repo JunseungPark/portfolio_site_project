@@ -56,7 +56,7 @@
 <script>
 import { defineAsyncComponent, ref, computed } from 'vue'
 import draggable from 'vuedraggable'
-import { useRootStore } from '../../../store/Root';
+import { useMainStore } from '../store/Main';
 import { filterComma } from '../../../util/util';
 
 export default {
@@ -71,10 +71,11 @@ export default {
   },
 
   setup(context, {emit}) {
-    const root = useRootStore();
+    const mainStore = useMainStore();
 
     const drag = ref(false);
-    const isDraggable = root.getModalState;
+    const isDraggable = mainStore.getModalState;
+    mainStore.getGoogle()
 
     const dragOptions = computed(() => {
       return {

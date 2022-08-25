@@ -36,32 +36,130 @@ export default {
     const isItemState = ref(false);
     let allLayouts = {
       HeaderLayouts: [
-        { name: "HeaderLayout1", id: "h1", price: 10000, subject:'HeaderLayouts'},
-        { name: "HeaderLayout2", id: "h2", price: 22000, subject:'HeaderLayouts'},
-        { name: "HeaderLayout3", id: "h3", price: 22000, subject:'HeaderLayouts'},
-        { name: "HeaderLayout4", id: "h4", price: 22000, subject:'HeaderLayouts'},
-        { name: "HeaderLayout5", id: "h5", price: 22000, subject:'HeaderLayouts'},
+        { 
+          name: "HeaderLayout1", 
+          id: "h1", 
+          price: 10000, 
+          subject:'HeaderLayouts', 
+          layoutName: "사이트 헤드라인 디자인 #1", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
+        { 
+          name: "HeaderLayout2", 
+          id: "h2", 
+          price: 22000, 
+          subject:'HeaderLayouts',
+          layoutName: "사이트 헤드라인 디자인 #2", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
+        { 
+          name: "HeaderLayout3", 
+          id: "h3", 
+          price: 22000, 
+          subject:'HeaderLayouts',
+          layoutName: "사이트 헤드라인 디자인 #3", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
+        { 
+          name: "HeaderLayout4", 
+          id: "h4", 
+          price: 22000, 
+          subject:'HeaderLayouts',
+          layoutName: "사이트 헤드라인 디자인 #4", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
+        { 
+          name: "HeaderLayout5", 
+          id: "h5", 
+          price: 22000, 
+          subject:'HeaderLayouts',
+          layoutName: "사이트 헤드라인 디자인 #1", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
       ],
       PictureLayouts: [
-        { name: "PictureLayout1", id: "p1", price: 10000, subject:'PictureLayouts'},
+        { 
+          name: "PictureLayout1", 
+          id: "p1", 
+          price: 10000, 
+          subject:'PictureLayouts',
+          layoutName: "사이트 헤드라인 디자인 #5", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
       ],
       PictureTextLayouts: [
-        { name: "PictureTextLayout1", id: "pt1", price: 45000, subject:'PictureTextLayouts'},
-        { name: "PictureTextLayout2", id: "pt2", price: 909900, subject:'PictureTextLayouts'},
-        { name: "PictureTextLayout3", id: "pt3", price: 900, subject:'PictureTextLayouts'},
+        { 
+          name: "PictureTextLayout1", 
+          id: "pt1", 
+          price: 45000, 
+          subject:'PictureTextLayouts',
+          layoutName: "사이트 헤드라인 디자인 #1", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
+        { 
+          name: "PictureTextLayout2", 
+          id: "pt2", 
+          price: 909900, 
+          subject:'PictureTextLayouts',
+          layoutName: "사이트 헤드라인 디자인 #1", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
+        { 
+          name: "PictureTextLayout3", 
+          id: "pt3", 
+          price: 900, 
+          subject:'PictureTextLayouts',
+          layoutName: "사이트 헤드라인 디자인 #1", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
       ],
       TextLayouts: [
-        { name: "TextLayout1", id: "t1", price: 45000, subject:'TextLayouts'},
-        { name: "TextLayout2", id: "t2", price: 909900, subject:'TextLayouts'},
+        { 
+          name: "TextLayout1", 
+          id: "t1", 
+          price: 45000, 
+          subject:'TextLayouts',
+          layoutName: "사이트 헤드라인 디자인 #1", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
+        { 
+          name: "TextLayout2", 
+          id: "t2", 
+          price: 909900, 
+          subject:'TextLayouts',
+          layoutName: "사이트 헤드라인 디자인 #1", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
       ],
       SliderLayouts: [
-        { name: "SliderLayout1", id: "s1", price: 30000, subject:'SliderLayouts'},
+        { 
+          name: "SliderLayout1", 
+          id: "s1", 
+          price: 30000, 
+          subject:'SliderLayouts',
+          layoutName: "사이트 헤드라인 디자인 #1", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
       ],
       EmailLayouts: [
-        { name: "EmailLayout1", id: "e1", price: 30000, subject:'EmailLayouts'},
+        { 
+          name: "EmailLayout1", 
+          id: "e1", 
+          price: 30000, 
+          subject:'EmailLayouts',
+          layoutName: "사이트 헤드라인 디자인 #1", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
       ],
       FooterLayouts: [
-        { name: "FooterLayout1", id: "f1", price: 10000, subject:'FooterLayouts'},
+        { 
+          name: "FooterLayout1", 
+          id: "f1", 
+          price: 10000, 
+          subject:'FooterLayouts',
+          layoutName: "사이트 헤드라인 디자인 #1", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
       ],
     }
 
