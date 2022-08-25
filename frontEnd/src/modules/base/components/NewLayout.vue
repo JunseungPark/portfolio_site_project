@@ -19,7 +19,7 @@
                 @change="onChange"
                 style="min-height: 100vh"
                 v-bind="dragOptions"
-                :draggable= false>
+                :draggable= isDraggable>
                 <template #item="{element}">
                   <b-list-group-item class="border-0 position-relative p-0 not-draggable">
                     <b-button class="mx-3 position-absolute top-0 end-0 mt-3" variant="outline-danger" @click="deleteLayout(element)">제 거</b-button>
@@ -56,6 +56,7 @@
 <script>
 import { defineAsyncComponent, ref, computed } from 'vue'
 import draggable from 'vuedraggable'
+import { useRootStore } from '../../../store/Root';
 import { filterComma } from '../../../util/util';
 
 export default {
@@ -70,8 +71,10 @@ export default {
   },
 
   setup(context, {emit}) {
+    const root = useRootStore();
+
     const drag = ref(false);
-    const isDraggable = ref(false);
+    const isDraggable = root.getModalState;
 
     const dragOptions = computed(() => {
       return {
