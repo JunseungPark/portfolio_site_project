@@ -1,6 +1,6 @@
 <template>
   <!-- Modal -->
-  <div class="modal fade" ref="modal" id="TextEditModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="TextEditModalLabel" aria-hidden="true">
+  <div class="modal fade" ref="modal" id="TextEditModal" style="z-index: 1050 !important;" data-bs-backdrop="static" aria-labelledby="TextEditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">
@@ -11,6 +11,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" @click="hideModal">닫기</button>
+          <SelectVue/>
           <button type="button" class="btn btn-primary" @click="editTextData">데이터 변경</button>
         </div>
       </div>
@@ -20,14 +21,14 @@
 </template>
 
 <script>
-// import EditInput from '../Input/EditInput.vue'
 import { ref, watch, onMounted } from 'vue';
 import { Modal } from 'bootstrap';
+import SelectVue from '../Select/Select.vue';
 
 export default {
   name: "TextEditModal",
   components: {
-    // EditInput,
+    SelectVue
   },
   props: {
     selectedText: {
@@ -65,6 +66,7 @@ export default {
     }
 
     watch(() => props.isShowMoadal, (newVal) => {
+      console.log(newVal)
       if (!modalController) return
       if (newVal) {
         modalController.show()
@@ -88,7 +90,7 @@ export default {
       hideModal,
       editTextData,
       modal,
-      text
+      text,
     }
   },
 }
@@ -97,5 +99,8 @@ export default {
 /* 모달 백그라운드 노터치 */
 .modal {
   pointer-events: none;
+}
+.modal-backdrop.show {
+  z-index: 999;
 }
 </style>

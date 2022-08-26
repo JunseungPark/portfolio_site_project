@@ -12,7 +12,6 @@
               <li @click="showTextEditModal(contentData.textList[4])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[4].textValue}}</a></li>
               <li @click="showTextEditModal(contentData.textList[5])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[5].textValue}}</a></li>
             </ul>
-
             <ul class="nav col-1 col-lg-1 mb-4 justify-content-end mb-md-0">
               <li class="me-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
@@ -43,7 +42,6 @@ import { useMainStore } from '../../../store/Main';
 import { useHeaderStore } from '../../../store/modules/Header';
 import { getCurrentInstance } from 'vue';
 import TextEditModal from '../../Modal/TextEditModal.vue';
-
 export default {
   name: "HeaderLayout1",
   components: {

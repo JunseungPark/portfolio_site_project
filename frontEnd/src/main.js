@@ -5,7 +5,7 @@ import { createPinia } from 'pinia'
 import BootstrapVue3 from 'bootstrap-vue-3'
 import miit from "../src/util/eventBus"
 import Vue3SimpleHtml2pdf from "vue3-simple-html2pdf";
-
+import vSelect from 'vue-select'
 // pinia
 const pinia = createPinia()
 // css 적용
@@ -16,6 +16,7 @@ const app = createApp(App)
 app.use(router)
 app.use(pinia)
 app.use(miit)
+app.component('v-select', vSelect)
 app.use(Vue3SimpleHtml2pdf)
 app.use(BootstrapVue3)
 app.mount('#app')

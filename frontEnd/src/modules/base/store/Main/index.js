@@ -5,22 +5,26 @@ import { getGoogleFonts } from '../../api/index.js'
 export const useMainStore = defineStore('Main', () => {
   
   const isOpendAnyModal = ref(false);
-  const googleFontsList = ref(null);
+  let googleFontsList = [];
 
   function changeState() {
     isOpendAnyModal.value = !isOpendAnyModal.value;
   }
 
   function getGoogle() {
-    googleFontsList.value = getGoogleFonts();
+    getGoogleFonts().then(value => {
+      googleFontsList =value
+    });
   }
   
   const getModalState = computed(() =>  isOpendAnyModal.value);
+  const getGoogleFontsList = computed(() =>  googleFontsList);
 
   return { 
     isOpendAnyModal, 
     changeState,
     getGoogle,
     getModalState,
+    getGoogleFontsList,
   };
 });

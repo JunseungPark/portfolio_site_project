@@ -74,7 +74,7 @@ export default {
     const mainStore = useMainStore();
 
     const drag = ref(false);
-    const isDraggable = mainStore.getModalState;
+    const isDraggable = ref(mainStore.getModalState);
     mainStore.getGoogle()
 
     const dragOptions = computed(() => {
