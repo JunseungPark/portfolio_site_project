@@ -12,6 +12,7 @@ export const useMainStore = defineStore('Main', () => {
   }
 
   function getGoogle() {
+    console.log(">")
     getGoogleFonts().then(value => {
       googleFontsList =value
     });
