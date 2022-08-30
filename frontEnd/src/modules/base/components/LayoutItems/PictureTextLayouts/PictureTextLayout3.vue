@@ -2,7 +2,7 @@
   <div class="bg" style="background-color: #000000;">
     <div class="container text-white p-3">
       <div class="col-12 mt-5">
-        <h1 @click="showTextEditModal(contentData.textList[0])" class="display-2 fw-bold py-2 clickable effect-shine">{{contentData.textList[0].textValue}}</h1>
+        <h1 @click="showTextEditModal(contentData.textList[0])" class="display-2 fw-bold py-2 clickable effect-shine" :style="'font-family:'+contentData.textList[0].font">{{contentData.textList[0].textValue}}</h1>
       </div>
       <div class="col-12 mb-5">
         <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4">
@@ -10,29 +10,29 @@
             <div @click="showImageEditModal(contentData.imageList[0].key)" class="ratio ratio-1x1">
               <img :src="contentData.imageList[0].imgName" class="d-block img-fluid hoverImageWrap" alt="">
             </div>
-            <div @click="showTextEditModal(contentData.textList[1])" class="display-6 py-2 clickable effect-shine">{{contentData.textList[1].textValue}}</div>
-            <div @click="showTextEditModal(contentData.textList[2])" class="clickable effect-shine">{{contentData.textList[2].textValue}}</div>
+            <div @click="showTextEditModal(contentData.textList[1])" class="display-6 py-2 clickable effect-shine" :style="'font-family:'+contentData.textList[1].font">{{contentData.textList[1].textValue}}</div>
+            <div @click="showTextEditModal(contentData.textList[2])" class="clickable effect-shine" :style="'font-family:'+contentData.textList[2].font">{{contentData.textList[2].textValue}}</div>
           </div>
           <div class="col">
             <div @click="showImageEditModal(contentData.imageList[1].key)" class="ratio ratio-1x1">
               <img :src="contentData.imageList[1].imgName" class="d-block img-fluid hoverImageWrap" alt="">
             </div>
-            <div @click="showTextEditModal(contentData.textList[3])" class="display-6 py-2 clickable effect-shine">{{contentData.textList[3].textValue}}</div>
-            <div @click="showTextEditModal(contentData.textList[4])" class="clickable effect-shine">{{contentData.textList[4].textValue}}</div>
+            <div @click="showTextEditModal(contentData.textList[3])" class="display-6 py-2 clickable effect-shine" :style="'font-family:'+contentData.textList[3].font">{{contentData.textList[3].textValue}}</div>
+            <div @click="showTextEditModal(contentData.textList[4])" class="clickable effect-shine" :style="'font-family:'+contentData.textList[4].font">{{contentData.textList[4].textValue}}</div>
           </div>
           <div class="col">
             <div @click="showImageEditModal(contentData.imageList[2].key)" class="ratio ratio-1x1">
               <img :src="contentData.imageList[2].imgName" class="d-block img-fluid hoverImageWrap" alt="">
             </div>
-            <div @click="showTextEditModal(contentData.textList[5])" class="display-6 py-2 clickable effect-shine">{{contentData.textList[5].textValue}}</div>
-            <div @click="showTextEditModal(contentData.textList[6])" class="clickable effect-shine">{{contentData.textList[6].textValue}}</div>
+            <div @click="showTextEditModal(contentData.textList[5])" class="display-6 py-2 clickable effect-shine" :style="'font-family:'+contentData.textList[5].font">{{contentData.textList[5].textValue}}</div>
+            <div @click="showTextEditModal(contentData.textList[6])" class="clickable effect-shine" :style="'font-family:'+contentData.textList[6].font">{{contentData.textList[6].textValue}}</div>
           </div>
           <div class="col">
             <div @click="showImageEditModal(contentData.imageList[3].key)" class="ratio ratio-1x1">
               <img :src="contentData.imageList[3].imgName" class="d-block img-fluid hoverImageWrap" alt="">
             </div>
-            <div @click="showTextEditModal(contentData.textList[7])" class="display-6 py-2 clickable effect-shine">{{contentData.textList[7].textValue}}</div>
-            <div @click="showTextEditModal(contentData.textList[8])" class="clickable effect-shine">{{contentData.textList[8].textValue}}</div>
+            <div @click="showTextEditModal(contentData.textList[7])" class="display-6 py-2 clickable effect-shine" :style="'font-family:'+contentData.textList[7].font">{{contentData.textList[7].textValue}}</div>
+            <div @click="showTextEditModal(contentData.textList[8])" class="clickable effect-shine" :style="'font-family:'+contentData.textList[8].font">{{contentData.textList[8].textValue}}</div>
           </div>
         </div>
       </div>

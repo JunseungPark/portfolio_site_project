@@ -3,27 +3,33 @@ export default {
     textList: [
       {
         key: 1,
-        textValue: "HomePage"
+        textValue: "HomePage",
+        font: "DungGeunMo"
       },
       {
         key: 2,
-        textValue: "Home"
+        textValue: "Home",
+        font: "DungGeunMo"
       },
       {
         key: 3,
-        textValue: "About"
+        textValue: "About",
+        font: "DungGeunMo"
       },
       {
         key: 4,
-        textValue: "Work"
+        textValue: "Work",
+        font: "DungGeunMo"
       },
       {
         key: 5,
-        textValue: "Team"
+        textValue: "Team",
+        font: "DungGeunMo"
       },
       {
         key: 6,
-        textValue: "Contact"
+        textValue: "Contact",
+        font: "DungGeunMo"
       },
     ]
   },
@@ -31,7 +37,8 @@ export default {
     textList: [
       {
         key: 1,
-        textValue: "HomePag23131e"
+        textValue: "HomePag23131e",
+        font: "DungGeunMo"
       },
     ]
   }

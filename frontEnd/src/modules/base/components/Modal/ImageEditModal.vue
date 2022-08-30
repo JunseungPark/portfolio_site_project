@@ -5,12 +5,12 @@
       <div class="modal-content">
         <div class="modal-body">
           <img :src="image.imgName" class="previewImg" width="400" height="400" alt="">
-          <div class="file-upload-wrapper" data-text="Select your file!">
+        </div>
+        <div class="modal-footer flex-row">
+          <button type="button" class="btn btn-secondary  me-auto p-2" @click="hideModal">닫기</button>
+          <div class="file-upload-wrapper">
             <input name="file-upload-field" type="file" class="file-upload-field" value="" @change="onFileChange">
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" @click="hideModal">닫기</button>
           <button type="button" class="btn btn-primary" @click="editImageData">데이터 변경</button>
         </div>
       </div>
@@ -43,7 +43,7 @@ export default {
     //이미지 복사
     const image = ref({
         key: props.selectedImage,
-        imgName: require(`../../assets/img/logo.svg`)
+        imgName: require(`../../assets/img/defalutImg.svg`)
     });
 
     const hideModal = () => {
@@ -122,10 +122,9 @@ export default {
 
 .file-upload-wrapper {
   position: relative;
-  width: 100%;
-  height: 60px;
+  width: 30%;
 }
-.file-upload-wrapper:after {
+/* .file-upload-wrapper:after {
   content: attr(data-text);
   font-size: 18px;
   position: absolute;
@@ -142,24 +141,23 @@ export default {
   color: #999;
   border-radius: 5px 10px 10px 5px;
   font-weight: 300;
-}
+} */
 .file-upload-wrapper:before {
-  content: "Upload";
+  content: "사진 변경 하기";
   position: absolute;
-  top: 0;
+  top: -20px;
   right: 0;
   display: inline-block;
-  height: 60px;
   background: #4daf7c;
   color: #fff;
-  font-weight: 700;
+  font-weight: 500;
   z-index: 25;
-  font-size: 16px;
-  line-height: 60px;
-  padding: 0 15px;
+  font-size: 15px;
+  line-height: inherit;
+  padding: 8px 15px;
   text-transform: uppercase;
   pointer-events: none;
-  border-radius: 0 5px 5px 0;
+  border-radius: 5px;
 }
 .file-upload-wrapper:hover:before {
   background: #3d8c63;

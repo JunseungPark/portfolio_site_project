@@ -2,7 +2,7 @@
 	<div class="bg">
 		<div class="container text-center">
 			<div class="col-12 p-5">
-				<h1 @click="showTextEditModal(contentData.textList[0])" class="display-5 fw-bold">{{contentData.textList[0].textValue}}</h1>
+				<h1 @click="showTextEditModal(contentData.textList[0])" class="display-5 fw-bold" :style="'font-family:'+contentData.textList[0].font">{{contentData.textList[0].textValue}}</h1>
 			</div>
 			<div class="row">
 				<div class="col-lg-6 col-md-12 mb-4">

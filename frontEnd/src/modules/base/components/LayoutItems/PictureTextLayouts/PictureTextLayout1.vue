@@ -6,8 +6,13 @@
 					<img :src="contentData.imageList[0].imgName" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
 				</div>
 				<div class="col-lg-6">
-					<h1 @click="showTextEditModal(contentData.textList[0])" class="display4 fw-thin lh-1 mb-3 clickable effect-shine">{{contentData.textList[0].textValue}}</h1>
-					<p @click="showTextEditModal(contentData.textList[1])" class="lead"><small class="clickable effect-shine">{{contentData.textList[1].textValue}}</small></p>
+					<h1 
+            @click="showTextEditModal(contentData.textList[0])" 
+            class="display4 fw-thin lh-1 mb-3 clickable effect-shine"
+            :style="'font-family:'+contentData.textList[0].font">
+            {{contentData.textList[0].textValue}}
+          </h1>
+					<p @click="showTextEditModal(contentData.textList[1])" class="lead"><small class="clickable effect-shine" :style="'font-family:'+contentData.textList[1].font">{{contentData.textList[1].textValue}}</small></p>
 				</div>
 			</div>
 		</div>

@@ -3,14 +3,49 @@
     <header class="p-3 text-white" style="background-color:#333333">
       <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
-            <div @click="showTextEditModal(contentData.textList[0])" class="col clickable effect-shine">{{contentData.textList[0].textValue}}</div>
+            <div @click="showTextEditModal(contentData.textList[0])" class="col clickable effect-shine" :style="'font-family:'+contentData.textList[0].font">{{contentData.textList[0].textValue}}</div>
 
             <ul class="nav col-8 col-lg-8 me-lg-auto mb-2 justify-content-end mb-md-0">
-              <li @click="showTextEditModal(contentData.textList[1])"><a href="#" class="nav-link px-2 text-secondary clickable effect-shine">{{contentData.textList[1].textValue}}</a></li>
-              <li @click="showTextEditModal(contentData.textList[2])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[2].textValue}}</a></li>
-              <li @click="showTextEditModal(contentData.textList[3])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[3].textValue}}</a></li>
-              <li @click="showTextEditModal(contentData.textList[4])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[4].textValue}}</a></li>
-              <li @click="showTextEditModal(contentData.textList[5])"><a href="#" class="nav-link px-2 text-white clickable effect-shine">{{contentData.textList[5].textValue}}</a></li>
+              <li @click="showTextEditModal(contentData.textList[1])">
+                <a 
+                  href="#" class="nav-link px-2 text-secondary clickable effect-shine"
+                  :style="'font-family:'+contentData.textList[1].font"
+                >
+                {{contentData.textList[1].textValue}}
+                </a>
+              </li>
+              <li @click="showTextEditModal(contentData.textList[2])">
+                <a 
+                  href="#" class="nav-link px-2 text-white clickable effect-shine"
+                  :style="'font-family:'+contentData.textList[2].font"
+                >
+                {{contentData.textList[2].textValue}}
+                </a>
+              </li>
+              <li @click="showTextEditModal(contentData.textList[3])">
+                <a 
+                  href="#" class="nav-link px-2 text-white clickable effect-shine"
+                  :style="'font-family:'+contentData.textList[3].font"
+                >
+                {{contentData.textList[3].textValue}}
+                </a>
+              </li>
+              <li @click="showTextEditModal(contentData.textList[4])">
+                <a 
+                  href="#" class="nav-link px-2 text-white clickable effect-shine"
+                  :style="'font-family:'+contentData.textList[4].font"
+                >
+                {{contentData.textList[4].textValue}}
+                </a>
+              </li>
+               <li @click="showTextEditModal(contentData.textList[4])">
+                <a 
+                  href="#" class="nav-link px-2 text-white clickable effect-shine"
+                  :style="'font-family:'+contentData.textList[4].font"
+                >
+                {{contentData.textList[4].textValue}}
+                </a>
+              </li>
             </ul>
             <ul class="nav col-1 col-lg-1 mb-4 justify-content-end mb-md-0">
               <li class="me-3">
@@ -38,6 +73,8 @@
 </template>
 <script>
 import { ref } from "vue";
+// 선택된 폰트 가져오기
+
 import { useMainStore } from '../../../store/Main';
 import { useHeaderStore } from '../../../store/modules/Header';
 import { getCurrentInstance } from 'vue';

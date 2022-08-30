@@ -3,8 +3,8 @@
 		<div class="container h-50 col-xxl-9 px-4 py-5">
 			<div class="row h-100 align-items-center">
 				<div class="row-lg-6">
-					<h1 @click="showTextEditModal(contentData.textList[0])" class="display-5 fw-thin clickable effect-shine">{{contentData.textList[0].textValue}}</h1>
-					<p @click="showTextEditModal(contentData.textList[1])" class="lead mb-4 clickable effect-shine">{{contentData.textList[1].textValue}}</p>
+					<h1 @click="showTextEditModal(contentData.textList[0])" class="display-5 fw-thin clickable effect-shine" :style="'font-family:'+contentData.textList[0].font">{{contentData.textList[0].textValue}}</h1>
+					<p @click="showTextEditModal(contentData.textList[1])" class="lead mb-4 clickable effect-shine" :style="'font-family:'+contentData.textList[1].font">{{contentData.textList[1].textValue}}</p>
 				</div>
 			</div>
 		</div>

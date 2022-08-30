@@ -10,13 +10,16 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" @click="hideModal">닫기</button>
-          <SelectVue/>
-          <button type="button" class="btn btn-primary" @click="editTextData">데이터 변경</button>
+            <button type="button" class="btn btn-secondary me-auto p-2" @click="hideModal">닫기</button>
+            <div>글씨체 변경</div>
+            <SelectVue
+              :selectedFont="text.font"
+              @changeFont="changeFont"
+            />
+            <button type="button" class="btn btn-primary" @click="editTextData">데이터 변경</button>
         </div>
       </div>
     </div>
-       <font-picker :api-key="googleKey" :options="options" :active-font="fontFamily" @change="myFunc"></font-picker>
   </div>
 </template>
 
@@ -51,22 +54,30 @@ export default {
     //텍스트 복사
     const text = ref({
         key:"",
-        textValue:""
+        textValue:"",
+        font:""
     });
 
     let originalText = null;
 
     const hideModal = () => {
       text.value.textValue = originalText.textValue
+      text.value.font = originalText.font
       context.emit('hideModal');
     }
     const editTextData = () => {
-      if (text.value.textValue === '') text.value.textValue = originalText.textValue
+      if (text.value.textValue === '') {
+        text.value.textValue = originalText.textValue
+        text.value.font = originalText.font
+      }
       context.emit('editTextData', text.value);
     }
 
+    const changeFont = (newFont) => {
+      text.value.font =newFont
+    }
+
     watch(() => props.isShowMoadal, (newVal) => {
-      console.log(newVal)
       if (!modalController) return
       if (newVal) {
         modalController.show()
@@ -78,6 +89,7 @@ export default {
     watch(() => props.selectedText, (newVal) => {
       if (!originalText) originalText = JSON.parse(JSON.stringify(newVal));
       text.value = newVal;
+      console.log(text)
     })
 
     /// ------------------------- LIFE -------------------------///
@@ -89,6 +101,7 @@ export default {
       googleKey,
       hideModal,
       editTextData,
+      changeFont,
       modal,
       text,
     }
