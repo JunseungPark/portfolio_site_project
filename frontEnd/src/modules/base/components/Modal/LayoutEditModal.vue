@@ -5,17 +5,16 @@
       <div class="modal-content">
         <div class="modal-body">
           <div>
-            <!-- <input type="type" class="form-control" style="height:300px" placeholder="Selected Text" aria-label="text" v-model="text.value" > -->
-            <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="10" v-model="text.textValue"></textarea>
+            <SelectVue
+              :selectedFont="text.font"
+              @changeFont="changeFont"
+            />
+            <ColorPicker/>
           </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary me-auto p-2" @click="hideModal">닫기</button>
             <div>글씨체 변경</div>
-            <SelectVue
-              :selectedFont="text.font"
-              @changeFont="changeFont"
-            />
             <button type="button" class="btn btn-primary" @click="editTextData">데이터 변경</button>
         </div>
       </div>
@@ -27,11 +26,13 @@
 import { ref, watch, onMounted } from 'vue';
 import { Modal } from 'bootstrap';
 import SelectVue from '../Select/Select.vue';
+import ColorPicker from '../Select/ColorPicker.vue'
 
 export default {
-  name: "TextEditModal",
+  name: "LayoutEditModal",
   components: {
     SelectVue,
+    ColorPicker
   },
   props: {
     selectedText: {

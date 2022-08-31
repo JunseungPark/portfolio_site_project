@@ -106,9 +106,9 @@ export default {
     const deleteLayout = (element) => {
       emit('deleteLayout', element)
     }
-    const isOpenedAnyModal = () => {
-      isDraggable.value = true;
-    }
+    // const isOpenedAnyModal = () => {
+    //   isDraggable.value = true;
+    // }
     // isClosedModal() {
     //   this.isDraggable = false;
     // }
@@ -120,7 +120,7 @@ export default {
       findCompoent,
       caluPrice,
       deleteLayout,
-      isOpenedAnyModal
+      // isOpenedAnyModal
     }
   },
 

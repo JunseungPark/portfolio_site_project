@@ -8,7 +8,9 @@ export const useMainStore = defineStore('Main', () => {
   let googleFontsList = [];
 
   function changeState() {
+    console.log("변경전", isOpendAnyModal.value)
     isOpendAnyModal.value = !isOpendAnyModal.value;
+    console.log("변경후", isOpendAnyModal.value)
   }
 
   async function getGoogle() {
@@ -54,7 +56,9 @@ export const useMainStore = defineStore('Main', () => {
     }
   }
   
-  const getModalState = computed(() =>  isOpendAnyModal.value);
+  const getModalState = computed(() => {
+    return isOpendAnyModal.value
+  });
   const getGoogleFontsList = computed(() =>  googleFontsList);
   return { 
     isOpendAnyModal,

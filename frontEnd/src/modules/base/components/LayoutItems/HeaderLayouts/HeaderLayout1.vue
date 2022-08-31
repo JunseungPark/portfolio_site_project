@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="p-3 text-white" style="background-color:#333333">
+    <header class="p-3 text-white selector" style="background-color:#333333;">
       <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
             <div @click="showTextEditModal(contentData.textList[0])" class="col clickable effect-shine" :style="'font-family:'+contentData.textList[0].font">{{contentData.textList[0].textValue}}</div>
@@ -62,12 +62,19 @@
         </div>
       </div>
     </header>
-
+    <div class="position-absolute top-0 start-0 p-1" @click="showLayoutEditModal">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="White" class="bi bi-sliders layoutSetting" viewBox="0 0 16 16">
+        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+      </svg>
+    </div>
     <TextEditModal
       :isShowMoadal="isShowTextEditMoadal"
       :selectedText="selectedText"
       @hideModal='hideTextEditModal'
       @editTextData="editTextData"
+    />
+    <LayoutEditModal
+      :isShowMoadal="isShowLayoutEditMoadal"
     />
   </div>
 </template>
@@ -79,10 +86,12 @@ import { useMainStore } from '../../../store/Main';
 import { useHeaderStore } from '../../../store/modules/Header';
 import { getCurrentInstance } from 'vue';
 import TextEditModal from '../../Modal/TextEditModal.vue';
+import LayoutEditModal from '../../Modal/LayoutEditModal.vue'
 export default {
   name: "HeaderLayout1",
   components: {
     TextEditModal,
+    LayoutEditModal
   },
   emits: ["isOpendAnyModal", "isClosedModal"],
   setup() {
@@ -94,6 +103,36 @@ export default {
     const mainStore = useMainStore();
     const header = useHeaderStore();
     const contentData = header.getHeaderLayout1;
+    // ----------------------------- 레이아웃 에딧 ------------------------------//
+    const isShowLayoutEditMoadal = ref(false);
+
+    const showLayoutEditModal = () => {
+      isShowLayoutEditMoadal.value = true;
+      // emitter.emit('isOpenedAnyModal');
+      console.log(1)
+      mainStore.changeState()
+    };
+
+    const hideLayoutEditModal = () => {
+      isShowLayoutEditMoadal.value = false;
+      mainStore.changeState();
+      // 수정필요
+      // setTimeout(() => {
+      //   this.emitter.emit('isClosedModal');
+      // },100)
+    };
+    
+    const editLayoutData = (editedText) =>{
+      console.log(editedText)
+      // header.editTextList(contentData, editedText)
+      isShowLayoutEditMoadal.value = false;
+      mainStore.changeState()
+      // 수정필요
+      // setTimeout(() => {
+      //   this.emitter.emit('isClosedModal');
+      // },100)
+    };
+    // ----------------------------- 레이아웃 에딧 ------------------------------//
     
     // ----------------------------- 텍스트 에딧 ------------------------------- //
     const isShowTextEditMoadal = ref(false);
@@ -126,8 +165,14 @@ export default {
     };
     // ----------------------------- 텍스트 에딧 ------------------------------- //
     return {
+      // ----------------------------- 레이아웃 에딧 ------------------------------//
+      showLayoutEditModal,
+      hideLayoutEditModal,
+      editLayoutData,
+      // ----------------------------- 레이아웃 에딧 ------------------------------//
       // ----------------------------- 텍스트 에딧 ------------------------------- //
       isShowTextEditMoadal,
+      isShowLayoutEditMoadal,
       selectedText,
       showTextEditModal,
       hideTextEditModal,
@@ -157,4 +202,16 @@ export default {
       -webkit-mask-position: -50%;
     }
   }
+ /* effect-setting */
+  .layoutSetting:hover {
+    transform: rotate( 720deg );
+  }
+
+  .selector {
+    user-drag: none;
+user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+-ms-user-select: none;
+}
 </style>
