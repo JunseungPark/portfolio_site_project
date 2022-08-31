@@ -1,12 +1,12 @@
 <template>
-  <Sketch v-model="colors"/>
+  <Chrome v-model="colors"/>
 </template>
 <script>
-import { Sketch } from '@ckpack/vue-color';
+import { Chrome } from '@ckpack/vue-color';
 
 export default {
   components: {
-    Sketch,
+    Chrome,
   },
   setup() {
     return {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="p-3 text-white selector" style="background-color:#333333;">
+    <header class="p-3" :style="'background-color:'+ contentData.layoutAttribute.backgroundColor+'; color:' + contentData.layoutAttribute.textColor">
       <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
             <div @click="showTextEditModal(contentData.textList[0])" class="col clickable effect-shine" :style="'font-family:'+contentData.textList[0].font">{{contentData.textList[0].textValue}}</div>
@@ -75,16 +75,16 @@
     />
     <LayoutEditModal
       :isShowMoadal="isShowLayoutEditMoadal"
+      :selectedLayoutAttribute="selectedLayoutAttribute"
+      @hideModal='hideLayoutEditModal'
+      @editLayoutData="editLayoutData"
     />
   </div>
 </template>
 <script>
 import { ref } from "vue";
-// 선택된 폰트 가져오기
-
 import { useMainStore } from '../../../store/Main';
 import { useHeaderStore } from '../../../store/modules/Header';
-import { getCurrentInstance } from 'vue';
 import TextEditModal from '../../Modal/TextEditModal.vue';
 import LayoutEditModal from '../../Modal/LayoutEditModal.vue'
 export default {
@@ -95,42 +95,27 @@ export default {
   },
   emits: ["isOpendAnyModal", "isClosedModal"],
   setup() {
-    // 이벤트 버스 임시 사용중 pinia로 이전 필요해보임
-    // vue3에서는 기본적으로 이벤트버스를 허용하지 않아 mitt라이브러리 이용중
-    const internalInstance = getCurrentInstance(); 
-    const emitter = internalInstance.appContext.config.globalProperties.emitter;
-
     const mainStore = useMainStore();
     const header = useHeaderStore();
     const contentData = header.getHeaderLayout1;
     // ----------------------------- 레이아웃 에딧 ------------------------------//
     const isShowLayoutEditMoadal = ref(false);
+    const selectedLayoutAttribute = ref({});
 
     const showLayoutEditModal = () => {
+      selectedLayoutAttribute.value = contentData.layoutAttribute;
       isShowLayoutEditMoadal.value = true;
-      // emitter.emit('isOpenedAnyModal');
-      console.log(1)
       mainStore.changeState()
     };
 
     const hideLayoutEditModal = () => {
       isShowLayoutEditMoadal.value = false;
       mainStore.changeState();
-      // 수정필요
-      // setTimeout(() => {
-      //   this.emitter.emit('isClosedModal');
-      // },100)
     };
     
-    const editLayoutData = (editedText) =>{
-      console.log(editedText)
-      // header.editTextList(contentData, editedText)
+    const editLayoutData = () =>{
       isShowLayoutEditMoadal.value = false;
       mainStore.changeState()
-      // 수정필요
-      // setTimeout(() => {
-      //   this.emitter.emit('isClosedModal');
-      // },100)
     };
     // ----------------------------- 레이아웃 에딧 ------------------------------//
     
@@ -141,38 +126,30 @@ export default {
     const showTextEditModal = (text) => {
       selectedText.value = text
       isShowTextEditMoadal.value = true;
-      emitter.emit('isOpenedAnyModal');
       mainStore.changeState()
     };
 
     const hideTextEditModal = () => {
       isShowTextEditMoadal.value = false;
       mainStore.changeState();
-      // 수정필요
-      // setTimeout(() => {
-      //   this.emitter.emit('isClosedModal');
-      // },100)
     };
     
     const editTextData = (editedText) =>{
       header.editTextList(contentData, editedText)
       isShowTextEditMoadal.value = false;
       mainStore.changeState()
-      // 수정필요
-      // setTimeout(() => {
-      //   this.emitter.emit('isClosedModal');
-      // },100)
     };
     // ----------------------------- 텍스트 에딧 ------------------------------- //
     return {
       // ----------------------------- 레이아웃 에딧 ------------------------------//
+      isShowLayoutEditMoadal,
+      selectedLayoutAttribute,
       showLayoutEditModal,
       hideLayoutEditModal,
       editLayoutData,
       // ----------------------------- 레이아웃 에딧 ------------------------------//
       // ----------------------------- 텍스트 에딧 ------------------------------- //
       isShowTextEditMoadal,
-      isShowLayoutEditMoadal,
       selectedText,
       showTextEditModal,
       hideTextEditModal,
@@ -206,12 +183,4 @@ export default {
   .layoutSetting:hover {
     transform: rotate( 720deg );
   }
-
-  .selector {
-    user-drag: none;
-user-select: none;
--webkit-user-drag: none;
--webkit-user-select: none;
--ms-user-select: none;
-}
 </style>

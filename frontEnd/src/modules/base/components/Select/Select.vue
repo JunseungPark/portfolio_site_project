@@ -1,6 +1,6 @@
 <template>
 	<div class="selectBox">
-    <div v-if="(selected === 'DungGeunMo')" class="customSelect">{{selected}}</div>
+    <!-- <div v-if="(selected === 'DungGeunMo')" class="customSelect">{{selected}}</div> -->
     <select
       class="select"
       v-model="selected"
@@ -10,7 +10,6 @@
         v-for="(font, index) in googleFontsList"
         :style="'font-family:'+font.family"
         :key="index"
-        :selected="(index === 0)"
         :value="font.family">
         {{font.family}}
       </option>
@@ -41,8 +40,7 @@ export default {
     const googleFontsList = mainStore.getGoogleFontsList
 
     const changeFont = (event) => {
-      console.log(JSON.stringify(event.target.value))
-      emit('changeFont', selected)
+      emit('changeFont', event.target.value)
     }
 
     watch(() => props.selectedFont, (newVal) => {

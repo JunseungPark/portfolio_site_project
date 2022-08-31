@@ -16,12 +16,11 @@
                   type: 'transition-group',
                   name: !drag ? 'flip-list' : null
                 }"
-                @change="onChange"
                 style="min-height: 100vh"
                 v-bind="dragOptions"
-                :draggable= isDraggable>
+                :force-fallback="false">
                 <template #item="{element}">
-                  <b-list-group-item class="border-0 position-relative p-0 not-draggable">
+                  <b-list-group-item class="border-0 position-relative p-0">
                     <b-button class="mx-3 position-absolute top-0 end-0 mt-3" variant="outline-danger" @click="deleteLayout(element)">제 거</b-button>
                     <component :key="element.id" :is="findCompoent(element.subject, element.name)"/>
                   </b-list-group-item>
@@ -80,11 +79,10 @@ export default {
     const dragOptions = computed(() => {
       return {
         group: {
-          name: 'g1'
+          name: 'g1',
+          pull: false 
         },
         scrollSensitivity: 200,
-        forceFallback: true,
-        disabled: false,
         animation: 200,
         ghostClass: "ghost"
       }
@@ -93,7 +91,6 @@ export default {
     const findCompoent = (subject, name) => {
       return defineAsyncComponent(() =>import(`@/modules/base/components/LayoutItems/${subject}/${name}.vue`));
     }
-
     const caluPrice = () =>{
       var price = 0;
       this.newLayouts.forEach(element => {
@@ -153,8 +150,11 @@ export default {
 .list-group {
   min-height: 20px;
 }
-.list-group-item {
+.list-group-item{
   cursor: pointer;
+}
+.list-group-item .no-pointer{
+  pointer-events:none !important;
 }
 .list-group-item i {
   cursor: pointer;

@@ -12,7 +12,7 @@
             :style="'font-family:'+contentData.textList[0].font">
             {{contentData.textList[0].textValue}}
           </h1>
-					<p @click="showTextEditModal(contentData.textList[1])" class="lead"><small class="clickable effect-shine" :style="'font-family:'+contentData.textList[1].font">{{contentData.textList[1].textValue}}</small></p>
+					<p class="lead"><small @click="showTextEditModal(contentData.textList[1])" class="clickable effect-shine" :style="'font-family:'+contentData.textList[1].font">{{contentData.textList[1].textValue}}</small></p>
 				</div>
 			</div>
 		</div>

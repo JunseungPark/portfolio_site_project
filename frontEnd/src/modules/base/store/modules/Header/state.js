@@ -31,7 +31,12 @@ export default {
         textValue: "Contact",
         font: "DungGeunMo"
       },
-    ]
+    ],
+    layoutAttribute: {
+      font: "DungGeunMo",
+      textColor: "#FFFFFF",
+      backgroundColor: "#333333"
+    }
   },
   HeaderLayout2: {
     textList: [
