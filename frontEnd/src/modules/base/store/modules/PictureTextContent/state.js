@@ -1,13 +1,22 @@
 export default {
   PictureTextLayout1: {
+    layoutAttribute: {
+      fontFamily: "DungGeunMo",
+      color: "#000000",
+      backgroundColor: "#FFFFFF"
+    },
     textList: [
       {
         key: 1,
-        textValue: "We create objects that blur the line between real & virtual"
+        textValue: "We create objects that blur the line between real & virtual",
+        fontFamily: "DungGeunMo",
+        color: "#000000",
       },
       {
         key: 2,
-        textValue: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+        textValue: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        fontFamily: "DungGeunMo",
+        color: "#000000",
       },
     ],
     imageList: [
@@ -18,10 +27,17 @@ export default {
     ]
   },
   PictureTextLayout2: {
+    layoutAttribute: {
+      fontFamily: "DungGeunMo",
+      color: "#000000",
+      backgroundColor: "#FFFFFF"
+    },
     textList: [
       {
         key: 1,
-        textValue: "Who we are"
+        textValue: "Who we are",
+        fontFamily: "DungGeunMo",
+        color: "#000000",
       },
     ],
     imageList: [
@@ -56,42 +72,65 @@ export default {
     ]
   },
   PictureTextLayout3: {
+    layoutAttribute: {
+      fontFamily: "DungGeunMo",
+      color: "#FFFFFF",
+      backgroundColor: "#000000"
+    },
     textList: [
       {
         key: 1,
-        textValue: "Meet The Team"
+        textValue: "Meet The Team",
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
       {
         key: 2,
-        textValue: "NAME"
+        textValue: "NAME",
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
       {
         key: 3,
-        textValue: "Subject"
+        textValue: "Subject",
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
       {
         key: 4,
-        textValue: "NAME"
+        textValue: "NAME",
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
       {
         key: 5,
-        textValue: "Subject"
+        textValue: "Subject",
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
       {
         key: 6,
-        textValue: "NAME"
+        textValue: "NAME",
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
       {
         key: 7,
-        textValue: "Subject"
+        textValue: "Subject",
+        fontFamily: "DungGeunMo",
+        color: "#000000",
       },
       {
         key: 8,
-        textValue: "NAME"
+        textValue: "NAME",
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
       {
         key: 9,
-        textValue: "Subject"
+        textValue: "Subject",
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
     ],
     imageList: [

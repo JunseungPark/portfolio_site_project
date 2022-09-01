@@ -16,6 +16,7 @@
               :selectedFont="text.fontFamily"
               @changeFont="changeFont"
             />
+            <input type="color" class="col-1" v-model="text.color">
             <button type="button" class="btn btn-primary" @click="editTextData">데이터 변경</button>
         </div>
       </div>

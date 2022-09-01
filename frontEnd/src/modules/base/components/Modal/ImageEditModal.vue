@@ -42,7 +42,7 @@ export default {
 
     //이미지 복사
     const image = ref({
-        key: props.selectedImage,
+        key: 0,
         imgName: require(`../../assets/img/defalutImg.svg`)
     });
 
@@ -82,14 +82,12 @@ export default {
       if (newVal) {
         modalController.show()
       } else {
+        image.value.imgName = require(`../../assets/img/defalutImg.svg`)
         modalController.hide()
       }
     })
 
     watch(() => props.selectedImage, (newVal) => {
-      if(newVal == 0) {
-        image.value.imgName = require(`../../assets/img/logo.svg`);
-      }
       image.value.key = newVal;
     })
 
