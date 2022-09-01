@@ -38,20 +38,22 @@ export default {
 
     const showTextEditModal = (text) => {
       selectedText.value = text
-      isShowTextEditMoadal.value = true;
-      mainStore.changeState();
+      setTextEditModalState(true)
     };
 
     const hideTextEditModal = () => {
-      isShowTextEditMoadal.value = false;
-      mainStore.changeState();
+      setTextEditModalState(false)
     };
     
     const editTextData = (editedText) =>{
       textContent.editTextList(contentData, editedText)
-      isShowTextEditMoadal.value = false;
-      mainStore.changeState();
+      setTextEditModalState(false)
     };
+
+    const setTextEditModalState = (value) => {
+      isShowTextEditMoadal.value = value;
+      mainStore.changeState()
+    }
     // ----------------------------- 텍스트 에딧 ------------------------------- //
     return {
       // ----------------------------- 텍스트 에딧 ------------------------------- //

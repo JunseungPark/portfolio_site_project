@@ -61,20 +61,22 @@ export default {
 
     const showTextEditModal = (text) => {
       selectedText.value = text
-      isShowTextEditMoadal.value = true;
-      mainStore.changeState();
+      setTextEditModalState(true)
     };
 
     const hideTextEditModal = () => {
-      isShowTextEditMoadal.value = false;
-      mainStore.changeState();
+      setTextEditModalState(false)
     };
     
     const editTextData = (editedText) =>{
       PictureTextContent.editTextList(contentData, editedText)
-      isShowTextEditMoadal.value = false;
-      mainStore.changeState();
+      setTextEditModalState(false)
     };
+
+    const setTextEditModalState = (value) => {
+      isShowTextEditMoadal.value = value;
+      mainStore.changeState()
+    }
     // ----------------------------- 텍스트 에딧 ------------------------------- //
 
     // ----------------------------- 이미지 에딧 ------------------------------- //
@@ -83,20 +85,22 @@ export default {
 
     const showImageEditModal = (key) => {
       selectedImage.value = key
-      isShowImageEditMoadal.value = true;
-      mainStore.changeState();
+      setImageEditModalState(true)
     };
 
     const hideImageEditModal = () => {
-      isShowImageEditMoadal.value = false;
-      mainStore.changeState();
+      setImageEditModalState(false)
     };
 
     const editImageData = (uploaedImg) =>{
       PictureTextContent.editPictureList(contentData, uploaedImg)
-      isShowImageEditMoadal.value = false;
-      mainStore.changeState();
+      setImageEditModalState(false)
     };
+
+    const setImageEditModalState = (value) => {
+      isShowImageEditMoadal.value = value;
+      mainStore.changeState()
+    }
     // ----------------------------- 이미지 에딧 ------------------------------- //
     return {
       // ----------------------------- 텍스트 에딧 ------------------------------- //

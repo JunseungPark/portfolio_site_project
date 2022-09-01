@@ -13,7 +13,7 @@
             <button type="button" class="btn btn-secondary me-auto p-2" @click="hideModal">닫기</button>
             <div>글씨체 변경</div>
             <SelectVue
-              :selectedFont="text.font"
+              :selectedFont="text.fontFamily"
               @changeFont="changeFont"
             />
             <button type="button" class="btn btn-primary" @click="editTextData">데이터 변경</button>
@@ -55,26 +55,27 @@ export default {
     const text = ref({
         key:"",
         textValue:"",
-        font:""
+        fontFamily:"",
+        color:"",
     });
 
     let originalText = null;
 
     const hideModal = () => {
       text.value.textValue = originalText.textValue
-      text.value.font = originalText.font
+      text.value.fontFamily = originalText.fontFamily
       context.emit('hideModal');
     }
     const editTextData = () => {
       if (text.value.textValue === '') {
         text.value.textValue = originalText.textValue
-        text.value.font = originalText.font
+        text.value.fontFamily = originalText.fontFamily
       }
       context.emit('editTextData', text.value);
     }
 
     const changeFont = (newFont) => {
-      text.value.font =newFont
+      text.value.fontFamily =newFont
     }
 
     watch(() => props.isShowMoadal, (newVal) => {
@@ -89,7 +90,6 @@ export default {
     watch(() => props.selectedText, (newVal) => {
       if (!originalText) originalText = JSON.parse(JSON.stringify(newVal));
       text.value = newVal;
-      console.log(text)
     })
 
     /// ------------------------- LIFE -------------------------///

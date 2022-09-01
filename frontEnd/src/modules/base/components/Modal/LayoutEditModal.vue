@@ -9,13 +9,13 @@
               <div class="col-3">글씨체: </div>
               <SelectVue
                 class="col-6"
-                :selectedFont="layoutAttribute.font"
+                :selectedFont="layoutAttribute.fontFamily"
                 @changeFont="changeFont"
               />
             </div>
             <div class="row  w-100 mb-3">
               <div class="col-3">폰트 컬러 :</div>
-              <input type="color" class="col-1" v-model="layoutAttribute.textColor">
+              <input type="color" class="col-1" v-model="layoutAttribute.color">
             </div>
             <div class="row  w-100">
               <div class="col-3">백그라운드 컬러 :</div>
@@ -36,6 +36,7 @@
 import { ref, watch, onMounted } from 'vue';
 import { Modal } from 'bootstrap';
 import SelectVue from '../Select/Select.vue';
+import { isBlackColor } from '@/util/util';
 // import ColorPicker from '../Select/ColorPicker.vue'
 
 export default {
@@ -64,8 +65,8 @@ export default {
 
     //텍스트 복사
     const layoutAttribute = ref({
-        font:"",
-        textColor:"",
+        fontFamily:"",
+        color:"",
         backgroundColor:""
     });
 
@@ -76,12 +77,31 @@ export default {
       context.emit('hideModal');
     }
     const editLayoutData = () => {
-      context.emit('editLayoutData');
+      var result = isBlackColor(layoutAttribute.value.backgroundColor)
+      context.emit('editLayoutData', result);
     }
 
     const changeFont = (newFont) => {
-      layoutAttribute.value.font =newFont
+      layoutAttribute.value.fontFamily =newFont
     }
+
+    // const colorCheck = (color) => {
+    //   var result = 0.2126*color.r + 0.7152*color.g + 0.0722*color.b
+    //   return (result < 128) ? true : false
+    // } 
+
+    // // const rgbToHex = (r, g, b) => {
+    // //   return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    // // }
+
+    // const hexToRgb = (hex) => {
+    //   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    //   return result ? {
+    //     r: parseInt(result[1], 16),
+    //     g: parseInt(result[2], 16),
+    //     b: parseInt(result[3], 16)
+    //   } : null;
+    // }
 
     watch(() => props.isShowMoadal, (newVal) => {
       if (!modalController) return

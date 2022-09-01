@@ -45,21 +45,25 @@ export default {
 
     const showImageEditModal = (key) => {
       selectedImage.value = key
-      isShowImageEditMoadal.value = true;
-      mainStore.changeState();
+      setImageEditModalState(true);
     };
 
     const hideImageEditModal = () => {
-      isShowImageEditMoadal.value = false;
-      mainStore.changeState();
+      setImageEditModalState(false);
     };
 
     const editImageData = (uploaedImg) =>{
       pictureConent.editPictureList(contentData, uploaedImg)
-      isShowImageEditMoadal.value = false;
-      mainStore.changeState();
+      setImageEditModalState(false)
     };
     // ----------------------------- 이미지 에딧 ------------------------------- //
+    // ----------------------------- 공통 ------------------------------- //
+
+    const setImageEditModalState = (value) => {
+      isShowImageEditMoadal.value = value;
+      mainStore.changeState()
+    }
+    // ----------------------------- 공통 ------------------------------- //
     return {
       // ----------------------------- 이미지 에딧 ------------------------------- //
       isShowImageEditMoadal,

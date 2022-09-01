@@ -1,47 +1,47 @@
 <template>
   <div>
-    <header class="p-3" :style="'background-color:'+ contentData.layoutAttribute.backgroundColor+'; color:' + contentData.layoutAttribute.textColor">
+    <header class="header1 p-3" :style="[contentData.layoutAttribute]">
       <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
-            <div @click="showTextEditModal(contentData.textList[0])" class="col clickable effect-shine" :style="'font-family:'+contentData.textList[0].font">{{contentData.textList[0].textValue}}</div>
+            <div @click="showTextEditModal(contentData.textList[0])" class="col clickable effect-shine" :style="'font-family:'+contentData.textList[0].fontFamily">{{contentData.textList[0].textValue}}</div>
 
             <ul class="nav col-8 col-lg-8 me-lg-auto mb-2 justify-content-end mb-md-0">
               <li @click="showTextEditModal(contentData.textList[1])">
                 <a 
-                  href="#" class="nav-link px-2 text-secondary clickable effect-shine"
-                  :style="'font-family:'+contentData.textList[1].font"
+                  href="#" class="nav-link px-2 clickable effect-shine"
+                  :style="[contentData.textList[1]]"
                 >
                 {{contentData.textList[1].textValue}}
                 </a>
               </li>
               <li @click="showTextEditModal(contentData.textList[2])">
                 <a 
-                  href="#" class="nav-link px-2 text-white clickable effect-shine"
-                  :style="'font-family:'+contentData.textList[2].font"
+                  href="#" class="nav-link px-2 clickable effect-shine"
+                  :style="'font-family:'+contentData.textList[2].fontFamily"
                 >
                 {{contentData.textList[2].textValue}}
                 </a>
               </li>
               <li @click="showTextEditModal(contentData.textList[3])">
                 <a 
-                  href="#" class="nav-link px-2 text-white clickable effect-shine"
-                  :style="'font-family:'+contentData.textList[3].font"
+                  href="#" class="nav-link px-2 clickable effect-shine"
+                  :style="'font-family:'+contentData.textList[3].fontFamily"
                 >
                 {{contentData.textList[3].textValue}}
                 </a>
               </li>
               <li @click="showTextEditModal(contentData.textList[4])">
                 <a 
-                  href="#" class="nav-link px-2 text-white clickable effect-shine"
-                  :style="'font-family:'+contentData.textList[4].font"
+                  href="#" class="nav-link px-2 clickable effect-shine"
+                  :style="'font-family:'+contentData.textList[4].fontFamily"
                 >
                 {{contentData.textList[4].textValue}}
                 </a>
               </li>
                <li @click="showTextEditModal(contentData.textList[4])">
                 <a 
-                  href="#" class="nav-link px-2 text-white clickable effect-shine"
-                  :style="'font-family:'+contentData.textList[4].font"
+                  href="#" class="nav-link px-2 clickable effect-shine"
+                  :style="'font-family:'+contentData.textList[4].fontFamily"
                 >
                 {{contentData.textList[4].textValue}}
                 </a>
@@ -63,7 +63,7 @@
       </div>
     </header>
     <div class="position-absolute top-0 start-0 p-1" @click="showLayoutEditModal">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="White" class="bi bi-sliders layoutSetting" viewBox="0 0 16 16">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" :fill="(isBlackBG) ? 'White' : 'Black'" class="bi bi-sliders layoutSetting" viewBox="0 0 16 16">
         <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
       </svg>
     </div>
@@ -87,6 +87,8 @@ import { useMainStore } from '../../../store/Main';
 import { useHeaderStore } from '../../../store/modules/Header';
 import TextEditModal from '../../Modal/TextEditModal.vue';
 import LayoutEditModal from '../../Modal/LayoutEditModal.vue'
+import { isBlackColor } from '@/util/util';
+
 export default {
   name: "HeaderLayout1",
   components: {
@@ -102,21 +104,22 @@ export default {
     const isShowLayoutEditMoadal = ref(false);
     const selectedLayoutAttribute = ref({});
 
+    const isBlackBG = ref(isBlackColor(contentData.layoutAttribute.backgroundColor));
+
     const showLayoutEditModal = () => {
       selectedLayoutAttribute.value = contentData.layoutAttribute;
-      isShowLayoutEditMoadal.value = true;
-      mainStore.changeState()
+      setLayoutEditModalState(true);
     };
 
     const hideLayoutEditModal = () => {
-      isShowLayoutEditMoadal.value = false;
-      mainStore.changeState();
+      setLayoutEditModalState(false);
     };
     
-    const editLayoutData = () =>{
-      isShowLayoutEditMoadal.value = false;
-      mainStore.changeState()
+    const editLayoutData = (result) =>{
+      isBlackBG.value = result
+      setLayoutEditModalState(false);
     };
+    
     // ----------------------------- 레이아웃 에딧 ------------------------------//
     
     // ----------------------------- 텍스트 에딧 ------------------------------- //
@@ -125,21 +128,32 @@ export default {
 
     const showTextEditModal = (text) => {
       selectedText.value = text
-      isShowTextEditMoadal.value = true;
-      mainStore.changeState()
+      setTextEditModalState(true);
     };
 
     const hideTextEditModal = () => {
-      isShowTextEditMoadal.value = false;
-      mainStore.changeState();
+      setTextEditModalState(false);
     };
     
     const editTextData = (editedText) =>{
       header.editTextList(contentData, editedText)
-      isShowTextEditMoadal.value = false;
-      mainStore.changeState()
+      setTextEditModalState(false);
     };
     // ----------------------------- 텍스트 에딧 ------------------------------- //
+    // ----------------------------- 공통 ------------------------------- //
+
+    const setTextEditModalState = (value) => {
+      isShowTextEditMoadal.value = value;
+      mainStore.changeState()
+    }
+
+    const setLayoutEditModalState = (value) => {
+      isShowLayoutEditMoadal.value = value;
+      mainStore.changeState()
+    }
+
+    // ----------------------------- 공통 ------------------------------- //
+
     return {
       // ----------------------------- 레이아웃 에딧 ------------------------------//
       isShowLayoutEditMoadal,
@@ -147,6 +161,7 @@ export default {
       showLayoutEditModal,
       hideLayoutEditModal,
       editLayoutData,
+      isBlackBG,
       // ----------------------------- 레이아웃 에딧 ------------------------------//
       // ----------------------------- 텍스트 에딧 ------------------------------- //
       isShowTextEditMoadal,
@@ -182,5 +197,9 @@ export default {
  /* effect-setting */
   .layoutSetting:hover {
     transform: rotate( 720deg );
+  }
+
+  .nav-link {
+    color: inherit;
   }
 </style>

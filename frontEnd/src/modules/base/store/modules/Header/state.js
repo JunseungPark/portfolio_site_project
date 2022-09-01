@@ -4,37 +4,43 @@ export default {
       {
         key: 1,
         textValue: "HomePage",
-        font: "DungGeunMo"
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
       {
         key: 2,
         textValue: "Home",
-        font: "DungGeunMo"
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
       {
         key: 3,
         textValue: "About",
-        font: "DungGeunMo"
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
       {
         key: 4,
         textValue: "Work",
-        font: "DungGeunMo"
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
       {
         key: 5,
         textValue: "Team",
-        font: "DungGeunMo"
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
       {
         key: 6,
         textValue: "Contact",
-        font: "DungGeunMo"
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
       },
     ],
     layoutAttribute: {
-      font: "DungGeunMo",
-      textColor: "#FFFFFF",
+      fontFamily: "DungGeunMo",
+      color: "#FFFFFF",
       backgroundColor: "#333333"
     }
   },

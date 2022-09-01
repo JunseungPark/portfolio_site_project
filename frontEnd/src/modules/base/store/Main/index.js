@@ -8,10 +8,8 @@ export const useMainStore = defineStore('Main', () => {
   let googleFontsList = [];
 
   function changeState() {
-    console.log("변경전", isOpendAnyModal.value)
     if(isOpendAnyModal.value) isOpendAnyModal.value = false
     else isOpendAnyModal.value = true
-    console.log("변경후", isOpendAnyModal.value)
   }
 
   async function getGoogle() {
