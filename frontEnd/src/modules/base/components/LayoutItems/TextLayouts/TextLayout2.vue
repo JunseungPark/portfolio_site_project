@@ -1,11 +1,11 @@
 <template>
   <!-- Html -->
-	<div class="bg h-75 py-5" :style="[contentData.layoutAttribute]">
-		<div class="container text-white py-5">
-			<div class="row flex-lg-row align-items-center g-5 py-5">
-				<div class="col-lg-6">
-					<h1 @click="showTextEditModal(contentData.textList[0])" class="display-7 fw-bold lh-1 mb-5 clickable effect-shine" :style="[contentData.textList[0]]">{{contentData.textList[0].textValue}}</h1>
-					<span @click="showTextEditModal(contentData.textList[1])" class="mb-5"><u class="clickable effect-shine" :style="[contentData.textList[1]]">{{contentData.textList[1].textValue}}</u></span>
+	<div class="bg" :style="[contentData.layoutAttribute]">
+		<div class="container h-50 col-xxl-9 px-4 py-5">
+			<div class="row h-100 align-items-center">
+				<div class="row-lg-6">
+					<h1 @click="showTextEditModal(contentData.textList[0])" class="display-5 fw-thin clickable effect-shine" :style="[contentData.textList[0]]">{{contentData.textList[0].textValue}}</h1>
+					<p @click="showTextEditModal(contentData.textList[1])" class="lead mb-4 clickable effect-shine" :style="[contentData.textList[0]]">{{contentData.textList[1].textValue}}</p>
 				</div>
 			</div>
 		</div>
@@ -39,7 +39,7 @@ import LayoutEditModal from '../../Modal/LayoutEditModal.vue'
 import { isBlackColor } from '@/util/util';
 
 export default {
-  name: "TextLayout1",
+  name: "TextLayout2",
   components: {
     TextEditModal,
     LayoutEditModal
@@ -47,7 +47,7 @@ export default {
   setup() {
     const mainStore = useMainStore();
     const textContent = useTextStore();
-    const contentData = textContent.getTextLayout1;
+    const contentData = textContent.getTextLayout2;
 
     // ----------------------------- 레이아웃 에딧 ------------------------------//
     const isShowLayoutEditMoadal = ref(false);

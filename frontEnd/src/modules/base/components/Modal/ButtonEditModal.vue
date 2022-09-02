@@ -6,18 +6,23 @@
         <div class="modal-body">
           <div>
             <!-- <input type="type" class="form-control" style="height:300px" placeholder="Selected Text" aria-label="text" v-model="text.value" > -->
-            <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="10" v-model="text.textValue"></textarea>
+            <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="10" v-model="button.textValue"></textarea>
           </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary me-auto p-2" @click="hideModal">닫기</button>
             <div>글씨체 변경</div>
             <SelectVue
-              :selectedFont="text.fontFamily"
+              :selectedFont="button.fontFamily"
               @changeFont="changeFont"
             />
-            <input type="color" class="col-1" v-model="text.color">
-            <button type="button" class="btn btn-primary" @click="editTextData">데이터 변경</button>
+            글
+            <input type="color" class="col-1" v-model="button.color">
+            배
+            <input type="color" class="col-1" v-model="button.backgroundColor">
+            보
+            <input v-if="!button.borderColor == ''" type="color" class="col-1" v-model="button.borderColor">
+            <button type="button" class="btn btn-primary" @click="editButtonData">데이터 변경</button>
         </div>
       </div>
     </div>
@@ -30,12 +35,12 @@ import { Modal } from 'bootstrap';
 import SelectVue from '../Select/Select.vue';
 
 export default {
-  name: "TextEditModal",
+  name: "ButtonEditModal",
   components: {
     SelectVue,
   },
   props: {
-    selectedText: {
+    selectedButton: {
       type: Object,
     },
     isShowMoadal: {
@@ -53,46 +58,54 @@ export default {
     let modalController = null
 
     //텍스트 복사
-    const text = ref({
+    const button = ref({
         key:"",
         textValue:"",
         fontFamily:"",
         color:"",
+        backgroundColor: "",
+        borderColor : ""
     });
 
-    let originalText = {
+    let originalButton = {
       key:"",
       textValue:"",
       fontFamily:"",
       color:"",
+      backgroundColor: "",
+      borderColor : ""
     };
 
     const hideModal = () => {
-      text.value.textValue = originalText.textValue
-      text.value.fontFamily = originalText.fontFamily
-      text.value.color = originalText.color
+      button.value.textValue = originalButton.textValue
+      button.value.fontFamily = originalButton.fontFamily
+      button.value.color = originalButton.color
+      button.value.backgroundColor = originalButton.backgroundColor
+      button.value.borderColor = originalButton.borderColor
       context.emit('hideModal');
     }
-    const editTextData = () => {
-      if (text.value.textValue === '') {
-        text.value.textValue = originalText.textValue
-        text.value.fontFamily = originalText.fontFamily
-        text.value.color = originalText.color
+    const editButtonData = () => {
+      if (button.value.textValue === '') {
+        button.value.textValue = originalButton.textValue
+        button.value.fontFamily = originalButton.fontFamily
+        button.value.color = originalButton.color
+        button.value.backgroundColor = originalButton.backgroundColor
+        button.value.borderColor = originalButton.borderColor
       }
-      context.emit('editTextData', text.value);
+      context.emit('editButtonData', button.value);
     }
 
     const changeFont = (newFont) => {
-      text.value.fontFamily =newFont
+      button.value.fontFamily =newFont
     }
 
     watch(() => props.isShowMoadal, (newVal) => {
       if (!modalController) return
       if (newVal) {
         // 텍스트 복사 및 저장
-        originalText = JSON.parse(JSON.stringify(props.selectedText));
-        text.value = props.selectedText;
-
+        originalButton = JSON.parse(JSON.stringify(props.selectedButton));
+        button.value = props.selectedButton;
+        
         modalController.show()
       } else {
         modalController.hide()
@@ -107,10 +120,10 @@ export default {
     return {
       googleKey,
       hideModal,
-      editTextData,
+      editButtonData,
       changeFont,
       modal,
-      text,
+      button,
     }
   },
 }

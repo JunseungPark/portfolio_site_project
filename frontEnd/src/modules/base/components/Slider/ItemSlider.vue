@@ -9,9 +9,9 @@
             <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
           </svg>
         </div>
-        <div class="carousel-caption d-none d-md-block text-white">
-          <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
+        <div class="carousel-caption d-none d-md-block text-white position-absolute bottom-0" style="font-size:10px">
+          <h5>{{ layout.layoutName }}</h5>
+          <p>{{ layout.layoutDetail }}</p>
         </div>
       </div>
     </div>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 
 export default {
   name: "ItemSlieder",
@@ -35,19 +36,25 @@ export default {
       type: Array,
     }
   },
-  data() {
+
+  emits: ["addLayoutTo"],
+
+  setup(props, context) {
+    const subject = ref(props.layoutList[0].subject)
+
+    const getImage = (index) => {
+      return require("../../assets/img/nasa"+ (index+1) +".jpg");
+    }
+
+    const addLayoutTo = (layout) => {
+      context.emit('addLayoutTo', layout)
+    }
     return {
-      subject: this.layoutList[0].subject
+      subject,
+      getImage,
+      addLayoutTo,
     }
   },
-  methods: {
-    getImage(index) {
-      return require("../../assets/img/nasa"+ (index+1) +".jpg");
-    },
-    addLayoutTo(layout) {
-      this.$emit('addLayoutTo', layout)
-    }
-  }
 }
 </script>
 

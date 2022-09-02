@@ -1,68 +1,24 @@
 <template>
   <div>
     <!-- Html -->
-    <header class="header1 p-3" :style="[contentData.layoutAttribute]">
-      <div class="container">
-          <div class="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
-            <div @click="showTextEditModal(contentData.textList[0])" class="col clickable effect-shine" :style="[contentData.textList[0]]">{{contentData.textList[0].textValue}}</div>
-
-            <ul class="nav col-8 col-lg-8 me-lg-auto mb-2 justify-content-end mb-md-0">
-              <li @click="showTextEditModal(contentData.textList[1])">
-                <a 
-                  href="#" class="nav-link px-2 clickable effect-shine"
-                  :style="[contentData.textList[1]]"
-                >
-                {{contentData.textList[1].textValue}}
-                </a>
-              </li>
-              <li @click="showTextEditModal(contentData.textList[2])">
-                <a 
-                  href="#" class="nav-link px-2 clickable effect-shine"
-                  :style="[contentData.textList[2]]"
-                >
-                {{contentData.textList[2].textValue}}
-                </a>
-              </li>
-              <li @click="showTextEditModal(contentData.textList[3])">
-                <a 
-                  href="#" class="nav-link px-2 clickable effect-shine"
-                  :style="[contentData.textList[3]]"
-                >
-                {{contentData.textList[3].textValue}}
-                </a>
-              </li>
-              <li @click="showTextEditModal(contentData.textList[4])">
-                <a 
-                  href="#" class="nav-link px-2 clickable effect-shine"
-                  :style="[contentData.textList[4]]"
-                >
-                {{contentData.textList[4].textValue}}
-                </a>
-              </li>
-               <li @click="showTextEditModal(contentData.textList[4])">
-                <a 
-                  href="#" class="nav-link px-2 clickable effect-shine"
-                  :style="[contentData.textList[5]]"
-                >
-                {{contentData.textList[5].textValue}}
-                </a>
-              </li>
-            </ul>
-            <ul class="nav col-1 col-lg-1 mb-4 justify-content-end mb-md-0">
-              <li class="me-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
-                  <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
-                </svg>
-              </li>
-            </ul> 
+    <div class="bg" :style="[contentData.layoutAttribute]">
+      <div class="container col-xxl-9 px-4 py-5">
+        <div class="row flex-lg-row-reverse g-5 py-5">
+          <div @click="showImageEditModal(contentData.imageList[0].key)" class="col-10 col-sm-8 col-lg-6 hoverImageWrap">
+            <img :src="contentData.imageList[0].imgName" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+          </div>
+          <div class="col-lg-6">
+            <h1 
+              @click="showTextEditModal(contentData.textList[0])" 
+              class="display4 fw-thin lh-1 mb-3 clickable effect-shine"
+              :style="[contentData.textList[0]]">
+              {{contentData.textList[0].textValue}}
+            </h1>
+            <p class="lead"><small @click="showTextEditModal(contentData.textList[1])" class="clickable effect-shine" :style="[contentData.textList[1]]">{{contentData.textList[1].textValue}}</small></p>
+          </div>
         </div>
       </div>
-    </header>
+    </div>
     <!-- Html -->
     <div class="position-absolute top-0 start-0 p-2" @click="showLayoutEditModal">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" :fill="(isBlackBG) ? 'White' : 'Black'" class="bi bi-sliders layoutSetting" viewBox="0 0 16 16">
@@ -75,6 +31,12 @@
       @hideModal='hideTextEditModal'
       @editTextData="editTextData"
     />
+    <ImageEditModal
+      :isShowMoadal="isShowImageEditMoadal"
+      :selectedImage="selectedImage"
+      @hideModal='hideImageEditModal'
+      @editImageData="editImageData"
+    />
     <LayoutEditModal
       :isShowMoadal="isShowLayoutEditMoadal"
       :selectedLayoutAttribute="selectedLayoutAttribute"
@@ -86,22 +48,25 @@
 <script>
 import { ref } from "vue";
 import { useMainStore } from '../../../store/Main';
-import { useHeaderStore } from '../../../store/modules/Header';
+import { usePictureTextStore } from '../../../store/modules/PictureTextContent';
 import TextEditModal from '../../Modal/TextEditModal.vue';
+import ImageEditModal from "../../Modal/ImageEditModal.vue";
 import LayoutEditModal from '../../Modal/LayoutEditModal.vue'
 import { isBlackColor } from '@/util/util';
 
 export default {
-  name: "HeaderLayout1",
+  name: "PictureTextLayout1",
   components: {
     TextEditModal,
+    ImageEditModal,
     LayoutEditModal
   },
-  emits: ["isOpendAnyModal", "isClosedModal"],
+
   setup() {
     const mainStore = useMainStore();
-    const header = useHeaderStore();
-    const contentData = header.getHeaderLayout1;
+    const PictureTextContent = usePictureTextStore();
+    const contentData = PictureTextContent.getPictureTextLayout1;
+
     // ----------------------------- 레이아웃 에딧 ------------------------------//
     const isShowLayoutEditMoadal = ref(false);
     const selectedLayoutAttribute = ref({});
@@ -122,7 +87,7 @@ export default {
       setAllAttribute();
       setLayoutEditModalState(false);
     };
-    
+
     const setLayoutEditModalState = (value) => {
       isShowLayoutEditMoadal.value = value;
       mainStore.changeState()
@@ -151,7 +116,7 @@ export default {
     };
     
     const editTextData = (editedText) =>{
-      header.editTextList(contentData, editedText)
+      PictureTextContent.editTextList(contentData, editedText)
       setTextEditModalState(false);
     };
 
@@ -159,9 +124,31 @@ export default {
       isShowTextEditMoadal.value = value;
       mainStore.changeState()
     }
-    
     // ----------------------------- 텍스트 에딧 ------------------------------- //
 
+    // ----------------------------- 이미지 에딧 ------------------------------- //
+    const isShowImageEditMoadal = ref(false);
+    const selectedImage = ref(0);
+
+    const showImageEditModal = (key) => {
+      selectedImage.value = key
+      setImageEditModalState(true);
+    };
+
+    const hideImageEditModal = () => {
+      setImageEditModalState(false);
+    };
+
+    const editImageData = (uploaedImg) =>{
+      PictureTextContent.editPictureList(contentData, uploaedImg)
+      setImageEditModalState(false);
+    };
+
+    const setImageEditModalState = (value) => {
+      isShowImageEditMoadal.value = value;
+      mainStore.changeState()
+    }
+    // ----------------------------- 이미지 에딧 ------------------------------- //
     return {
       // ----------------------------- 레이아웃 에딧 ------------------------------//
       isShowLayoutEditMoadal,
@@ -178,14 +165,21 @@ export default {
       hideTextEditModal,
       editTextData,
       // ----------------------------- 텍스트 에딧 ------------------------------- //
-      contentData,
+      // ----------------------------- 이미지 에딧 ------------------------------- //
+      isShowImageEditMoadal,
+      selectedImage,
+      showImageEditModal,
+      hideImageEditModal,
+      editImageData,
+      // ----------------------------- 이미지 에딧 ------------------------------- //
+      contentData
     }
   },
 }
 </script>
 
 <style>
-  /* effect-shine */
+  /* 텍스트 effect-shine */
   .clickable.effect-shine:hover {
     cursor: pointer;
     -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%);
@@ -202,12 +196,10 @@ export default {
       -webkit-mask-position: -50%;
     }
   }
- /* effect-setting */
-  .layoutSetting:hover {
-    transform: rotate( 720deg );
-  }
 
-  /* .nav-link {
-    color: inherit;
-  } */
+  /* 이미지 */ 
+  .hoverImageWrap{
+    cursor: pointer;
+    overflow: hidden;
+  }
 </style>

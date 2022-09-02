@@ -1,16 +1,16 @@
 <template>
   <!-- Modal -->
-  <div class="modal fade" ref="modal" id="TextEditModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="TextEditModalLabel" aria-hidden="true">
+  <div class="modal fade" ref="modal" id="ImageEditModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="ImageEditModal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">
           <img :src="image.imgName" class="previewImg" width="400" height="400" alt="">
-          <div class="file-upload-wrapper" data-text="Select your file!">
+        </div>
+        <div class="modal-footer flex-row">
+          <button type="button" class="btn btn-secondary  me-auto p-2" @click="hideModal">닫기</button>
+          <div class="file-upload-wrapper">
             <input name="file-upload-field" type="file" class="file-upload-field" value="" @change="onFileChange">
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" @click="hideModal">닫기</button>
           <button type="button" class="btn btn-primary" @click="editImageData">데이터 변경</button>
         </div>
       </div>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { ref, watch, onMounted } from 'vue';
 import { Modal } from 'bootstrap';
 
 export default {
@@ -32,83 +33,96 @@ export default {
     },
   },
 
-  /// ------------------------- LIFE -------------------------///
-  created() {
-    this.image.imgName = require(`../../assets/img/logo.svg`);
-  }, 
-  mounted() {
-    this.modal = new Modal(this.$refs.modal);
-  },
-  /// ------------------------- LIFE -------------------------///
-  data() {
-    return {
-      modal: null,
-      image: {
-        key: this.selectedImage,
-        imgName: "",
-      }
-    }
-  },
-  watch: {
-    isShowMoadal(val) {
-      if (!this.modal) return
-      if (val) {
-        this.modal.show()
-      } else {
-        this.modal.hide()
-      }
-    },
-    selectedImage(newVal) {
-      if(newVal == 0) {
-        this.image.imgName = require(`../../assets/img/logo.svg`);
-      }
+  emits: ["hideModal", "editTextData"],
 
-      this.image.key = newVal;
+  setup(props, context) {
+    // 모달창 컨트롤러
+    const modal = ref(null);
+    let modalController = null
+
+    //이미지 복사
+    const image = ref({
+        key: 0,
+        imgName: require(`../../assets/img/defalutImg.svg`)
+    });
+
+    const hideModal = () => {
+      context.emit('hideModal');
     }
-  },
-  methods: {
-    hideModal() {
-      this.$emit('hideModal');
-    },
-    editImageData() {
-      this.$emit('editImageData', this.image);
-    },
+    const editImageData = () => {
+      context.emit('editImageData', image.value);
+    }
 
     // 이미지 주입
-    onFileChange(e) {
+    const onFileChange = (e) => {
       var files = e.target.files;
       if (!files.length)
         return;
-      this.createImage(files[0]);
-    },
-    createImage(file) {
+      createImage(files[0]);
+    }
+
+    // 이미지 적용
+    const createImage = (file) => {
       // var image = new Image();
       var reader = new FileReader();
 
       reader.onload = (e) => {
-        this.image.imgName = e.target.result;
+        image.value.imgName = e.target.result;
       };
       reader.readAsDataURL(file);
-    },
+    }
 
     // 이미지 삭제
-    removeImage: function (item) {
+    const removeImage = (item) => {
       item.image = false; 
     }
-  }
+
+    watch(() => props.isShowMoadal, (newVal) => {
+      if (!modalController) return
+      if (newVal) {
+        modalController.show()
+      } else {
+        image.value.imgName = require(`../../assets/img/defalutImg.svg`)
+        modalController.hide()
+      }
+    })
+
+    watch(() => props.selectedImage, (newVal) => {
+      image.value.key = newVal;
+    })
+
+    /// ------------------------- LIFE -------------------------///
+    onMounted(()=> {
+      modalController = new Modal(modal.value);
+    });
+    /// ------------------------- LIFE -------------------------///
+
+    return {
+      hideModal,
+      editImageData,
+      onFileChange,
+      createImage,
+      removeImage,
+      modal,
+      image
+    }
+  },
 }
 </script>
 <style>
+/* 모달 백그라운드 노터치 */
+.modal {
+  pointer-events: none;
+}
 .previewImg {
   object-fit: cover;
 }
 
 .file-upload-wrapper {
   position: relative;
-  width: 100%;
-  height: 60px;
+  width: 30%;
 }
-.file-upload-wrapper:after {
+/* .file-upload-wrapper:after {
   content: attr(data-text);
   font-size: 18px;
   position: absolute;
@@ -125,24 +139,23 @@ export default {
   color: #999;
   border-radius: 5px 10px 10px 5px;
   font-weight: 300;
-}
+} */
 .file-upload-wrapper:before {
-  content: "Upload";
+  content: "사진 변경 하기";
   position: absolute;
-  top: 0;
+  top: -20px;
   right: 0;
   display: inline-block;
-  height: 60px;
   background: #4daf7c;
   color: #fff;
-  font-weight: 700;
+  font-weight: 500;
   z-index: 25;
-  font-size: 16px;
-  line-height: 60px;
-  padding: 0 15px;
+  font-size: 15px;
+  line-height: inherit;
+  padding: 8px 15px;
   text-transform: uppercase;
   pointer-events: none;
-  border-radius: 0 5px 5px 0;
+  border-radius: 5px;
 }
 .file-upload-wrapper:hover:before {
   background: #3d8c63;

@@ -6,8 +6,8 @@ export const usePictureStore = defineStore('picture', () => {
   
   const pictureContentList = ref(state);
 
-  function editPictureList(uploaedImg) {
-    pictureContentList.value.PICTURE1.imageList.filter(image => { 
+  function editPictureList(target, uploaedImg) {
+    target.imageList.filter(image => { 
       if (image.key === uploaedImg.key) { 
         image.imgName = uploaedImg.imgName;
        } 
@@ -15,15 +15,15 @@ export const usePictureStore = defineStore('picture', () => {
   }
   
   const getDataAll = computed(() =>  pictureContentList.value);
-  const getPicture1 = computed(() =>  pictureContentList.value.PICTURE1);
-  const getPicture2 = computed(() =>  pictureContentList.value.PICTURE2);
+  const getPictureLayout1 = computed(() =>  pictureContentList.value.PictureLayout1);
+  const getPictureLayout2 = computed(() =>  pictureContentList.value.PictureLayout1);
 
   return { 
     pictureContentList, 
-    editPictureList, 
+    editPictureList,
     getDataAll,
-    getPicture1,
-    getPicture2
+    getPictureLayout1,
+    getPictureLayout2
   };
 
 });

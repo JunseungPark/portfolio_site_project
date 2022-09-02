@@ -33,19 +33,19 @@
         <ItemSlider :layoutList='allLayouts.HeaderLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Slider Main" class="mb-3 border-top">
-        <ItemSlider :layoutList='allLayouts.ContentLayouts' @addLayoutTo="addLayoutTo" />
+        <ItemSlider :layoutList='allLayouts.SliderLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Picture Text Main"  class="mb-3 border-top">
-        <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />
+        <ItemSlider :layoutList='allLayouts.PictureTextLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Picture Main"  class="mb-3 border-top">
         <ItemSlider :layoutList='allLayouts.PictureLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Text Main"  class="mb-3 border-top">
-        <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />
+        <ItemSlider :layoutList='allLayouts.TextLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Send Mail"  class="mb-3 border-top">
-        <ItemSlider :layoutList='allLayouts.FeatureLayouts' @addLayoutTo="addLayoutTo" />
+        <ItemSlider :layoutList='allLayouts.EmailLayouts' @addLayoutTo="addLayoutTo" />
       </b-accordion-item>
       <b-accordion-item title="Footer"  class="mb-3 border-top">
         <ItemSlider :layoutList='allLayouts.FooterLayouts' @addLayoutTo="addLayoutTo" />
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import { ref }  from 'vue'
 import ItemSlider from '@/modules/base/components/Slider/ItemSlider.vue'
 
 export default {
@@ -72,21 +73,25 @@ export default {
       type: Object,
     }
   },
-  data() {
+
+  setup(context, {emit}) {
+    const isShow = ref(false)
+
+    const openClose = (thema) => {
+      console.log(thema);
+      isShow.value = !isShow.value;
+    }
+
+    const addLayoutTo = (layout) => {
+      emit('addLayoutTo', layout)
+    }
+
     return {
-      isShow : false
+      isShow,
+      openClose,
+      addLayoutTo
     }
   },
-  methods: {
-    openClose(thema){
-      this.isShow = !this.isShow;
-      console.log(thema);
-      // this.$emit('selectThema', thema);
-    },
-    addLayoutTo(layout) {
-      this.$emit('addLayoutTo', layout)
-    }
-  }
 }
 </script>
 

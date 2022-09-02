@@ -2,25 +2,31 @@ import { defineStore } from 'pinia';
 import state from './state';
 import { ref, computed } from "vue";
 
-export const useHeaderStore = defineStore('header', () => {
+export const useTextStore = defineStore('text', () => {
   
-  const headerList = ref(state);
-  const test = ref();
+  const textContentList = ref(state);
 
-  function addList(param) {
-    test.value = param;
+  function editTextList(target, editedText) {
+    target.textList.filter(text => { 
+      if (text.key === editedText.key) { 
+        text.key = editedText.key
+        text.value = editedText.value;
+      } 
+    });
   }
 
-  const getDataAll = computed(() =>  headerList.value);
-  const getHeadr1 = computed(() =>  headerList.value.HEADER1);
-  const getHeadr2 = computed(() =>  headerList.value.HEADER2);
+  const getDataAll = computed(() =>  textContentList.value);
+  const getTextLayout1 = computed(() =>  textContentList.value.TextLayout1);
+  const getTextLayout2 = computed(() =>  textContentList.value.TextLayout2);
+  const getTextLayout3 = computed(() =>  textContentList.value.TextLayout3);
 
   return { 
-    headerList, 
-    addList, 
+    textContentList, 
+    editTextList, 
     getDataAll,
-    getHeadr1,
-    getHeadr2
+    getTextLayout1,
+    getTextLayout2,
+    getTextLayout3
   };
 
 });
