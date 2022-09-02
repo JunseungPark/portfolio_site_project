@@ -1,6 +1,6 @@
 <template>
   <!-- Modal -->
-  <div class="modal fade" ref="modal" id="TextEditModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="TextEditModalLabel" aria-hidden="true">
+  <div class="modal fade" ref="modal" id="ImageEditModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="ImageEditModal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">

@@ -152,4 +152,100 @@ export default {
       },
     ]
   },
+
+  PictureTextLayout4: {
+    layoutAttribute: {
+      fontFamily: "DungGeunMo",
+      color: "#FFFFFF",
+      backgroundColor: "#37517e"
+    },
+    textList: [
+      {
+        key: 1,
+        textValue: "Better Solutions For Your Business",
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
+      },
+      {
+        key: 2,
+        textValue: "We are team of talented designers making websites with Bootstrap",
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
+      },
+      {
+        key: 3,
+        textValue: "Subject",
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
+      },
+    ],
+    buttonList: [
+      {
+        key: 1,
+        textValue: "NAME",
+        fontFamily: "DungGeunMo",
+        color: "#FFFFFF",
+        backgroundColor: "#000000",
+        borderColor : ""
+      },
+    ],
+    imageList: [
+      {
+        key: 1,
+        imgName: require(`../../../assets/img/header/header2/header2-img.png`),
+      },
+    ]
+  },
+
+  PictureTextLayout5: {
+    layoutAttribute: {
+      fontFamily: "Poppins",
+      color: "#37517e",
+      backgroundColor: "#FFFFFF"
+    },
+    textList: [
+      {
+        key: 1,
+        textValue: "Voluptatem dignissimos provident quasi corporis voluptates",
+        fontFamily: "Poppins",
+        color: "#37517e",
+      },
+      {
+        key: 2,
+        textValue: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        fontFamily: "Poppins",
+        color: "#000000",
+      },
+      {
+        key: 3,
+        textValue: "HTML",
+        fontFamily: "Poppins",
+        color: "#37517e",
+      },
+      {
+        key: 4,
+        textValue: "CSS90",
+        fontFamily: "Poppins",
+        color: "#37517e",
+      },
+      {
+        key: 5,
+        textValue: "JAVASCRIPT75",
+        fontFamily: "Poppins",
+        color: "#37517e",
+      },
+      {
+        key: 6,
+        textValue: "PHOTOSHOP55",
+        fontFamily: "Poppins",
+        color: "#37517e",
+      },
+    ],
+    imageList: [
+      {
+        key: 1,
+        imgName: require(`../../../assets/img/pictureText/pictureText5/pictureText5-img.png`),
+      },
+    ]
+  },
 };

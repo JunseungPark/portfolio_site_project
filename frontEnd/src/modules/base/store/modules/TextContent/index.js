@@ -18,13 +18,15 @@ export const useTextStore = defineStore('text', () => {
   const getDataAll = computed(() =>  textContentList.value);
   const getTextLayout1 = computed(() =>  textContentList.value.TextLayout1);
   const getTextLayout2 = computed(() =>  textContentList.value.TextLayout2);
+  const getTextLayout3 = computed(() =>  textContentList.value.TextLayout3);
 
   return { 
     textContentList, 
     editTextList, 
     getDataAll,
     getTextLayout1,
-    getTextLayout2
+    getTextLayout2,
+    getTextLayout3
   };
 
 });

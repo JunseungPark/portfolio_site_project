@@ -22,11 +22,22 @@ export const usePictureTextStore = defineStore('pictureText', () => {
       } 
     });
   }
+
+  // function editButtonList(target, editedButton) {
+  //   target.buttonList.filter(button => { 
+  //     if (button.key === editedButton.key) { 
+  //       button.key = editedButton.key
+  //       button.value = editedButton.value;
+  //     } 
+  //   });
+  // }
   
   const getDataAll = computed(() =>  pictureTextContentList.value);
   const getPictureTextLayout1 = computed(() =>  pictureTextContentList.value.PictureTextLayout1);
   const getPictureTextLayout2 = computed(() =>  pictureTextContentList.value.PictureTextLayout2);
   const getPictureTextLayout3 = computed(() =>  pictureTextContentList.value.PictureTextLayout3);
+  const getPictureTextLayout4 = computed(() =>  pictureTextContentList.value.PictureTextLayout4);
+  const getPictureTextLayout5 = computed(() =>  pictureTextContentList.value.PictureTextLayout5);
 
   return { 
     pictureTextContentList, 
@@ -35,7 +46,9 @@ export const usePictureTextStore = defineStore('pictureText', () => {
     getDataAll,
     getPictureTextLayout1,
     getPictureTextLayout2,
-    getPictureTextLayout3
+    getPictureTextLayout3,
+    getPictureTextLayout4,
+    getPictureTextLayout5
   };
 
 });

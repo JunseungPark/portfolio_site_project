@@ -112,6 +112,22 @@ export default {
           layoutName: "사이트 헤드라인 디자인 #1", 
           layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
         },
+        { 
+          name: "PictureTextLayout4", 
+          id: "pt4", 
+          price: 900, 
+          subject:'PictureTextLayouts',
+          layoutName: "사이트 헤드라인 디자인 #4", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
+        { 
+          name: "PictureTextLayout5", 
+          id: "pt5", 
+          price: 900, 
+          subject:'PictureTextLayouts',
+          layoutName: "사이트 헤드라인 디자인 #5", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
       ],
       TextLayouts: [
         { 
@@ -127,7 +143,15 @@ export default {
           id: "t2", 
           price: 909900, 
           subject:'TextLayouts',
-          layoutName: "사이트 헤드라인 디자인 #1", 
+          layoutName: "사이트 헤드라인 디자인 #2", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
+        { 
+          name: "TextLayout3", 
+          id: "t3", 
+          price: 909900, 
+          subject:'TextLayouts',
+          layoutName: "사이트 헤드라인 디자인 #3", 
           layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
         },
       ],
