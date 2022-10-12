@@ -4,9 +4,23 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">
-          <div>
+          <div class="mb-3">
             <!-- <input type="type" class="form-control" style="height:300px" placeholder="Selected Text" aria-label="text" v-model="text.value" > -->
-            <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="10" v-model="button.textValue"></textarea>
+            <textarea class="form-control form-control-sm" id="exampleFormControlTextarea1" rows="10" v-model="button.textValue"></textarea>
+          </div>
+          <div class="d-flex gap-2">
+            <div class="d-flex flex-column flex-sm-row gap-2 col-4">
+              <div>글씨체 변경: </div>
+              <input type="color" v-model="button.color">
+            </div>
+            <div class="d-flex flex-column flex-sm-row gap-2 col-4">
+              <div>배경 변경: </div>
+              <input type="color" v-model="button.backgroundColor">
+            </div>
+            <div class="d-flex flex-column flex-sm-row gap-2 col-4" v-if="!button.borderColor == ''">
+              <div>보더 변경: </div>
+              <input type="color" v-model="button.borderColor">
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -16,12 +30,6 @@
               :selectedFont="button.fontFamily"
               @changeFont="changeFont"
             />
-            글
-            <input type="color" class="col-1" v-model="button.color">
-            배
-            <input type="color" class="col-1" v-model="button.backgroundColor">
-            보
-            <input v-if="!button.borderColor == ''" type="color" class="col-1" v-model="button.borderColor">
             <button type="button" class="btn btn-primary" @click="editButtonData">데이터 변경</button>
         </div>
       </div>

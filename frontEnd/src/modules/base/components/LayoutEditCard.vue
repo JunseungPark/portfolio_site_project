@@ -9,7 +9,7 @@
       <NewLayout :newLayouts="newLayouts" @deleteLayout='deleteLayout'/>
     </b-col>
     <b-col xs="3" sm="3" md="3">
-      <ItemTap :allLayouts="allLayouts"  @addLayoutTo='addLayoutTo'></ItemTap>
+      <ItemTap :allLayouts="allLayouts" :newLayouts="newLayouts" @addLayoutTo='addLayoutTo'></ItemTap>
     </b-col>
   </b-row>
 </template>
@@ -190,7 +190,6 @@ export default {
     const newLayouts = ref([]);
 
     const addLayoutTo = (layout) => {
-      console.log(layout);
       newLayouts.value.push(layout)
     }
 

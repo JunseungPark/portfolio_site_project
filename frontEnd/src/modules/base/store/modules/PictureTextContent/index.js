@@ -23,6 +23,25 @@ export const usePictureTextStore = defineStore('pictureText', () => {
     });
   }
 
+  // 데이터 찾기 
+  function findPictureTexts(name) {
+    let list = {}
+    Object.entries(pictureTextContentList.value).map(x => {
+      if (x[0] === name) {
+        list = {
+          name: name,
+          textList: x[1].textList,
+          imageList: x[1].imageList,
+          buttonList: {}.propertyIsEnumerable.call(x[1], 'buttonList') ? x[1].buttonList : {},
+          iconList: {}.propertyIsEnumerable.call(x[1], 'iconList') ? x[1].iconList : {},
+          layoutAttribute: x[1].layoutAttribute,
+        };
+      }
+    })
+    return list;
+  }
+  
+
   // function editButtonList(target, editedButton) {
   //   target.buttonList.filter(button => { 
   //     if (button.key === editedButton.key) { 
@@ -43,6 +62,7 @@ export const usePictureTextStore = defineStore('pictureText', () => {
     pictureTextContentList, 
     editPictureList,
     editTextList,
+    findPictureTexts,
     getDataAll,
     getPictureTextLayout1,
     getPictureTextLayout2,

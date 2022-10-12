@@ -13,6 +13,22 @@ export const usePictureStore = defineStore('picture', () => {
        } 
     });
   }
+
+  // 데이터 찾기 
+  function findPictures(name) {
+    let list = {}
+    Object.entries(pictureContentList.value).map(x => {
+      if (x[0] === name) {
+        list = {
+          name: name,
+          imageList: x[1].imageList,
+          buttonList: {}.propertyIsEnumerable.call(x[1], 'buttonList') ? x[1].buttonList : {},
+          iconList: {}.propertyIsEnumerable.call(x[1], 'iconList') ? x[1].iconList : {},
+        };
+      }
+    })
+    return list;
+  }
   
   const getDataAll = computed(() =>  pictureContentList.value);
   const getPictureLayout1 = computed(() =>  pictureContentList.value.PictureLayout1);
@@ -21,6 +37,7 @@ export const usePictureStore = defineStore('picture', () => {
   return { 
     pictureContentList, 
     editPictureList,
+    findPictures,
     getDataAll,
     getPictureLayout1,
     getPictureLayout2

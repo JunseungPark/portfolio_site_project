@@ -1,13 +1,13 @@
 <template>
   <!-- Modal -->
   <div class="modal fade" ref="modal" id="IconEditModal" style="z-index: 1050 !important;" data-bs-backdrop="static" aria-labelledby="IconEditModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body">
           <div class="d-flex flex-column flex-wrap justify-content-start align-items-center">
-            <div class="row  w-100">
-              <div class="col-3">컬러 :</div>
-              <input type="color" class="col-1" v-model="icon.color">
+            <div class="d-flex flex-column flex-sm-row gap-2 col-12">
+              <div class="col-6">컬러 :</div>
+              <input type="color" class="col-3" v-model="icon.color">
             </div>
           </div>
         </div>

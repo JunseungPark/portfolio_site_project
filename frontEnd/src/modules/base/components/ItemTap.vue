@@ -53,6 +53,7 @@
     </b-accordion>
 
     <div class="position-absolute bottom-0 end-0">
+      <div @click="savaTemp">임시 저장</div>
       <div>이미지로 저장</div>
       <div>카톡 내보내기</div>
     </div>
@@ -63,6 +64,12 @@
 import { ref }  from 'vue'
 import ItemSlider from '@/modules/base/components/Slider/ItemSlider.vue'
 
+//pinia
+import { useHeaderStore } from '@/modules/base/store/modules/Header';
+import { usePictureStore } from '@/modules/base/store/modules/PictureContent';
+import { usePictureTextStore } from '@/modules/base/store/modules/PictureTextContent';
+import { useTextStore } from '@/modules/base/store/modules/TextContent';
+
 export default {
   name: "ItemTap",
   components: {
@@ -71,10 +78,20 @@ export default {
   props: {
     allLayouts: {
       type: Object,
+    },
+    //현재 보여지고 있는 레이아웃
+    newLayouts: {
+      type: Array,
     }
   },
 
-  setup(context, {emit}) {
+  setup(props, {emit}) {
+    // pinia
+    const header = useHeaderStore();
+    const pictureConent = usePictureStore();
+    const PictureTextContent = usePictureTextStore();
+    const textContent = useTextStore();
+
     const isShow = ref(false)
 
     const openClose = (thema) => {
@@ -86,10 +103,39 @@ export default {
       emit('addLayoutTo', layout)
     }
 
+    const savaTemp = () => {
+      let list = props.newLayouts;
+      let saveList = [];
+      if (list.length) {
+        list.map((x) => {
+          switch (x.subject) {
+            case "HeaderLayouts":
+              saveList.push(header.findHeaders(x.name));
+              break;
+            case "PictureLayouts":
+              saveList.push(pictureConent.findPictures(x.name));
+              break;
+            case "PictureTextLayouts":
+              saveList.push(PictureTextContent.findPictureTexts(x.name));
+              break;
+            case "TextLayouts":
+              saveList.push(textContent.findTexts(x.name));
+              break;
+              /* falls through */
+          }
+
+          console.log("save", saveList)
+        });
+      } else {
+        alert("먼저 레이아웃을 골라주세요");
+      }
+    }
+
     return {
       isShow,
       openClose,
-      addLayoutTo
+      addLayoutTo,
+      savaTemp
     }
   },
 }
