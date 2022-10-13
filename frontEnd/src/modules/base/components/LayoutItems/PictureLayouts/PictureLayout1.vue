@@ -55,6 +55,7 @@ export default {
     const editImageData = (uploaedImg) =>{
       pictureConent.editPictureList(contentData, uploaedImg)
       setImageEditModalState(false)
+      mainStore.savaTemp()
     };
     // ----------------------------- 이미지 에딧 ------------------------------- //
     // ----------------------------- 공통 ------------------------------- //

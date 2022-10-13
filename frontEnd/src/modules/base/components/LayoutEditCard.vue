@@ -16,6 +16,7 @@
 
 <script>
 import { ref } from 'vue'
+import { useMainStore } from '../store/Main';
 import NewLayout from '@/modules/base/components/NewLayout.vue'
 // import ContentsList from '@/modules/base/components/ContentsList.vue'
 import ItemTap from '@/modules/base/components/ItemTap.vue'
@@ -30,7 +31,11 @@ export default {
       PreviewModal
   },
   
-  setup() { 
+  setup() {
+    // pinia
+    const mainStore = useMainStore();
+
+    const newLayouts = ref(mainStore.getNewLayout);
     const isShowModal = ref(false);
     const isOpenModal = ref(false);
     const isItemState = ref(false);
@@ -186,8 +191,6 @@ export default {
         },
       ],
     }
-
-    const newLayouts = ref([]);
 
     const addLayoutTo = (layout) => {
       newLayouts.value.push(layout)

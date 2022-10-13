@@ -7,11 +7,15 @@ export const usePictureTextStore = defineStore('pictureText', () => {
   const pictureTextContentList = ref(state);
 
   function editPictureList(target, uploaedImg) {
+    console.log("target:", target)
+    console.log("uploaedImg:", uploaedImg)
     target.imageList.filter(image => { 
       if (image.key === uploaedImg.key) { 
         image.imgName = uploaedImg.imgName;
        } 
     });
+
+    console.log("변경후:", pictureTextContentList)
   }
 
   function editTextList(target, editedText) {
@@ -28,7 +32,9 @@ export const usePictureTextStore = defineStore('pictureText', () => {
     let list = {}
     Object.entries(pictureTextContentList.value).map(x => {
       if (x[0] === name) {
+        console.log("저장될당시", x[1].imageList)
         list = {
+          id: "PictureTextLayouts",
           name: name,
           textList: x[1].textList,
           imageList: x[1].imageList,
@@ -39,6 +45,18 @@ export const usePictureTextStore = defineStore('pictureText', () => {
       }
     })
     return list;
+  }
+
+  function setSavedPictureTextsCSS(cssValue) {
+    Object.entries(pictureTextContentList.value).map(x => {
+      if (x[0] === cssValue.name) {
+        x[1].textList = cssValue.textList
+        x[1].imageList = cssValue.imageList
+        x[1].layoutAttribute = cssValue.layoutAttribute
+        if(x[1].buttonList) x[1].buttonList = cssValue.buttonList
+        if(x[1].iconList) x[1].iconList = cssValue.iconList
+      }
+    })
   }
   
 
@@ -63,6 +81,7 @@ export const usePictureTextStore = defineStore('pictureText', () => {
     editPictureList,
     editTextList,
     findPictureTexts,
+    setSavedPictureTextsCSS,
     getDataAll,
     getPictureTextLayout1,
     getPictureTextLayout2,

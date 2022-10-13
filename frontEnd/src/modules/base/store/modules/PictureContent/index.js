@@ -20,6 +20,7 @@ export const usePictureStore = defineStore('picture', () => {
     Object.entries(pictureContentList.value).map(x => {
       if (x[0] === name) {
         list = {
+          id: "PictureLayouts",
           name: name,
           imageList: x[1].imageList,
           buttonList: {}.propertyIsEnumerable.call(x[1], 'buttonList') ? x[1].buttonList : {},
@@ -28,6 +29,17 @@ export const usePictureStore = defineStore('picture', () => {
       }
     })
     return list;
+  }
+
+  function setSavedPicturesCSS(cssValue) {
+    Object.entries(pictureContentList.value).map(x => {
+      if (x[0] === cssValue.name) {
+        x[1].imageList = cssValue.imageList
+        if(x[1].layoutAttribute) x[1].layoutAttribute = cssValue.layoutAttribute
+        if(x[1].buttonList) x[1].buttonList = cssValue.buttonList
+        if(x[1].iconList) x[1].iconList = cssValue.iconList
+      }
+    })
   }
   
   const getDataAll = computed(() =>  pictureContentList.value);
@@ -38,6 +50,7 @@ export const usePictureStore = defineStore('picture', () => {
     pictureContentList, 
     editPictureList,
     findPictures,
+    setSavedPicturesCSS,
     getDataAll,
     getPictureLayout1,
     getPictureLayout2

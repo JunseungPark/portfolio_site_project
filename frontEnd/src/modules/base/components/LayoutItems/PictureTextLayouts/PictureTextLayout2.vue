@@ -150,6 +150,7 @@ export default {
     const editImageData = (uploaedImg) =>{
       PictureTextContent.editPictureList(contentData, uploaedImg)
       setImageEditModalState(false)
+      mainStore.savaTemp()
     };
 
     const setImageEditModalState = (value) => {

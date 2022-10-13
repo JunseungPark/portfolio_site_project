@@ -41,6 +41,7 @@
 import { ref, watch, onMounted } from 'vue';
 import { Modal } from 'bootstrap';
 import SelectVue from '../Select/Select.vue';
+import { useMainStore } from '@/modules/base/store/Main/';
 
 export default {
   name: "ButtonEditModal",
@@ -59,6 +60,8 @@ export default {
   emits: ["hideModal", "editTextData"],
 
   setup(props, context) {
+    // pinia
+    const mainStore = useMainStore();
     // 구글 apikey
     const googleKey = process.env.VUE_APP_GOOGLE_API_KEY ;
     // 모달창 컨트롤러
@@ -100,6 +103,7 @@ export default {
         button.value.backgroundColor = originalButton.backgroundColor
         button.value.borderColor = originalButton.borderColor
       }
+      mainStore.savaTemp();
       context.emit('editButtonData', button.value);
     }
 

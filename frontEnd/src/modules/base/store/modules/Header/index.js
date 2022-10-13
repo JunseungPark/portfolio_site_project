@@ -21,6 +21,7 @@ export const useHeaderStore = defineStore('header', () => {
     Object.entries(headerList.value).map(x => {
       if (x[0] === name) {
         list = {
+          id: "HeaderLayouts",
           name: name,
           textList: x[1].textList,
           buttonList: {}.propertyIsEnumerable.call(x[1], 'buttonList') ? x[1].buttonList : {},
@@ -32,6 +33,17 @@ export const useHeaderStore = defineStore('header', () => {
     return list;
   }
 
+  function setSavedHeaderCSS(cssValue) {
+    Object.entries(headerList.value).map(x => {
+      if (x[0] === cssValue.name) {
+        x[1].textList = cssValue.textList
+        x[1].layoutAttribute = cssValue.layoutAttribute
+        if (x[1].buttonList) x[1].buttonList = cssValue.buttonList
+        if (x[1].iconList) x[1].iconList = cssValue.iconList
+      }
+    })
+  }
+
   const getDataAll = computed(() =>  headerList.value);
   const getHeaderLayout1 = computed(() =>  headerList.value.HeaderLayout1);
   const getHeaderLayout2 = computed(() =>  headerList.value.HeaderLayout2);
@@ -40,6 +52,7 @@ export const useHeaderStore = defineStore('header', () => {
     headerList, 
     editTextList,
     findHeaders,
+    setSavedHeaderCSS,
     getDataAll,
     getHeaderLayout1,
     getHeaderLayout2
