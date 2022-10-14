@@ -69,6 +69,7 @@ export default {
     let exportFilename = 'my-custom-file.pdf';
     const generateReport = () => {
       // vue3SimpleHtml2pdf.download()
+      // 이미지 다운로드
       html2canvas(vue3SimpleHtml2pdf).then(canvas => {
         var link = document.createElement("a");
         link.download = "download.png";
@@ -90,7 +91,7 @@ export default {
       this.$refs.vue3SimpleHtml2pdf.download()
       window.Kakao.init(process.env.VUE_APP_KAKAO_JS_KEY); // 사용할 앱의 JavaScript키를 입력해 주세요.
       window.Kakao.Channel.chat({
-          channelPublicId: '_xlrQIxj' // 카카오톡 채널 홈 URL에 명시된 ID를 입력합니다.
+      channelPublicId: '_xlrQIxj' // 카카오톡 채널 홈 URL에 명시된 ID를 입력합니다.
       })
     };
     watch(() => props.isShowMoadal, (newVal) => {
