@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref, computed, watch } from "vue";
+import { ref, computed } from "vue";
 import { getGoogleFonts } from '../../api/index.js'
 
 //pinia
@@ -49,13 +49,13 @@ export const useMainStore = defineStore('Main', () => {
   }
 
 
-  watch(
-    newLayout,
-    (newLayoutVal) => {
-      localStorage.setItem("newLayout", JSON.stringify(newLayoutVal))
-    },
-    {deep: true}
-  );
+  // watch(
+  //   newLayout,
+  //   (newLayoutVal) => {
+  //     localStorage.setItem("newLayout", JSON.stringify(newLayoutVal))
+  //   },
+  //   {deep: true}
+  // );
 
   ///////////////////////////////////////////////////////////////////
   //////////////////////////// M E T H O D //////////////////////////
@@ -65,7 +65,33 @@ export const useMainStore = defineStore('Main', () => {
     else isOpendAnyModal.value = true
   }
 
-  function savaTemp () {
+  function initializationData() {
+    if(newLayout.value.length) {
+      if (localStorage.getItem("newLayout")) {
+        localStorage.removeItem("newLayout");
+        newLayout.value = [];
+      }
+      if (localStorage.getItem("newLayoutCSS")) {
+        localStorage.removeItem("newLayoutCSS");
+      }
+      alert("데이터초기화!")
+    } else {
+      alert("저장된 레이아웃이 없습니다.")
+    }
+
+  }
+  
+  function saveTemp() {
+    if(newLayout.value.length) {
+      localStorage.setItem("newLayout", JSON.stringify(newLayout.value))
+      saveTempCSS ()
+      alert("임시저장완료!")
+    } else {
+      alert("저장할 레이아웃이 없습니다.")
+    }
+  }
+
+  function saveTempCSS () {
     let list = newLayout.value;
     let saveList = [];
     if (list.length) {
@@ -143,7 +169,9 @@ export const useMainStore = defineStore('Main', () => {
     isOpendAnyModal,
     changeState,
     getGoogle,
-    savaTemp,
+    saveTemp,
+    saveTempCSS,
+    initializationData,
     getModalState,
     getNewLayout,
     getGoogleFontsList,

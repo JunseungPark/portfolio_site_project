@@ -53,27 +53,32 @@
     </b-accordion>
 
     <div class="position-absolute bottom-0 end-0">
-      <div @click="savaTemp">임시 저장</div>
-      <div>이미지로 저장</div>
-      <div>카톡 내보내기</div>
+      <div class=" btn" @click="saveTemp">임시 저장</div>
+      <div class=" btn" @click="initializationData">초기화</div>
+      <div class=" btn" @click="showPreviewModal">이미지로 저장</div>
+      <div class=" btn" >카톡 내보내기</div>
     </div>
+
+    <PreviewModal
+      :isShowMoadal="isShowPreviewMoadal"
+      :newLayouts="newLayouts"
+      @hideModal='hidePreviewModal'
+    />
   </b-card>
 </template>
 
 <script>
 import { ref }  from 'vue'
 import ItemSlider from '@/modules/base/components/Slider/ItemSlider.vue'
-
+import PreviewModal from '@/modules/base/components/Modal/PreviewModal.vue';
 //pinia
-import { useHeaderStore } from '@/modules/base/store/modules/Header';
-import { usePictureStore } from '@/modules/base/store/modules/PictureContent';
-import { usePictureTextStore } from '@/modules/base/store/modules/PictureTextContent';
-import { useTextStore } from '@/modules/base/store/modules/TextContent';
+import { useMainStore } from '@/modules/base/store/Main/';
 
 export default {
   name: "ItemTap",
   components: {
     ItemSlider,
+    PreviewModal,
   },
   props: {
     allLayouts: {
@@ -87,11 +92,7 @@ export default {
 
   setup(props, {emit}) {
     // pinia
-    const header = useHeaderStore();
-    const pictureConent = usePictureStore();
-    const PictureTextContent = usePictureTextStore();
-    const textContent = useTextStore();
-
+    const mainStore = useMainStore();
     const isShow = ref(false)
 
     const openClose = (thema) => {
@@ -103,39 +104,33 @@ export default {
       emit('addLayoutTo', layout)
     }
 
-    const savaTemp = () => {
-      let list = props.newLayouts;
-      let saveList = [];
-      if (list.length) {
-        list.map((x) => {
-          switch (x.subject) {
-            case "HeaderLayouts":
-              saveList.push(header.findHeaders(x.name));
-              break;
-            case "PictureLayouts":
-              saveList.push(pictureConent.findPictures(x.name));
-              break;
-            case "PictureTextLayouts":
-              saveList.push(PictureTextContent.findPictureTexts(x.name));
-              break;
-            case "TextLayouts":
-              saveList.push(textContent.findTexts(x.name));
-              break;
-              /* falls through */
-          }
+    // ----------------------------- 프리뷰 모달 ------------------------------//
+    const isShowPreviewMoadal = ref(false);
+    const showPreviewModal = () => {
+      isShowPreviewMoadal.value = true
+    };
 
-          console.log("save", saveList)
-        });
-      } else {
-        alert("먼저 레이아웃을 골라주세요");
-      }
+    const hidePreviewModal = () => {
+      isShowPreviewMoadal.value = false
+    };
+    // ----------------------------- 프리뷰 모달 ------------------------------//
+    const saveTemp = () => {
+      mainStore.saveTemp()
+    }
+
+    const initializationData = () => {
+      mainStore.initializationData()
     }
 
     return {
       isShow,
       openClose,
       addLayoutTo,
-      savaTemp
+      saveTemp,
+      initializationData,
+      isShowPreviewMoadal,
+      showPreviewModal,
+      hidePreviewModal
     }
   },
 }

@@ -57,7 +57,7 @@
 </template>
 <script>
 import { ref } from "vue";
-import { useMainStore } from '../../../store/Main';
+import { useMainStore } from '@/modules/base/store/Main/';
 import { useHeaderStore } from '../../../store/modules/Header';
 import TextEditModal from '../../Modal/TextEditModal.vue';
 import LayoutEditModal from '../../Modal/LayoutEditModal.vue'

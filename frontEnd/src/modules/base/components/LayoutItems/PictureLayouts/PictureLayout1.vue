@@ -25,7 +25,7 @@
 </template>
 <script>
 import { ref } from "vue";
-import { useMainStore } from '../../../store/Main';
+import { useMainStore } from '@/modules/base/store/Main/';
 import { usePictureStore } from '../../../store/modules/PictureContent';
 import ImageEditModal from "../../Modal/ImageEditModal.vue";
 
@@ -55,7 +55,6 @@ export default {
     const editImageData = (uploaedImg) =>{
       pictureConent.editPictureList(contentData, uploaedImg)
       setImageEditModalState(false)
-      mainStore.savaTemp()
     };
     // ----------------------------- 이미지 에딧 ------------------------------- //
     // ----------------------------- 공통 ------------------------------- //

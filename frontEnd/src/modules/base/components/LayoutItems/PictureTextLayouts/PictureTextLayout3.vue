@@ -67,7 +67,7 @@
 </template>
 <script>
 import { ref } from "vue";
-import { useMainStore } from '../../../store/Main';
+import { useMainStore } from '@/modules/base/store/Main/';
 import { usePictureTextStore } from '../../../store/modules/PictureTextContent';
 import TextEditModal from '../../Modal/TextEditModal.vue';
 import ImageEditModal from "../../Modal/ImageEditModal.vue";
@@ -160,7 +160,6 @@ export default {
     const editImageData = (uploaedImg) =>{
       PictureTextContent.editPictureList(contentData, uploaedImg)
       setImageEditModalState(false)
-      mainStore.savaTemp()
     };
 
     const setImageEditModalState = (value) => {

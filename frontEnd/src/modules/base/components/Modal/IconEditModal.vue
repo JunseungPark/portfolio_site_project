@@ -23,7 +23,6 @@
 <script>
 import { ref, watch, onMounted } from 'vue';
 import { Modal } from 'bootstrap';
-import { useMainStore } from '@/modules/base/store/Main/';
 
 export default {
   name: "IconEditModal",
@@ -41,8 +40,6 @@ export default {
   emits: ["hideModal", "editTextData"],
 
   setup(props, context) {
-    // pinia
-    const mainStore = useMainStore();
     // 모달창 컨트롤러
     const modal = ref(null);
     let modalController = null
@@ -64,7 +61,6 @@ export default {
 
     const editIconData = () => {
       context.emit('editIconData');
-      mainStore.savaTemp();
     }
 
     watch(() => props.isShowMoadal, (newVal) => {

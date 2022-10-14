@@ -32,7 +32,7 @@
 </template>
 <script>
 import { ref } from "vue";
-import { useMainStore } from '../../../store/Main';
+import { useMainStore } from '@/modules/base/store/Main/';
 import { useTextStore } from '../../../store/modules/TextContent';
 import TextEditModal from '../../Modal/TextEditModal.vue';
 import LayoutEditModal from '../../Modal/LayoutEditModal.vue'

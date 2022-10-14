@@ -3,21 +3,23 @@
     <div class="modal-dialog modal-fullscreen">
       <div class="modal-content">
         <div class="modal-body">
-          <vue3-simple-html2pdf
-            ref="vue3SimpleHtml2pdf"
+          <!-- <vue3-simple-html2pdf
+            ref="imgaeRef"
             :options="pdfOptions"
             :filename="exportFilename"
-          >
-            <b-list-group v-if="newLayouts !=null">
-              <b-list-group-item class="border-0" v-for="layout in newLayouts" :key="layout.id">
+          > -->
+          <div ref="imgaeRef">
+            <b-list-group v-if="newLayouts">
+              <b-list-group-item class="border-0 position-relative p-0" v-for="layout in newLayouts" :key="layout.id">
                 <component :is="findCompoent(layout.subject, layout.name)"/>
               </b-list-group-item>
             </b-list-group>
-          </vue3-simple-html2pdf>
+          </div>
+          <!-- </vue3-simple-html2pdf> -->
         </div>
         <div class="modal-footer">
           <b-button class="mx-1" variant="secondary" @click="hideModal">Close</b-button>
-          <b-button class="mx-1 " variant="warning" @click="testKakao">kakao</b-button>
+          <b-button class="mx-1 " variant="warning" @click="generateReport">Save</b-button>
         </div>
       </div>
     </div>
@@ -26,6 +28,8 @@
 
 <script>
 import { defineAsyncComponent } from 'vue'
+import { ref, watch, onMounted } from 'vue';
+import html2canvas from "html2canvas"
 import { Modal } from 'bootstrap';
 
 export default {
@@ -39,60 +43,84 @@ export default {
     }
   },
 
-  /// ------------------------- LIFE -------------------------///
-  mounted() {
-    this.modal = new Modal(this.$refs.modal);
-  },
-  /// ------------------------- LIFE -------------------------///
-  data() {
-    return {
-      modal: null,
-      modalVisible:true,
-      pdfOptions: {
-        margin: 5,
-        image: {
-          type: 'jpeg',
-          quality: 1,
-        },
-        html2canvas: { scale: 3 },
-        jsPDF: {
-          unit: 'mm',
-          format: 'a3',
-          orientation: 'p',
-        },
+  setup(props, context) {
+    // 구글 apikey
+    const googleKey = process.env.VUE_APP_GOOGLE_API_KEY ;
+    // 모달창 컨트롤러
+    const modal = ref(null);
+    const imgaeRef = ref(null);
+    let modalController = null;
+    let vue3SimpleHtml2pdf = null;
+
+    let pdfOptions = {
+      margin: 5,
+      image: {
+        type: 'jpeg',
+        quality: 1,
       },
-      exportFilename: 'my-custom-file.pdf',
+      html2canvas: { scale: 3 },
+      jsPDF: {
+        unit: 'mm',
+        format: 'a3',
+        orientation: 'p',
+      },
+    };
+
+    let exportFilename = 'my-custom-file.pdf';
+    const generateReport = () => {
+      // vue3SimpleHtml2pdf.download()
+      html2canvas(vue3SimpleHtml2pdf).then(canvas => {
+        var link = document.createElement("a");
+        link.download = "download.png";
+        link.href = canvas.toDataURL("image/png");
+        document.body.appendChild(link);
+        link.click()
+      })
+    };
+
+    const findCompoent = (subject, name) => {
+      return defineAsyncComponent(() =>import(`@/modules/base/components/LayoutItems/${subject}/${name}.vue`));
     }
-  },
-  watch: {
-    isShowMoadal(val) {
-      if (!this.modal) return
-      if (val) {
-        this.modal.show()
-      } else {
-        this.modal.hide()
-      }
-    },
-  },
-  methods: {
-    generateReport () {
-      this.$refs.vue3SimpleHtml2pdf.download()
-    },
-    findCompoent(subject, name){
-      return defineAsyncComponent(() =>import(`@/modules/base/components/${subject}/${name}.vue`));
-    },
-    hideModal() {
-      this.$emit('hideModal');
-    },
-    testKakao() {
+    
+    const hideModal = () => {
+      context.emit('hideModal');
+    };
+    const testKakao = () => {
       // 파일 다운로드
       this.$refs.vue3SimpleHtml2pdf.download()
       window.Kakao.init(process.env.VUE_APP_KAKAO_JS_KEY); // 사용할 앱의 JavaScript키를 입력해 주세요.
       window.Kakao.Channel.chat({
           channelPublicId: '_xlrQIxj' // 카카오톡 채널 홈 URL에 명시된 ID를 입력합니다.
       })
-    },
-  },
+    };
+    watch(() => props.isShowMoadal, (newVal) => {
+      if (!modalController) return
+      if (newVal) {
+        modalController.show()
+      } else {
+        modalController.hide()
+      }
+    })
+
+    /// ------------------------- LIFE -------------------------///
+    onMounted(()=> {
+      modalController = new Modal(modal.value);
+      vue3SimpleHtml2pdf = imgaeRef.value;
+    });
+    /// ------------------------- LIFE -------------------------///
+    return {
+      googleKey,
+      hideModal,
+      exportFilename,
+      pdfOptions,
+      modal,
+      generateReport,
+      findCompoent,
+      testKakao,
+      imgaeRef
+    }
+  }
+
 }
 </script>
 

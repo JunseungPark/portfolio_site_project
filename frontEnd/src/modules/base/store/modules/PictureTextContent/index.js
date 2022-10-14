@@ -7,15 +7,11 @@ export const usePictureTextStore = defineStore('pictureText', () => {
   const pictureTextContentList = ref(state);
 
   function editPictureList(target, uploaedImg) {
-    console.log("target:", target)
-    console.log("uploaedImg:", uploaedImg)
     target.imageList.filter(image => { 
       if (image.key === uploaedImg.key) { 
         image.imgName = uploaedImg.imgName;
        } 
     });
-
-    console.log("변경후:", pictureTextContentList)
   }
 
   function editTextList(target, editedText) {
@@ -32,7 +28,6 @@ export const usePictureTextStore = defineStore('pictureText', () => {
     let list = {}
     Object.entries(pictureTextContentList.value).map(x => {
       if (x[0] === name) {
-        console.log("저장될당시", x[1].imageList)
         list = {
           id: "PictureTextLayouts",
           name: name,

@@ -27,7 +27,6 @@
 <script>
 import { ref, watch, onMounted } from 'vue';
 import { Modal } from 'bootstrap';
-import { useMainStore } from '@/modules/base/store/Main/';
 import SelectVue from '../Select/Select.vue';
 
 export default {
@@ -47,9 +46,6 @@ export default {
   emits: ["hideModal", "editTextData"],
 
   setup(props, context) {
-    // pinia
-    const mainStore = useMainStore();
-
     // 구글 apikey
     const googleKey = process.env.VUE_APP_GOOGLE_API_KEY ;
     // 모달창 컨트롤러
@@ -83,8 +79,6 @@ export default {
         text.value.fontFamily = originalText.fontFamily
         text.value.color = originalText.color
       }
-
-      mainStore.savaTemp();
       context.emit('editTextData', text.value);
     }
 

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import state from './state';
 import { ref, computed } from "vue";
+// import { useMainStore } from '@/modules/base/store/Main/';
 
 export const usePictureStore = defineStore('picture', () => {
   
