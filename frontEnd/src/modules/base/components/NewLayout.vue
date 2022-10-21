@@ -7,7 +7,7 @@
       <b-row class="g-0">
         <b-col>
           <b-list-group>
-              <draggable 
+              <draggable
                 :list="newLayouts" 
                 group="people"
                 item-key="id"
@@ -23,7 +23,8 @@
                   <b-list-group-item class="border-0 position-relative p-0 settings">
                     <div class="temp">
                       <!-- <b-button class="mx-3 position-absolute top-0 end-0 mt-3" variant="outline-danger" @click="deleteLayout(element)">제 거</b-button> -->
-                      <component :key="element.id" :is="findCompoent(element.subject, element.name)" :ref="setItemRef"/>
+                      <component :key="element.id" :is="findCompoent(element.subject, element.name)" :ref="setItemRef"/>      
+
                       <ul class="d-flex align-items-center justify-content-end px-3 list-unstyled icons">
                         <li class="icon mx-3" @click="show(element.name)">
                           <i class="bi bi-gear"></i>
@@ -87,6 +88,7 @@ export default {
     const drag = ref(false);
     const isDraggable = ref(mainStore.getModalState);
     // 컴포넌트 모음
+
     const components = ref([])
     mainStore.getGoogle();
 
@@ -117,7 +119,7 @@ export default {
     const deleteLayout = (element) => {
       emit('deleteLayout', element)
     }
-    
+    // for convenience
     const show = (nameRef) => {
       components.value.forEach(e => {
         if(e.$.type.name === nameRef) e.showLayoutEditModal()
@@ -142,11 +144,12 @@ export default {
       isDraggable,
       dragOptions,
       components,
+      setItemRef,
       findCompoent,
       caluPrice,
       deleteLayout,
       show,
-      setItemRef
+      // setItemRef
       // isOpenedAnyModal
     }
   },
