@@ -23,7 +23,7 @@
                   <b-list-group-item class="border-0 position-relative p-0 settings">
                     <div class="temp">
                       <!-- <b-button class="mx-3 position-absolute top-0 end-0 mt-3" variant="outline-danger" @click="deleteLayout(element)">제 거</b-button> -->
-                      <component :key="element.id" :is="findCompoent(element.subject, element.name)" :ref="setItemRef"/>      
+                      <component :key="element.id" :is="findCompoent(element.subject, element.name)"/>      
 
                       <ul class="d-flex align-items-center justify-content-end px-3 list-unstyled icons">
                         <li class="icon mx-3" @click="show(element.name)">
@@ -125,13 +125,13 @@ export default {
         if(e.$.type.name === nameRef) e.showLayoutEditModal()
       })
     }
-    const setItemRef = (nameRef) => {
-      if (nameRef) {
-        components.value.push(nameRef)
-        const set = new Set(components.value);
-        components.value = [...set];
-      }
-    }
+    // const setItemRef = (nameRef) => {
+    //   if (nameRef) {
+    //     components.value.push(nameRef)
+    //     const set = new Set(components.value);
+    //     components.value = [...set];
+    //   }
+    // }
     // const isOpenedAnyModal = () => {
     //   isDraggable.value = true;
     // }
@@ -144,7 +144,7 @@ export default {
       isDraggable,
       dragOptions,
       components,
-      setItemRef,
+      // setItemRef,
       findCompoent,
       caluPrice,
       deleteLayout,
