@@ -89,10 +89,6 @@ export default {
     const testKakao = () => {
       // 파일 다운로드
       this.$refs.vue3SimpleHtml2pdf.download()
-      window.Kakao.init(process.env.VUE_APP_KAKAO_JS_KEY); // 사용할 앱의 JavaScript키를 입력해 주세요.
-      window.Kakao.Channel.chat({
-      channelPublicId: '_xlrQIxj' // 카카오톡 채널 홈 URL에 명시된 ID를 입력합니다.
-      })
     };
     watch(() => props.isShowMoadal, (newVal) => {
       if (!modalController) return
@@ -126,18 +122,5 @@ export default {
 </script>
 
 <style>
-/* PC 카카오톡 채널 버튼 위치 */
-.kakaoChatPc {
-    position: fixed;
-    z-index: 999;
-    right: 20px; /* 화면 오른쪽으로부터의 거리, 숫자만 입력 */
-    bottom: 20px; /* 화면 아래쪽으로부터의 거리, 숫자만 입력 */
-}
-/* 모바일 카카오톡 채널 버튼 위치 */
-.kakaoChatMob {
-    position: fixed;
-    z-index: 999;
-    right: 20px; /* 화면 오른쪽으로부터의 거리, 숫자만 입력 */
-    bottom: 20px; /* 화면 아래쪽으로부터의 거리, 숫자만 입력 */
-}
+
 </style>

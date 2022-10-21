@@ -116,7 +116,6 @@ export default {
       console.log(newVal)
       if (!originalLayoutAttribute) originalLayoutAttribute = JSON.parse(JSON.stringify(newVal));
       layoutAttribute.value = newVal;
-      console.log(layoutAttribute.value.font)
     })
 
     /// ------------------------- LIFE -------------------------///

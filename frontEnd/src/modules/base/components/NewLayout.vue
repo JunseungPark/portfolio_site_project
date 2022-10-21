@@ -20,9 +20,21 @@
                 v-bind="dragOptions"
                 :force-fallback="false">
                 <template #item="{element}">
-                  <b-list-group-item class="border-0 position-relative p-0">
-                    <b-button class="mx-3 position-absolute top-0 end-0 mt-3" variant="outline-danger" @click="deleteLayout(element)">제 거</b-button>
-                    <component :key="element.id" :is="findCompoent(element.subject, element.name)"/>
+                  <b-list-group-item class="border-0 position-relative p-0 settings">
+                    <div class="temp">
+                      <!-- <b-button class="mx-3 position-absolute top-0 end-0 mt-3" variant="outline-danger" @click="deleteLayout(element)">제 거</b-button> -->
+                      <component :key="element.id" :is="findCompoent(element.subject, element.name)" :ref="setItemRef"/>
+                      <ul class="d-flex align-items-center justify-content-end px-3 list-unstyled icons">
+                        <li class="icon mx-3" @click="show(element.name)">
+                          <i class="bi bi-gear"></i>
+                        </li>
+                        <!-- <li class="icon mx-3"><span class="far fa-heart"></span></li> -->
+                        <li class="icon" @click="deleteLayout(element)">
+                          <i class="bi bi-trash"></i>
+                        </li>
+                      </ul>
+                    </div>
+
                   </b-list-group-item>
                 </template>
               </draggable>
@@ -74,6 +86,8 @@ export default {
 
     const drag = ref(false);
     const isDraggable = ref(mainStore.getModalState);
+    // 컴포넌트 모음
+    const components = ref([])
     mainStore.getGoogle();
 
     const dragOptions = computed(() => {
@@ -103,6 +117,19 @@ export default {
     const deleteLayout = (element) => {
       emit('deleteLayout', element)
     }
+    
+    const show = (nameRef) => {
+      components.value.forEach(e => {
+        if(e.$.type.name === nameRef) e.showLayoutEditModal()
+      })
+    }
+    const setItemRef = (nameRef) => {
+      if (nameRef) {
+        components.value.push(nameRef)
+        const set = new Set(components.value);
+        components.value = [...set];
+      }
+    }
     // const isOpenedAnyModal = () => {
     //   isDraggable.value = true;
     // }
@@ -114,9 +141,12 @@ export default {
       drag,
       isDraggable,
       dragOptions,
+      components,
       findCompoent,
       caluPrice,
       deleteLayout,
+      show,
+      setItemRef
       // isOpenedAnyModal
     }
   },
@@ -159,4 +189,47 @@ export default {
 .list-group-item i {
   cursor: pointer;
 }
+.temp {
+  overflow: hidden;
+  position: relative;
+}
+.icons {
+  position: absolute;
+  top: -50px;
+  right: 10px;
+}
+.settings .icons .icon {
+    width: 25px;
+    height: 25px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.6s ease;
+    transform: rotate(180deg);
+    cursor: pointer
+}
+
+.settings .icons .icon:hover {
+    background-color: yellowgreen;
+    color: #fff
+}
+
+.settings .icons .icon:nth-last-of-type(3) {
+    transition-delay: 0.2s
+}
+
+.settings .icons .icon:nth-last-of-type(2) {
+    transition-delay: 0.15s
+}
+
+.settings .icons .icon:nth-last-of-type(1) {
+    transition-delay: 0.1s
+}
+
+.temp:hover .icons .icon{
+    transform: translateY(60px)
+}
+
 </style>

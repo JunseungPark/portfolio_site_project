@@ -133,6 +133,14 @@ export default {
           layoutName: "사이트 헤드라인 디자인 #5", 
           layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
         },
+        { 
+          name: "PictureTextLayout6", 
+          id: "pt6", 
+          price: 900, 
+          subject:'PictureTextLayouts',
+          layoutName: "사이트 헤드라인 디자인 #6", 
+          layoutDetail: "이 디자인은 심플한 디자인으로서 조금은 더 깔금한 느낌에 홈페이지를 제작할 수 있도록 방향을 제시합니다. 심플한 화이트 페이지를 구상하고 있다면 이게 가장 좋은 선택일 수도~?"
+        },
       ],
       TextLayouts: [
         { 

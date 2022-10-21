@@ -1,44 +1,18 @@
 <template>
+  <!-- 수정 방법
+    1. 전체 스타일
+    2. 엘리멘트 스타일
+    3. 텍스트 or 이미지 or 레이아웃 모달 오프너 추가
+    4. 데이터 맵핑 ex) 텍스트 , 이미지 -->
   <!-- Html -->
-  <div class="bg" :style="[contentData.layoutAttribute]">
-    <div class="container text-white p-3">
-      <div class="col-12 mt-5">
-        <h1 @click="showTextEditModal(contentData.textList[0])" class="display-2 fw-bold py-2 clickable effect-shine" :style="[contentData.textList[0]]">{{contentData.textList[0].textValue}}</h1>
-      </div>
-      <div class="col-12 mb-5">
-        <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4">
-          <div class="col">
-            <div @click="showImageEditModal(contentData.imageList[0].key)" class="ratio ratio-1x1">
-              <img :src="contentData.imageList[0].imgName" class="d-block img-fluid hoverImageWrap" alt="">
-            </div>
-            <div @click="showTextEditModal(contentData.textList[1])" class="display-6 py-2 clickable effect-shine" :style="[contentData.textList[1]]">{{contentData.textList[1].textValue}}</div>
-            <div @click="showTextEditModal(contentData.textList[2])" class="clickable effect-shine" :style="[contentData.textList[2]]">{{contentData.textList[2].textValue}}</div>
-          </div>
-          <div class="col">
-            <div @click="showImageEditModal(contentData.imageList[1].key)" class="ratio ratio-1x1">
-              <img :src="contentData.imageList[1].imgName" class="d-block img-fluid hoverImageWrap" alt="">
-            </div>
-            <div @click="showTextEditModal(contentData.textList[3])" class="display-6 py-2 clickable effect-shine" :style="[contentData.textList[3]]">{{contentData.textList[3].textValue}}</div>
-            <div @click="showTextEditModal(contentData.textList[4])" class="clickable effect-shine" :style="[contentData.textList[4]]">{{contentData.textList[4].textValue}}</div>
-          </div>
-          <div class="col">
-            <div @click="showImageEditModal(contentData.imageList[2].key)" class="ratio ratio-1x1">
-              <img :src="contentData.imageList[2].imgName" class="d-block img-fluid hoverImageWrap" alt="">
-            </div>
-            <div @click="showTextEditModal(contentData.textList[5])" class="display-6 py-2 clickable effect-shine" :style="[contentData.textList[5]]">{{contentData.textList[5].textValue}}</div>
-            <div @click="showTextEditModal(contentData.textList[6])" class="clickable effect-shine" :style="[contentData.textList[6]]">{{contentData.textList[6].textValue}}</div>
-          </div>
-          <div class="col">
-            <div @click="showImageEditModal(contentData.imageList[3].key)" class="ratio ratio-1x1">
-              <img :src="contentData.imageList[3].imgName" class="d-block img-fluid hoverImageWrap" alt="">
-            </div>
-            <div @click="showTextEditModal(contentData.textList[7])" class="display-6 py-2 clickable effect-shine" :style="[contentData.textList[7]]">{{contentData.textList[7].textValue}}</div>
-            <div @click="showTextEditModal(contentData.textList[8])" class="clickable effect-shine" :style="[contentData.textList[8]]">{{contentData.textList[8].textValue}}</div>
-          </div>
-        </div>
-      </div>
+  <section id="hero" class="d-flex flex-column justify-content-center align-items-center" >
+    <img src="../../../assets/img/planet1.jpg" class="img-fluid hoverImageWrap bg-img" alt="">
+    <div class="container text-center text-md-left" data-aos="fade-up">
+      <h1>Welcome to Maxim</h1>
+      <h2>We are team of talented designers making websites with Bootstrap</h2>
+      <a href="#about" class="btn-get-started scrollto">Get Started</a>
     </div>
-  </div>
+  </section>
   <!-- Html -->
   <!-- <div class="position-absolute top-0 start-0 p-2" @click="showLayoutEditModal">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" :fill="(isBlackBG) ? 'White' : 'Black'" class="bi bi-sliders layoutSetting" viewBox="0 0 16 16">
@@ -66,25 +40,26 @@
   />
 </template>
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useMainStore } from '@/modules/base/store/Main/';
 import { usePictureTextStore } from '../../../store/modules/PictureTextContent';
 import TextEditModal from '../../Modal/TextEditModal.vue';
 import ImageEditModal from "../../Modal/ImageEditModal.vue";
 import LayoutEditModal from '../../Modal/LayoutEditModal.vue'
 import { isBlackColor } from '@/util/util';
+import AOS from "aos";
 
 export default {
-  name: "PictureTextLayout3",
+  name: "PictureTextLayout5",
   components: {
     TextEditModal,
     ImageEditModal,
-    LayoutEditModal
+    LayoutEditModal,
   },
   setup() {
     const mainStore = useMainStore();
     const PictureTextContent = usePictureTextStore();
-    const contentData = PictureTextContent.getPictureTextLayout3;
+    const contentData = PictureTextContent.getPictureTextLayout5;
     // ----------------------------- 레이아웃 에딧 ------------------------------//
     const isShowLayoutEditMoadal = ref(false);
     const selectedLayoutAttribute = ref({});
@@ -143,7 +118,6 @@ export default {
       mainStore.changeState()
     }
     // ----------------------------- 텍스트 에딧 ------------------------------- //
-
     // ----------------------------- 이미지 에딧 ------------------------------- //
     const isShowImageEditMoadal = ref(false);
     const selectedImage = ref(0);
@@ -167,6 +141,12 @@ export default {
       mainStore.changeState()
     }
     // ----------------------------- 이미지 에딧 ------------------------------- //
+
+    /// ------------------------- LIFE -------------------------///
+    onMounted(()=> {
+      AOS.init();
+    });
+    /// ------------------------- LIFE -------------------------///
     return {
       // ----------------------------- 레이아웃 에딧 ------------------------------//
       isShowLayoutEditMoadal,
@@ -221,11 +201,127 @@ export default {
     overflow: hidden;
   }
 
-  /* TestContent5 전용 */ 
-  img.d-block{
+  /*--------------------------------------------------------------
+  # 해당 css
+  --------------------------------------------------------------*/
+
+  /*--------------------------------------------------------------
+  # General
+  --------------------------------------------------------------*/
+  body {
+    font-family: "Open Sans", sans-serif;
+    color: #444444;
+  }
+
+  a {
+    color: #1bac91;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #22d8b6;
+    text-decoration: none;
+  }
+  /*--------------------------------------------------------------
+  # Disable aos animation delay on mobile devices
+  --------------------------------------------------------------*/
+  @media screen and (max-width: 768px) {
+    [data-aos-delay] {
+      transition-delay: 0 !important;
+    }
+  }
+
+  /*--------------------------------------------------------------
+  # Hero Section
+  --------------------------------------------------------------*/
+  #hero {
+    width: 100%;
+    height: calc(100vh - 70px);
+    position: relative;
+    padding: 0;
+  }
+  #hero .bg-img{
     width: 100%;
     height: 100%;
+    position:absolute;
+    bottom: 0px;
+    left:0;
+    right:0;
+    margin:0 auto;
     object-fit: cover;
-    object-position: center;
   }
+
+  #hero:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #hero .container {
+    z-index: 2;
+  }
+
+  #hero h1 {
+    margin: 0 0 10px 0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    color: #fff;
+  }
+
+  #hero h2 {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 35px;
+    font-size: 24px;
+  }
+
+  #hero .btn-get-started {
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 28px;
+    border-radius: 4px;
+    transition: 0.5s;
+    border: 2px solid #fff;
+    color: #fff;
+  }
+
+  #hero .btn-get-started:hover {
+    border-color: #1bac91;
+    background: #1bac91;
+  }
+
+  @media (min-width: 1024px) {
+    #hero {
+      background-attachment: fixed;
+    }
+  }
+
+  @media (max-width: 992px) {
+    #hero {
+      margin-top: 60px;
+      height: calc(100vh - 60px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    #hero h1 {
+      font-size: 28px;
+      line-height: 36px;
+    }
+
+    #hero h2 {
+      font-size: 18px;
+      line-height: 24px;
+      margin-bottom: 30px;
+    }
+  }
+
 </style>
